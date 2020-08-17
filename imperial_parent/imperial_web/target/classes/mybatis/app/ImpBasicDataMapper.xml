@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpBasicDataMapper">
+    
+    <resultMap type="ImpBasicData" id="ImpBasicDataResult">
+        <result property="id"    column="ID"    />
+        <result property="tackingNumber1"    column="tacking_number_1"    />
+        <result property="tackingNumber2"    column="tacking_number_2"    />
+        <result property="bagNumber"    column="bag_number"    />
+        <result property="boxNumber"    column="box_number"    />
+        <result property="palletNumber"    column="pallet_number"    />
+        <result property="containerNumber"    column="container_number"    />
+        <result property="reference1"    column="reference1"    />
+        <result property="referrnce2"    column="referrnce2"    />
+        <result property="shipperName"    column="shipper_name"    />
+        <result property="shipperReference"    column="shipper_reference"    />
+        <result property="consigneeName"    column="consignee_name"    />
+        <result property="lineAddress1"    column="line_address_1"    />
+        <result property="lineAddress2"    column="line_address_2"    />
+        <result property="lineAddress3"    column="line_address_3"    />
+        <result property="town"    column="town"    />
+        <result property="state"    column="state"    />
+        <result property="postCode"    column="post_code"    />
+        <result property="countryCode"    column="country_code"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="pieces"    column="pieces"    />
+        <result property="weight"    column="weight"    />
+        <result property="weightUom"    column="weight_uom"    />
+        <result property="value"    column="value"    />
+        <result property="shippingRate"    column="shipping_rate"    />
+        <result property="currency"    column="currency"    />
+        <result property="incoterms"    column="incoterms"    />
+        <result property="importPurpose"    column="import_purpose"    />
+        <result property="eoriNumber"    column="eori_number"    />
+        <result property="mossNumber"    column="moss_number"    />
+        <result property="description"    column="description"    />
+        <result property="hsCode"    column="hs_code"    />
+        <result property="itemQuantity"    column="item_quantity"    />
+        <result property="itemValue"    column="item_value"    />
+        <result property="skuNumber"    column="sku_number"    />
+        <result property="returnInstruction"    column="return_instruction"    />
+        <result property="salesLink"    column="sales_link"    />
+        <result property="lastMileProvider"    column="last_mile_provider"    />
+        <result property="lastMileAccountName"    column="last_mile_account_name"    />
+        <result property="lastMileService"    column="last_mile_service"    />
+        <result property="orderIsdraftFlag"    column="order_isdraft_flag"    />
+        <result property="orderEndFlag"    column="order_end_flag"    />
+        <result property="submitFlag"    column="submit_flag"    />
+        <result property="checkFlag"    column="check_flag"    />
+        <result property="isresubmitFlag"    column="isresubmit_flag"    />
+        <result property="isresubmitCheckFlag"    column="isresubmit_check_flag"    />
+    </resultMap>
+    
+    <resultMap type="ImpBagNumber" id="bagNumberResult">
+        <result property="id"    column="ID"    />
+        <result property="bagNumber"    column="bag_number"    />
+        <result property="consigneeName"    column="consignee_name"    />
+    </resultMap>
+    
+    <resultMap type="ImpBasicRation" id="ImpBasicRationResult">
+        <result property="id"    column="ID"    />
+        <result property="mainOrderNo"    column="main_order_no"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="tackNumber1"    column="tack_number1"    />
+        <result property="tackNumber2"    column="tack_number2"    />
+    </resultMap>
+
+    <sql id="selectImpBasicDataVo">
+        select ibd.ID, tacking_number_1, tacking_number_2, bag_number, box_number, pallet_number, container_number, reference1, referrnce2, shipper_name, shipper_reference, consignee_name, line_address_1, line_address_2, line_address_3, town, state, post_code, country_code, email, phone, pieces, weight, weight_uom, value, shipping_rate, currency, incoterms, import_purpose, eori_number, moss_number, description, hs_code, item_quantity, item_value, sku_number, return_instruction, sales_link, last_mile_provider, last_mile_account_name, last_mile_service,order_isdraft_flag,order_end_flag,submit_flag,check_flag,isresubmit_flag,isresubmit_check_flag  from imp_basic_data ibd
+    </sql>
+
+	<!-- 当前用户订单数据 包含有效的、历史的、草稿的-->
+    <select id="selectImpBasicDataList" parameterType="java.util.Map" resultMap="ImpBasicDataResult">
+        <include refid="selectImpBasicDataVo"/>
+        join imp_basic_relation ibr on ibr.tack_number1 = ibd.tacking_number_1 
+        <if test="mainOrderNo != null  and mainOrderNo != ''"> and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+        <where>  1=1
+            <if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
+            <if test="tackingNumber2 != null  and tackingNumber2 != ''"> and ibd.tacking_number_2 = #{tackingNumber2}</if>
+            <if test="bagNumber != null  and bagNumber != ''"> and ibd.bag_number = #{bagNumber}</if>
+            <if test="boxNumber != null  and boxNumber != ''"> and ibd.box_number = #{boxNumber}</if>
+            <if test="palletNumber != null  and palletNumber != ''"> and ibd.pallet_number = #{palletNumber}</if>
+            <if test="containerNumber != null  and containerNumber != ''"> and ibd.container_number = #{containerNumber}</if>
+            <if test="shipperName != null  and shipperName != ''"> and ibd.shipper_name like concat('%', #{shipperName}, '%')</if>
+            <if test="consigneeName != null  and consigneeName != ''"> and ibd.consignee_name like concat('%', #{consigneeName}, '%')</if>
+            <if test="state != null  and state != ''"> and ibd.state = #{state}</if>
+            <if test="skuNumber != null  and skuNumber != ''"> and ibd.sku_number = #{skuNumber}</if>
+            <if test="orderIsdraftFlag != null"> and ibd.order_isdraft_flag = #{orderIsdraftFlag}</if>
+            <if test="orderEndFlag != null"> and ibd.order_end_flag = #{orderEndFlag}</if>
+            <if test="submitFlag != null"> and ibd.submit_flag = #{submitFlag}</if>
+            <if test="incoterms != null and incoterms != ''"> and ibd.incoterms = #{incoterms}</if>
+            <if test="checkFlag != null"> and ibd.check_flag = #{checkFlag}</if>
+            <if test="isresubmitFlag != null"> and ibd.isresubmit_flag = #{isresubmitFlag}</if>
+            <if test="isresubmitCheckFlag != null"> and ibd.isresubmit_check_flag = #{isresubmitCheckFlag}</if>
+        </where>
+        order by ibd.isresubmit_flag desc
+    </select>
+    
+    <!-- 查询主单号构成的第一层表 -->
+    <select id ="selectMainOrderNoList" parameterType="java.util.Map" resultMap="ImpBasicRationResult" >
+    	select distinct ibr.main_order_no from imp_basic_relation ibr
+    	join imp_basic_data ibd on ibr.tack_number1 = ibd.tacking_number_1 
+    	<if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
+    	<if test="bagNumber != null  and bagNumber != ''"> and ibd.bag_number = #{bagNumber}</if>
+    	<if test="submitFlag != null"> and ibd.submit_flag = #{submitFlag}</if>
+    	<if test="incoterms != null and incoterms != ''"> and ibd.incoterms = #{incoterms}</if>
+    	<if test="orderIsdraftFlag != null"> and ibd.order_isdraft_flag = #{orderIsdraftFlag}</if>
+    	<if test="orderEndFlag != null"> and ibd.order_end_flag = #{orderEndFlag}</if>
+    	<if test="checkFlag != null"> and ibd.check_flag = #{checkFlag}</if>
+    	<where>  1=1
+            <if test="mainOrderNo != null and mainOrderNo != ''"> and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+            <if test="taskNumber != null and taskNumber != ''"> and ibr.task_number = #{taskNumber}</if>
+            <if test="tackNumber2 != null and tackNumber2 != ''"> and ibr.tack_number2 = #{tackNumber2}</if>
+        </where>
+    </select>
+    
+    <!-- 查询包裹号构成的第二层表 -->
+    <select id="selectBagNumberList" parameterType="java.util.Map" resultMap="bagNumberResult">
+    	select distinct ibd.bag_number FROM imp_basic_data ibd
+    	join imp_basic_relation ibr on 
+    	ibr.tack_number1 = ibd.tacking_number_1
+    	<if test="mainOrderNo != null and mainOrderNo != ''">and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+    	<where>  1=1
+            <if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
+    		<if test="bagNumber != null  and bagNumber != ''"> and ibd.bag_number = #{bagNumber}</if>
+            <if test="orderIsdraftFlag != null"> and ibd.order_isdraft_flag = #{orderIsdraftFlag}</if>
+            <if test="orderEndFlag != null"> and ibd.order_end_flag = #{orderEndFlag}</if>
+            <if test="submitFlag != null"> and ibd.submit_flag = #{submitFlag}</if>
+            <if test="checkFlag != null"> and ibd.check_flag = #{checkFlag}</if>
+            <if test="isresubmitFlag != null"> and ibd.isresubmit_flag = #{isresubmitFlag}</if>
+            <if test="isresubmitCheckFlag != null"> and ibd.isresubmit_check_flag = #{isresubmitCheckFlag}</if>
+            <if test="incoterms != null and incoterms != ''"> and ibd.incoterms = #{incoterms}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpBasicDataById" parameterType="Long" resultMap="ImpBasicDataResult">
+        <include refid="selectImpBasicDataVo"/>
+        where ID = #{id}
+    </select>
+    
+    
+    <select id="selectImpBasicDataByTackNum" parameterType="java.util.Map" resultMap="ImpBasicDataResult">
+        <include refid="selectImpBasicDataVo"/>
+        <where> 1=1
+        	<if test="tackingNumber1 != null  and tackingNumber1 != ''"> and tacking_number_1 = #{tackingNumber1}</if>
+        	<if test="draftFlag != null"> and order_isdraft_flag = #{draftFlag}</if>
+        </where>
+    </select>
+    
+    <!-- 检车快递号是否唯一 -->
+    <select id="checkTackNumUnique" parameterType="java.util.Map" resultType="int">
+		select count(1) from imp_basic_data 
+		<where> 1=1
+			<if test="tackingNumber1 != null  and tackingNumber1 != ''"> and tacking_number_1 = #{tackingNumber1}</if>
+        	<if test="draftFlag != null"> and order_isdraft_flag = #{draftFlag}</if>
+		</where>
+	</select>
+	
+	<!-- 查询待审核订单总数 -->
+	<select id="checkPendingNums"  resultType="int">
+		select count(1) from imp_basic_data ibd
+		where ibd.submit_flag = 1
+	</select>
+        
+    <!-- 基础数据的录入 -->
+    <insert id="insertImpBasicData" parameterType="ImpBasicData" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_basic_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tackingNumber1 != null">tacking_number_1,</if>
+            <if test="tackingNumber2 != null">tacking_number_2,</if>
+            <if test="bagNumber != null">bag_number,</if>
+            <if test="boxNumber != null">box_number,</if>
+            <if test="palletNumber != null">pallet_number,</if>
+            <if test="containerNumber != null">container_number,</if>
+            <if test="reference1 != null">reference1,</if>
+            <if test="referrnce2 != null">referrnce2,</if>
+            <if test="shipperName != null">shipper_name,</if>
+            <if test="shipperReference != null">shipper_reference,</if>
+            <if test="consigneeName != null">consignee_name,</if>
+            <if test="lineAddress1 != null">line_address_1,</if>
+            <if test="lineAddress2 != null">line_address_2,</if>
+            <if test="lineAddress3 != null">line_address_3,</if>
+            <if test="town != null">town,</if>
+            <if test="state != null">state,</if>
+            <if test="postCode != null">post_code,</if>
+            <if test="countryCode != null">country_code,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="pieces != null">pieces,</if>
+            <if test="weight != null">weight,</if>
+            <if test="weightUom != null">weight_uom,</if>
+            <if test="value != null">value,</if>
+            <if test="shippingRate != null">shipping_rate,</if>
+            <if test="currency != null">currency,</if>
+            <if test="incoterms != null">incoterms,</if>
+            <if test="importPurpose != null">import_purpose,</if>
+            <if test="eoriNumber != null">eori_number,</if>
+            <if test="mossNumber != null">moss_number,</if>
+            <if test="description != null">description,</if>
+            <if test="hsCode != null">hs_code,</if>
+            <if test="itemQuantity != null">item_quantity,</if>
+            <if test="itemValue != null">item_value,</if>
+            <if test="skuNumber != null">sku_number,</if>
+            <if test="returnInstruction != null">return_instruction,</if>
+            <if test="salesLink != null">sales_link,</if>
+            <if test="lastMileProvider != null">last_mile_provider,</if>
+            <if test="lastMileAccountName != null">last_mile_account_name,</if>
+            <if test="lastMileService != null">last_mile_service,</if>
+            <if test="orderIsdraftFlag != null">order_isdraft_flag,</if>
+            <if test="orderEndFlag != null">order_end_flag,</if>
+            insert_time,
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tackingNumber1 != null">#{tackingNumber1},</if>
+            <if test="tackingNumber2 != null">#{tackingNumber2},</if>
+            <if test="bagNumber != null">#{bagNumber},</if>
+            <if test="boxNumber != null">#{boxNumber},</if>
+            <if test="palletNumber != null">#{palletNumber},</if>
+            <if test="containerNumber != null">#{containerNumber},</if>
+            <if test="reference1 != null">#{reference1},</if>
+            <if test="referrnce2 != null">#{referrnce2},</if>
+            <if test="shipperName != null">#{shipperName},</if>
+            <if test="shipperReference != null">#{shipperReference},</if>
+            <if test="consigneeName != null">#{consigneeName},</if>
+            <if test="lineAddress1 != null">#{lineAddress1},</if>
+            <if test="lineAddress2 != null">#{lineAddress2},</if>
+            <if test="lineAddress3 != null">#{lineAddress3},</if>
+            <if test="town != null">#{town},</if>
+            <if test="state != null">#{state},</if>
+            <if test="postCode != null">#{postCode},</if>
+            <if test="countryCode != null">#{countryCode},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="pieces != null">#{pieces},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="weightUom != null">#{weightUom},</if>
+            <if test="value != null">#{value},</if>
+            <if test="shippingRate != null">#{shippingRate},</if>
+            <if test="currency != null">#{currency},</if>
+            <if test="incoterms != null">#{incoterms},</if>
+            <if test="importPurpose != null">#{importPurpose},</if>
+            <if test="eoriNumber != null">#{eoriNumber},</if>
+            <if test="mossNumber != null">#{mossNumber},</if>
+            <if test="description != null">#{description},</if>
+            <if test="hsCode != null">#{hsCode},</if>
+            <if test="itemQuantity != null">#{itemQuantity},</if>
+            <if test="itemValue != null">#{itemValue},</if>
+            <if test="skuNumber != null">#{skuNumber},</if>
+            <if test="returnInstruction != null">#{returnInstruction},</if>
+            <if test="salesLink != null">#{salesLink},</if>
+            <if test="lastMileProvider != null">#{lastMileProvider},</if>
+            <if test="lastMileAccountName != null">#{lastMileAccountName},</if>
+            <if test="lastMileService != null">#{lastMileService},</if>
+            <if test="orderIsdraftFlag != null">#{orderIsdraftFlag},</if>
+            <if test="orderEndFlag != null">#{orderEndFlag},</if>
+            now(),
+         </trim>
+    </insert>
+
+	<!-- 基础数据的更改 -->
+    <update id="updateImpBasicData" parameterType="ImpBasicData">
+        update imp_basic_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tackingNumber1 != null">tacking_number_1 = #{tackingNumber1},</if>
+            <if test="tackingNumber2 != null">tacking_number_2 = #{tackingNumber2},</if>
+            <if test="bagNumber != null">bag_number = #{bagNumber},</if>
+            <if test="boxNumber != null">box_number = #{boxNumber},</if>
+            <if test="palletNumber != null">pallet_number = #{palletNumber},</if>
+            <if test="containerNumber != null">container_number = #{containerNumber},</if>
+            <if test="reference1 != null">reference1 = #{reference1},</if>
+            <if test="referrnce2 != null">referrnce2 = #{referrnce2},</if>
+            <if test="shipperName != null">shipper_name = #{shipperName},</if>
+            <if test="shipperReference != null">shipper_reference = #{shipperReference},</if>
+            <if test="consigneeName != null">consignee_name = #{consigneeName},</if>
+            <if test="lineAddress1 != null">line_address_1 = #{lineAddress1},</if>
+            <if test="lineAddress2 != null">line_address_2 = #{lineAddress2},</if>
+            <if test="lineAddress3 != null">line_address_3 = #{lineAddress3},</if>
+            <if test="town != null">town = #{town},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="postCode != null">post_code = #{postCode},</if>
+            <if test="countryCode != null">country_code = #{countryCode},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="pieces != null">pieces = #{pieces},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="weightUom != null">weight_uom = #{weightUom},</if>
+            <if test="value != null">value = #{value},</if>
+            <if test="shippingRate != null">shipping_rate = #{shippingRate},</if>
+            <if test="currency != null">currency = #{currency},</if>
+            <if test="incoterms != null">incoterms = #{incoterms},</if>
+            <if test="importPurpose != null">import_purpose = #{importPurpose},</if>
+            <if test="eoriNumber != null">eori_number = #{eoriNumber},</if>
+            <if test="mossNumber != null">moss_number = #{mossNumber},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="hsCode != null">hs_code = #{hsCode},</if>
+            <if test="itemQuantity != null">item_quantity = #{itemQuantity},</if>
+            <if test="itemValue != null">item_value = #{itemValue},</if>
+            <if test="skuNumber != null">sku_number = #{skuNumber},</if>
+            <if test="returnInstruction != null">return_instruction = #{returnInstruction},</if>
+            <if test="salesLink != null">sales_link = #{salesLink},</if>
+            <if test="lastMileProvider != null">last_mile_provider = #{lastMileProvider},</if>
+            <if test="lastMileAccountName != null">last_mile_account_name = #{lastMileAccountName},</if>
+            <if test="lastMileService != null">last_mile_service = #{lastMileService},</if>
+            <if test="orderIsdraftFlag != null">order_isdraft_flag = #{orderIsdraftFlag},</if>
+            <if test="orderEndFlag != null">order_end_flag = #{orderEndFlag},</if>
+            <if test="submitFlag != null">submit_flag = #{submitFlag},</if>
+            <if test="isresubmitFlag != null">isresubmit_flag = #{isresubmitFlag},</if>
+            <if test="isresubmitCheckFlag != null">isresubmit_check_flag = #{isresubmitCheckFlag},</if>
+            update_time = now(),
+        </trim>
+        where ID = #{id}
+    </update>
+    
+    <!-- 基础数据提交审核 submitImpBasicData -->
+    <update id="updateImpBasicDataBylist" parameterType="java.util.Map">
+        update imp_basic_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="submitFlag != null">submit_flag = #{submitFlag},</if>
+            <if test="checkFlag != null">check_flag = #{checkFlag},</if>
+            <if test="isresubmitFlag != null">isresubmit_flag = #{isresubmitFlag},</if>
+            <if test="isresubmitCheckFlag != null">isresubmit_check_flag = #{isresubmitCheckFlag},</if>
+            update_time = now(),
+        </trim>
+        where ID in
+        <foreach item="ids" collection="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </update>
+
+	<!-- 单个删除基础数据 -->
+    <delete id="deleteImpBasicDataById" parameterType="Long">
+        delete from imp_basic_data where ID = #{id}
+    </delete>
+
+	<!-- 批量删除基础数据 -->
+    <delete id="deleteImpBasicDataByIds" parameterType="String">
+        delete from imp_basic_data where ID in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

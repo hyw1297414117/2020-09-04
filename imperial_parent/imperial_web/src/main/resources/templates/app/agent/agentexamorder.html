@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改清关系统基础数据表处理')" />
+</head>
+<body class="white-bg">
+<input type="hidden" id="orderId" value="{id}"/>
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-data-edit" th:object="${impBasicData}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递号1：</label>
+                <div class="col-sm-8">
+                    <input name="tackingNumber1" id="tackingNumber1" th:field="*{tackingNumber1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递号2：</label>
+                <div class="col-sm-8">
+                    <input name="tackingNumber2" th:field="*{tackingNumber2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">包编号：</label>
+                <div class="col-sm-8">
+                    <input name="bagNumber" th:field="*{bagNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">箱编号：</label>
+                <div class="col-sm-8">
+                    <input name="boxNumber" th:field="*{boxNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">运货板编号：</label>
+                <div class="col-sm-8">
+                    <input name="palletNumber" th:field="*{palletNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">集装箱编号：</label>
+                <div class="col-sm-8">
+                    <input name="containerNumber" th:field="*{containerNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">参考编码1：</label>
+                <div class="col-sm-8">
+                    <input name="reference1" th:field="*{reference1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">参考编码2：</label>
+                <div class="col-sm-8">
+                    <input name="referrnce2" th:field="*{referrnce2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发货人姓名：</label>
+                <div class="col-sm-8">
+                    <input name="shipperName" th:field="*{shipperName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发货人参考信息：</label>
+                <div class="col-sm-8">
+                    <input name="shipperReference" th:field="*{shipperReference}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收货人姓名：</label>
+                <div class="col-sm-8">
+                    <input name="consigneeName" th:field="*{consigneeName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">地址1：</label>
+                <div class="col-sm-8">
+                    <textarea name="lineAddress1" class="form-control">[[*{lineAddress1}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">地址2：</label>
+                <div class="col-sm-8">
+                    <textarea name="lineAddress2" class="form-control">[[*{lineAddress2}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">地址3：</label>
+                <div class="col-sm-8">
+                    <textarea name="lineAddress3" class="form-control">[[*{lineAddress3}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">集镇：</label>
+                <div class="col-sm-8">
+                    <input name="town" th:field="*{town}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">国家：</label>
+                <div class="col-sm-8">
+                    <input name="state" th:field="*{state}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">邮政编码：</label>
+                <div class="col-sm-8">
+                    <input name="postCode" th:field="*{postCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">国家代码：</label>
+                <div class="col-sm-8">
+                    <input name="countryCode" th:field="*{countryCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">邮箱：</label>
+                <div class="col-sm-8">
+                    <input name="email" th:field="*{email}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">电话：</label>
+                <div class="col-sm-8">
+                    <input name="phone" th:field="*{phone}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数量单位：</label>
+                <div class="col-sm-8">
+                    <input name="pieces" th:field="*{pieces}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">重量：</label>
+                <div class="col-sm-8">
+                    <input name="weight" th:field="*{weight}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">重量单位：</label>
+                <div class="col-sm-8">
+                    <input name="weightUom" th:field="*{weightUom}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未知：</label>
+                <div class="col-sm-8">
+                    <input name="value" th:field="*{value}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">运费、发货税率：</label>
+                <div class="col-sm-8">
+                    <input name="shippingRate" th:field="*{shippingRate}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">货币：</label>
+                <div class="col-sm-8">
+                    <input name="currency" th:field="*{currency}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">贸易术语 DDU/DDP：</label>
+                <div class="col-sm-8">
+                    <input name="incoterms" th:field="*{incoterms}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">进口目的：</label>
+                <div class="col-sm-8">
+                    <input name="importPurpose" th:field="*{importPurpose}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未知：</label>
+                <div class="col-sm-8">
+                    <input name="eoriNumber" th:field="*{eoriNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未知：</label>
+                <div class="col-sm-8">
+                    <input name="mossNumber" th:field="*{mossNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">说明：</label>
+                <div class="col-sm-8">
+                    <textarea name="description" class="form-control">[[*{description}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未知：</label>
+                <div class="col-sm-8">
+                    <input name="hsCode" th:field="*{hsCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">项目数量：</label>
+                <div class="col-sm-8">
+                    <input name="itemQuantity" th:field="*{itemQuantity}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品sku编号：</label>
+                <div class="col-sm-8">
+                    <input name="itemValue" th:field="*{itemValue}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未知：</label>
+                <div class="col-sm-8">
+                    <input name="skuNumber" th:field="*{skuNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">返回指令：</label>
+                <div class="col-sm-8">
+                    <input name="returnInstruction" th:field="*{returnInstruction}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">销售连结：</label>
+                <div class="col-sm-8">
+                    <textarea name="salesLink" class="form-control">[[*{salesLink}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末端供应商：</label>
+                <div class="col-sm-8">
+                    <input name="lastMileProvider" th:field="*{lastMileProvider}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末端账户名：</label>
+                <div class="col-sm-8">
+                    <input name="lastMileAccountName" th:field="*{lastMileAccountName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末端服务：</label>
+                <div class="col-sm-8">
+                    <input name="lastMileService" th:field="*{lastMileService}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:src="@{/js/app/agent/agentexamorder.js}"></script>    
+</body>
+</html>
