@@ -47,7 +47,7 @@
 				<a class="btn btn-primary btn-sm single test disabled" onclick="edit(this)" shiro:hasPermission="shipperModule:data:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger btn-sm multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="shipperModule:data:remove">
+                <a class="btn btn-danger btn-sm multiple disabled" onclick="remove()" shiro:hasPermission="shipperModule:data:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
             	<a class="btn btn-warning btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="shipperModule:data:export">
