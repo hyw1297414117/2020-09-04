@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpDicItemRuleMapper">
+    
+    <resultMap type="ImpDicItemRule" id="ImpDicItemRuleResult">
+        <result property="id"    column="id"    />
+        <result property="itemCode"    column="item_code"    />
+        <result property="touchField"    column="touch_field"    />
+        <result property="keyWords"    column="key_words"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectImpDicItemRuleVo">
+        select id, item_code, touch_field, key_words, status from imp_dic_item_rule
+    </sql>
+
+    <select id="selectImpDicItemRuleList" parameterType="ImpDicItemRule" resultMap="ImpDicItemRuleResult">
+        <include refid="selectImpDicItemRuleVo"/>
+        <where>  
+            <if test="itemCode != null  and itemCode != ''"> and item_code = #{itemCode}</if>
+            <if test="touchField != null  and touchField != ''"> and touch_field = #{touchField}</if>
+            <if test="keyWords != null  and keyWords != ''"> and key_words = #{keyWords}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpDicItemRuleById" parameterType="Long" resultMap="ImpDicItemRuleResult">
+        <include refid="selectImpDicItemRuleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImpDicItemRule" parameterType="ImpDicItemRule" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_dic_item_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemCode != null">item_code,</if>
+            <if test="touchField != null">touch_field,</if>
+            <if test="keyWords != null">key_words,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemCode != null">#{itemCode},</if>
+            <if test="touchField != null">#{touchField},</if>
+            <if test="keyWords != null">#{keyWords},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpDicItemRule" parameterType="ImpDicItemRule">
+        update imp_dic_item_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="itemCode != null">item_code = #{itemCode},</if>
+            <if test="touchField != null">touch_field = #{touchField},</if>
+            <if test="keyWords != null">key_words = #{keyWords},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpDicItemRuleById" parameterType="Long">
+        delete from imp_dic_item_rule where id = #{id}
+    </delete>
+
+    <delete id="deleteImpDicItemRuleByIds" parameterType="String">
+        delete from imp_dic_item_rule where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

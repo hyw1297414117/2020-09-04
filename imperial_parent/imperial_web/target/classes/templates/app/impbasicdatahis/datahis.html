@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('清关系统基础数据历史记录表')" />
+    <style>
+    	   .selectTrbgColor{
+           		background-color:#eedeb0;
+           }
+           .fixedTrbgColor{
+           		background-color:rgb(255,255,204);
+           }
+    </style>
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+        	<a>
+				<input type="checkbox" name="smsenable" class="smsenable"/>
+			</a>
+			<div id="searchModule"></div>
+            <div class="col-sm-12 select-table table-striped" id="impbasicdatahisTbDiv" style="height: 500px;overflow: auto;">
+                <table id="impbasicdatahisTb"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:src="@{/js/app/impbasicdatahis/datahis.js}"></script>
+    
+<script id="operatBtTpl" type="text/template">
+<div style="margin-top:5px">
+            	<a class="btn btn-warning btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="shipperModule:data:export">
+			            <i class="fa fa-upload"></i> 导出
+			    </a>
+</div>
+</script>
+<script id="searchTpl" type="text/template">
+<div class="col-sm-12 search-collapse formIdDiv" style="display: none">
+                <form id="formId">
+                    <div class="select-list" style= "float:left;width:90%">
+                        <ul>
+                            <li style="width:30%">
+                                <label>主单号：</label>
+                                <input type="text" id="mainOrderNo" name="mainOrderNo"/>
+                            </li>
+							<li style="width:30%">
+                                <label>包编号：</label>
+                                <input type="text" id="bagNumber" name="bagNumber"/>
+                            </li>
+                            <li style="width:30%">
+                                <label>追踪号1：</label>
+                                <input type="text" id="tackingNumber1" name="tackingNumber1"/>
+                            </li>
+                        </ul>
+						<div style="clear:both"></div>
+						<ul>
+							<li style="width:30%;">
+                                <label>发货人姓名：</label>
+                                <input type="text" id="shipperName" name="shipperName"/>
+                            </li>
+                            <li style="width:30%">
+                                <label>收货人姓名：</label>
+                                <input type="text" id="consigneeName" name="consigneeName"/>
+                            </li>
+                            <li style="width:30%">
+							    <label>类型：</label>
+							    <select id="typeSelect" class="form-control">
+							        <option value="none" selected disabled hidden>请选择</option> 
+							        <option>DDU</option>
+							        <option>DDP</option>
+							    </select>
+							</li>
+						</ul>
+                    </div>
+                    <div style = "float:left;margin-left:10px;">
+                         <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFun()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                         <br>
+                         <p style="height:5px;"></p>
+                         <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                    </div>
+            </form>
+</div>
+<div style="clear:both"></div>
+</script>
+</body>
+</html>
