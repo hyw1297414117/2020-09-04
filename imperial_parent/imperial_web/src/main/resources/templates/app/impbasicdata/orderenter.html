@@ -39,7 +39,7 @@
 </head>
 <body class="gray-bg">
      <div class="container-div">
-     	<a id ="batchImport" onclick="$.table.importExcel()">批量导入</a>
+     	<a id ="batchImport" onclick="importExcel()">批量导入</a>
      	<a id="amnualImport" onclick="add()">手动录入</a>
     </div>
     <th:block th:include="include :: footer" />
@@ -52,7 +52,7 @@
 		<input type="file" id="file" name="file"/>
 		<div class="mt10 pt5">
 			<input type="checkbox" id="updateSupport" name="updateSupport" title="如果数据已经存在，更新这条数据。"> 是否更新已经存在的数据
-			 &nbsp;	<a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
+			 &nbsp;	<a onclick="importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
 		</div>
 		<font color="red" class="pull-left mt10">
 			提示：仅允许导入"xls"、"xlsx"、"csv"格式文件！
