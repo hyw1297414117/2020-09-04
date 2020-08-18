@@ -328,6 +328,34 @@ function remove(){
 		})
 }
 /**
+ * 导出Excel表格
+ */
+function exportExcel(formId) {
+	//table.set();
+	$.modal.confirm("确定导出目标数据吗？", function() {
+		var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+		var operationDivId = $(event.target).parent().parent().next()[0].id; //获取点击修改按钮所在的div的id
+		var tableId = "impbasicDataSunTable"+operationDivId.substr(9); //获取点击按钮所属的tableid
+		var params = $("#" + tableId).bootstrapTable('getOptions');
+		var dataParam = $("#" + currentId).serializeArray();
+		dataParam.push({ "name": "orderByColumn", "value": params.sortName });
+		dataParam.push({ "name": "isAsc", "value": params.sortOrder });
+		$.modal.loading("正在导出数据，请稍后...");
+		$.post(prefix+"/export", dataParam, function(result) {
+			if (result.code == web_status.SUCCESS) {
+		        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+			} else if (result.code == web_status.WARNING) {
+                $.modal.alertWarning(result.msg)
+            } else {
+				$.modal.alertError(result.msg);
+			}
+			$.modal.closeLoading();
+		});
+	});
+}
+
+
+/**
  * 点击修改按钮展示修改页面
  * */
 function edit(){
