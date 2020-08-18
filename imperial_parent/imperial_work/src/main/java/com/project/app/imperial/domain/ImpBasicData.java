@@ -19,24 +19,24 @@ public class ImpBasicData extends BaseEntity
     /** null */
     private Long id;
 
-    /** 快递号1 */
-    @Excel(name = "快递号1")
+    /** 包裹追踪号1 */
+    @Excel(name = "包裹追踪号1")
     private String tackingNumber1;
 
-    /** 快递号2 */
-    @Excel(name = "快递号2")
+    /** 包裹追踪号2 */
+    @Excel(name = "包裹追踪号2")
     private String tackingNumber2;
 
     /** 包编号 */
-    @Excel(name = "包编号")
+    @Excel(name = "外袋号")
     private String bagNumber;
 
     /** 箱编号 */
-    @Excel(name = "箱编号")
+    @Excel(name = "外箱号")
     private String boxNumber;
 
-    /** 运货板编号 */
-    @Excel(name = "运货板编号")
+    /** 托盘号 */
+    @Excel(name = "托盘号")
     private String palletNumber;
 
     /** 集装箱编号 */
@@ -51,40 +51,40 @@ public class ImpBasicData extends BaseEntity
     @Excel(name = "参考编码2")
     private String referrnce2;
 
-    /** 发货人姓名 */
-    @Excel(name = "发货人姓名")
+    /** 发货人 */
+    @Excel(name = "发货人")
     private String shipperName;
 
-    /** 发货人参考信息 */
-    @Excel(name = "发货人参考信息")
+    /** 发货方识别码 */
+    @Excel(name = "发货方识别码")
     private String shipperReference;
 
     /** 收货人姓名 */
     @Excel(name = "收货人姓名")
     private String consigneeName;
 
-    /** 第一行地址 */
-    @Excel(name = "第一行地址")
+    /** 收货地址1 */
+    @Excel(name = "收货地址1")
     private String lineAddress1;
 
-    /** 第二行地址 */
-    @Excel(name = "第二行地址")
+    /** 收货地址2 */
+    @Excel(name = "收货地址2")
     private String lineAddress2;
 
-    /** 第三行地址 */
-    @Excel(name = "第三行地址")
+    /** 收货地址3 */
+    @Excel(name = "收货地址3")
     private String lineAddress3;
 
     /** 集镇 */
-    @Excel(name = "集镇")
+    @Excel(name = "城镇")
     private String town;
 
     /** 国家 */
-    @Excel(name = "国家")
+    @Excel(name = "州郡")
     private String state;
 
     /** 邮政编码 */
-    @Excel(name = "邮政编码")
+    @Excel(name = "邮编")
     private String postCode;
 
     /** 国家代码 */
@@ -92,31 +92,31 @@ public class ImpBasicData extends BaseEntity
     private String countryCode;
 
     /** 邮箱 */
-    @Excel(name = "邮箱")
+    @Excel(name = "电子邮箱")
     private String email;
 
     /** 电话 */
-    @Excel(name = "电话")
+    @Excel(name = "电话号码")
     private String phone;
 
     /** 数量单位 */
-    @Excel(name = "数量单位")
+    @Excel(name = "包裹数量")
     private String pieces;
 
     /** 重量（大小） */
-    @Excel(name = "重量", readConverterExp = "大=小")
+    @Excel(name = "重量(大小)")
     private String weight;
 
     /** 重量单位 */
     @Excel(name = "重量单位")
     private String weightUom;
 
-    /** null */
-    @Excel(name = "null")
+    /** 价值 */
+    @Excel(name = "价值")
     private Long value;
 
     /** 运费、发货税率 */
-    @Excel(name = "运费、发货税率")
+    @Excel(name = "运费")
     private Long shippingRate;
 
     /** 货币 */
@@ -132,51 +132,51 @@ public class ImpBasicData extends BaseEntity
     private String importPurpose;
 
     /** null */
-    @Excel(name = "null")
+    @Excel(name = "未知")
     private String eoriNumber;
 
     /** null */
-    @Excel(name = "null")
+    @Excel(name = "未知")
     private String mossNumber;
 
-    /** 说明 */
-    @Excel(name = "说明")
+    /** 货物描述 */
+    @Excel(name = "货物描述")
     private String description;
 
-    /** null */
-    @Excel(name = "null")
+    /** 海关代码 */
+    @Excel(name = "海关代码")
     private String hsCode;
 
-    /** 项目数量 */
-    @Excel(name = "项目数量")
+    /** 货品件数 */
+    @Excel(name = "货品件数")
     private String itemQuantity;
 
-    /** 产品sku编号 */
-    @Excel(name = "产品sku编号")
+    /** 货品单价 */
+    @Excel(name = "货品单价")
     private Long itemValue;
 
     /** null */
-    @Excel(name = "null")
+    @Excel(name = "未知")
     private String skuNumber;
 
-    /** 返回指令 */
-    @Excel(name = "返回指令")
+    /** 退货方式 */
+    @Excel(name = "退货方式")
     private String returnInstruction;
 
-    /** 销售连结 */
-    @Excel(name = "销售连结")
+    /** 销售链接 */
+    @Excel(name = "销售链接")
     private String salesLink;
 
-    /** 最后一英里供应商 */
-    @Excel(name = "最后一英里供应商")
+    /** 末端派送商 */
+    @Excel(name = "末端派送商")
     private String lastMileProvider;
 
-    /** 最后一英里账户名 */
-    @Excel(name = "最后一英里账户名")
+    /** 末端派送端账户名 */
+    @Excel(name = "末端派送端账户名")
     private String lastMileAccountName;
 
-    /** 最后一英里服务 */
-    @Excel(name = "最后一英里服务")
+    /** 末端服务 */
+    @Excel(name = "末端服务")
     private String lastMileService;
     
     /** 是否为草稿标识 */
