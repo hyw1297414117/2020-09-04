@@ -1,8 +1,23 @@
 var prefix = ctx + "shipperModule/impBasicData";
 
 $(function() {
-	
 })	
+
+/**
+ * 下载模板
+ */
+function importTemplate(){
+	$.get(prefix + "/importTemplate", function(result) {
+		if (result.code == web_status.SUCCESS) {
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+		} else if (result.code == web_status.WARNING) {
+            $.modal.alertWarning(result.msg)
+        } else {
+			$.modal.alertError(result.msg);
+		}
+	});
+}
+
 
 /**
  * 点击添加按钮展示添加页面
