@@ -298,6 +298,35 @@ function submit(){
 			layer.close(layerIndex);
 		})
 }
+
+/**
+ * 删除方法（待优化，应该刷新父级表格）
+ */
+function remove(){
+	var operationDivId = $(event.target).parent().parent().next()[0].id; //获取点击修改按钮所在的div的id
+	var tableId = "impbasicDataSunTable"+operationDivId.substr(9); //获取点击按钮所属的tableid
+	var rows = $("#impbasicDataSunTable"+operationDivId.substr(9)).bootstrapTable('getSelections');
+	var ids=[];
+	for(var i=0;i<rows.length;i++){
+		ids.push(rows[i].id);
+	}
+	ids = ids.join();
+	var dataMap = {};
+	dataMap.ids = ids;
+	dataMap.submitFlag = 1;
+	var layerIndex = layer.confirm("确定删除&nbsp;<font color=red>"+rows.length+"</font>&nbsp;条数据吗？", {
+		btn: ["确定","取消"] //按钮
+		}, function(){
+			$.operate.impAjax("/shipperModule/impBasicData/remove",dataMap,function(){
+				layer.msg("删除成功", {icon: 1,time: 2000});
+		        $("#impbasicDataSunTable"+operationDivId.substr(9)).bootstrapTable('refresh');//主要是要这种写法
+			},function(){
+				layer.msg("删除失败", {icon: 2,time: 1000});
+			});
+		}, function(){
+			layer.close(layerIndex);
+		})
+}
 /**
  * 点击修改按钮展示修改页面
  * */
