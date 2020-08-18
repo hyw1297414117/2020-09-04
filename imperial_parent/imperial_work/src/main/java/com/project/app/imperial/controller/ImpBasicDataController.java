@@ -128,13 +128,12 @@ public class ImpBasicDataController extends BaseController
     @ResponseBody
     public AjaxResult export(@RequestParam Map<String, Object> params)
     {
-    	String key  = (String) params.get("dataParam");
-    	List<Object> json = JSON.parseArray(key);
-    	System.out.println("===JSON="+json.size());
-        //List<ImpBasicData> list = impBasicDataService.selectImpBasicDataList(impBasicData);
-        //ExcelUtil<ImpBasicData> util = new ExcelUtil<ImpBasicData>(ImpBasicData.class);
-        //return util.exportExcel(list, "data");
-    	return null;
+    	//String key  = (String) params.get("dataParam");
+    	//List<Object> json = JSON.parseArray(key);
+    	//System.out.println("===JSON="+json.size());
+        List<ImpBasicData> list = impBasicDataService.selectImpBasicDataList(params);
+        ExcelUtil<ImpBasicData> util = new ExcelUtil<ImpBasicData>(ImpBasicData.class);
+        return util.exportExcel(list, "data");
     }
 
     /**
