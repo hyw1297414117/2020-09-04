@@ -17,7 +17,58 @@ function importTemplate(){
 		}
 	});
 }
-
+/**
+ * 批量导入数据
+ */
+function importExcel(formId) {
+	var currentId = $.common.isEmpty(formId) ? 'importTpl' : formId;
+	layer.open({
+		type: 1,
+		area: ['400px', '230px'],
+		fix: false,
+		//不固定
+		maxmin: true,
+		shade: 0.3,
+		title: '导入订单数据',
+		content: $('#' + currentId).html(),
+		btn: ['<i class="fa fa-check"></i> 导入', '<i class="fa fa-remove"></i> 取消'],
+		// 弹层外区域关闭
+		shadeClose: true,
+		btn1: function(index, layero){
+			var file = layero.find('#file').val();
+			if (file == '' || (!$.common.endWith(file, '.xls') && !$.common.endWith(file, '.xlsx') && !$.common.endWith(file, '.csv'))){
+				$.modal.msgWarning("请选择后缀为 'xls'、'xlsx'、'csv'的文件。");
+				return false;
+			}
+			var index = layer.load(2, {shade: false});
+			$.modal.disable();
+			var formData = new FormData(layero.find('form')[0]);
+			$.ajax({
+				url:prefix +"/importData",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: 'POST',
+				success: function (result) {
+					if (result.code == web_status.SUCCESS) {
+						$.modal.closeAll();
+						$.modal.alertSuccess(result.msg);
+						$.table.refresh();
+					} else if (result.code == web_status.WARNING) {
+						layer.close(index);
+						$.modal.enable();
+                        $.modal.alertWarning(result.msg)
+                    } else {
+						layer.close(index);
+						$.modal.enable();
+						$.modal.alertError(result.msg);
+					}
+				}
+			});
+		}
+	});
+}
 
 /**
  * 点击添加按钮展示添加页面
