@@ -93,3 +93,6 @@ function getParam(paramName) {
     if (r != null) return decodeURI(r[2]);
     return null;
 }
+function zhuche() {
+    window.open("/register");
+}

@@ -18,15 +18,18 @@
     <style type="text/css">label.error { position:inherit;  }</style>
 </head>
 <body class="signin">
-<h1 style="text-align:center;margin-top:60px;">欢迎使用 <strong>清关后台管理系统</strong></h1>
+<h1 style="text-align:center;margin-top:60px;">欢迎使用 <strong>请注册你的账号</strong></h1>
     <div class="signinpanel">
-        <div class="row" style="margin-top:-40px;">
+        <div class="row" style="margin-top:-90px;">
             <div class="col-sm-7">
             </div>
             <div class="col-sm-5">
                 <form id="registerForm" autocomplete="off">
                     <h4 class="no-margins">注册：</h4>
-                    <input type="text"     name="username" class="form-control uname"         placeholder="用户名"   maxlength="20" />
+                    <input type="text"     name="username" class="form-control uname"         placeholder="真实名称"   maxlength="20" />
+                    <input type="text"     name="loginName" class="form-control uname"         placeholder="登录名称"   maxlength="20" />
+                    <input type="text"     name="email" class="form-control pword"         placeholder="邮箱"   maxlength="20" />
+                    <input type="text"     name="phonenumber" class="form-control uname"         placeholder="手机号"   maxlength="20" />
                     <input type="password" name="password" class="form-control pword"         placeholder="密码"     maxlength="20" />
                     <input type="password" name="confirmPassword" class="form-control pword"  placeholder="确认密码" maxlength="20" />
 					<div class="row m-t" th:if="${captchaEnabled==true}">

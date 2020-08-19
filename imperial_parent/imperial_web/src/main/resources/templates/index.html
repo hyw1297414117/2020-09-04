@@ -228,10 +228,28 @@
 
         <div class="row mainContent" id="content-main">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
+
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
         <div class="footer">
+
+            <div class="pull-left">
+                <div style="float: left;margin-left: 10px">
+                    <div style="background-color: #0d8ddb;width: 50px;height: 10px;"></div>审核通过
+                </div>
+                <div style="float: left;margin-left: 10px">
+                    <div style="background-color: #8a6d3b;width: 50px;height: 10px;"></div>驳回
+                </div>
+                <div style="float: left;margin-left: 10px">
+                    <div style="background-color: green;width: 50px;height: 10px;"></div>二次提交审核中
+                </div>
+                <div style="float: left;margin-left: 10px">
+                    <div style="background-color: grey;width: 50px;height: 10px;"></div>	审核中
+                </div>
+            </div>
+
             <div class="pull-right">© [[${copyrightYear}]] fanke Copyright </div>
+
         </div>
     </div>
     <!--右侧部分结束-->

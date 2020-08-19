@@ -16,14 +16,20 @@ $.validator.setDefaults({
 function register() {
 	$.modal.loading($("#btnSubmit").data("loading"));
 	var username = $.common.trim($("input[name='username']").val());
+    var loginName = $.common.trim($("input[name='loginName']").val());
+    var email = $.common.trim($("input[name='email']").val());
+    var phonenumber = $.common.trim($("input[name='phonenumber']").val());
     var password = $.common.trim($("input[name='password']").val());
     var validateCode = $("input[name='validateCode']").val();
     $.ajax({
         type: "post",
         url: ctx + "register",
         data: {
-            "loginName": username,
+            "userName": username,
             "password": password,
+            "loginName": loginName,
+            "email": email,
+            "phonenumber": phonenumber,
             "validateCode": validateCode
         },
         success: function(r) {
@@ -35,7 +41,7 @@ function register() {
         	    function(index) {
         	        //关闭弹窗
         	        layer.close(index);
-        	        location.href = ctx + 'login';
+        	        location.href = ctx + 'register';
         	    });
             } else {
             	$.modal.closeLoading();
@@ -55,6 +61,18 @@ function validateRule() {
                 required: true,
                 minlength: 2
             },
+            loginName: {
+                required: true,
+                minlength: 2
+            },
+            email: {
+                required: true,
+                minlength: 2
+            },
+            phonenumber: {
+                required: true,
+                minlength: 11
+            },
             password: {
                 required: true,
                 minlength: 5
@@ -65,9 +83,25 @@ function validateRule() {
             }
         },
         messages: {
+
+        },
+        messages: {
+
             username: {
                 required: icon + "请输入您的用户名",
                 minlength: icon + "用户名不能小于2个字符"
+            },
+            loginName: {
+                required: icon + "请输入您的真实姓名",
+                minlength: icon + "用户名不能小于2个字符"
+            },
+            email: {
+                required: icon + "请输入您的邮箱",
+                minlength: icon + "用户名不能小于2个字符"
+            },
+            phonenumber: {
+                required: icon + "请输入您的手机号码",
+                    minlength: icon + "用户名不能小于11个字符"
             },
             password: {
             	required: icon + "请输入您的密码",

@@ -30,15 +30,32 @@ public class RegisterService
      */
     public String register(User user)
     {
-        String msg = "", username = user.getLoginName(), password = user.getPassword();
-
+        String msg = "", username = user.getUserName(),loginname=user.getLoginName(), password = user.getPassword(),emal=user.getEmail(),phonenome=user.getPhonenumber();
+        String regex = "^[A-Za-z0-9]{1,40}@[A-Za-z0-9]{1,40}\\.[A-Za-z]{2,3}$";
+        String regexphone="^1(3|5|8)\\d{9}$";
         if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
         {
             msg = "验证码错误";
         }
         else if (StringUtils.isEmpty(username))
         {
-            msg = "用户名不能为空";
+            msg = "用户真实姓名不能为空";
+        }
+        else if (StringUtils.isEmpty(loginname))
+        {
+            msg = "登录名不能为空";
+        }else if (StringUtils.isEmpty(emal))
+        {
+            msg = "邮箱不能为空";
+        }else if(!emal.matches(regex)){
+            msg = "邮箱格式不正确";
+        }
+        else if (StringUtils.isEmpty(phonenome))
+        {
+            msg = "手机号码不能为空";
+        }
+        else if(!phonenome.matches(regexphone)){
+            msg = "手机号码格式不正确！必须以13，14，15，18开头";
         }
         else if (StringUtils.isEmpty(password))
         {

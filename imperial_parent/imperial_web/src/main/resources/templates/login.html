@@ -45,7 +45,8 @@
 				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
 				    </div>
 				      <div class="signin-info">
-	                    <strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>
+	                    <!--<strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>-->
+                          <strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a href="javascript:void(0);" onclick="zhuche()">立即注册&raquo;</a></strong>
 	                  </div>
                     <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>
                 </form>
