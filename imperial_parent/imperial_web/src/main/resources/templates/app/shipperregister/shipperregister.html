@@ -48,7 +48,7 @@
 	                </div>
 	            </div>
 	            <div class="form-group">    
-	                <label class="col-sm-3 control-label">机构代码：</label>
+	                <label class="col-sm-3 control-label is-required">机构代码：</label>
 	                <div class="col-sm-5">
 	                    <input name="tackingNumber2" class="form-control" type="text">
 	                </div>
@@ -60,19 +60,19 @@
 	                </div>
 	            </div>
 	            <div class="form-group">    
-	                <label class="col-sm-3 control-label">手机号：</label>
+	                <label class="col-sm-3 control-label is-required">手机号：</label>
 	                <div class="col-sm-5">
 	                    <input name="boxNumber" class="form-control" type="text">
 	                </div>
 	            </div>
 	            <div class="form-group">    
-	                <label class="col-sm-3 control-label">邮箱：</label>
+	                <label class="col-sm-3 control-label is-required">邮箱：</label>
 	                <div class="col-sm-5">
 	                    <input name="palletNumber" class="form-control" type="text">
 	                </div>
 	            </div>
 	            <div class="form-group">    
-	                <label class="col-sm-5 control-label">货物类型：</label>
+	                <label class="col-sm-5 control-label ">货物类型：</label>
 	                <div class="col-sm-5">
 	                    <input name="containerNumber" class="form-control" type="text">
 	                </div>
@@ -84,7 +84,7 @@
 	                </div>
 	            </div>
 	            <div class="form-group">   
-	            <label class="col-sm-3 control-label">类型：</label>
+	            <label class="col-sm-3 control-label is-required">业务类型：</label>
 	            	<div class="col-sm-5">
 							    <select id="typeSelect" class="form-control">
 							        <option value="none" selected disabled hidden>请选择</option> 
@@ -158,9 +158,10 @@
 <div style="margin-bottom:100px;">
 	<a id ="batchImport" onclick="">保存</a>
 </div>
-<th:block th:include="include :: footer" />、
+<th:block th:include="include :: footer" />
 <script type="text/javascript">
 	$(function(){
+		//类型选择和右边tap页签进行关联		
 		$('#typeSelect').change(function() {
 			var options = $("#typeSelect option:selected").val();
 			var itemTabs = $(".itemTabs").children("li");
@@ -171,8 +172,6 @@
 				}
 			}) 
 		})
-		
-	    
 	})
 
 </script>
