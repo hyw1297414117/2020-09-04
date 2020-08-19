@@ -3,6 +3,10 @@
 <head>
     <th:block th:include="include :: header('发货机构注册页面')" />
     <style type="text/css">
+
+		a{
+			border: 0px solid red;
+		}
     	.leftFormDiv{
     		float:left;
     		width:48%;
@@ -115,14 +119,14 @@
 	    </div>
 	</div>
 	<div  class="rightTranRule" >
-		<ul class="nav nav-tabs itemTabs">
-		   <li class="active"><a href="#seaTrans" data-toggle="tab" id="seaTransx" style="border-bottom: 0px;">海运</a></li>
-		   <li ><a href="#landTrans" data-toggle="tab"  id="landTransx" style="display: none;border-bottom: 0px;">陆运</a></li>
-		   <li><a href="#airTrans" data-toggle="tab" id="airTransx" style="display: none;border-bottom: 0px;">空运</a></li>
-		   <li><a href="#consult" data-toggle="tab" id="consultx" style="display: none;border-bottom: 0px;">咨询</a></li>
-		   <li><a href="#other" data-toggle="tab" id="otherx" style="display: none;border-bottom: 0px;">其他</a></li>
-	    </ul>
-	<div class="tab-content" style="overflow: auto">
+		<ul class="nav nav-tabs itemTabs" style="border-bottom: 0px">
+		<li class="active"><a href="#seaTrans" data-toggle="tab" id="seaTransx"  style="border-bottom: 0px;margin-left: 5px;">海运</a></button></li>
+			<li ><a href="#landTrans" data-toggle="tab"  id="landTransx" style="display: none;border-bottom: 0px">陆运</a></button></li>
+			<li><a href="#airTrans" data-toggle="tab" id="airTransx" style="display: none;border-bottom: 0px">空运</a></button></li>
+			<li><a href="#consult" data-toggle="tab" id="consultx" style="display: none;border-bottom: 0px">咨询</a></button></li>
+			<li><a href="#other" data-toggle="tab" id="otherx" style="display: none;border-bottom: 0px">其他</a></button></li>
+	</ul>
+	<div class="tab-content" >
 		<div class="tab-pane active" id="seaTrans" >
 			1
 			<div style="float:left;width:50%;height:300px;padding:10px;">
@@ -316,37 +320,44 @@
 		check1.off('change').on('change',function(){
 			var val=$(this).val();
 			if($(this).is(':checked')){
-
 				if(val=="海运"){
 					document.getElementById("seaTransx").style.display="block";
-					document.getElementById("seaTransx").style.borderBottom="0px;";
 				}else if(val=="陆运"){
 					document.getElementById("landTransx").style.display="block";
-					document.getElementById("landTransx").style.borderBottom="0px;";
 				}else if(val=="空运"){
 					document.getElementById("airTransx").style.display="block";
-					document.getElementById("airTransx").style.borderBottom="0px;";
 				}else if(val=="咨询"){
 					document.getElementById("consultx").style.display="block";
-					document.getElementById("consultx").style.borderBottom="0px;";
 				}else if(val=="其他"){
 					document.getElementById("otherx").style.display="block";
-					document.getElementById("otherx").style.borderBottom="0px;";
 				}
 			}
 			if(!$(this).is(':checked')){
 				if(val=="海运"){
 					document.getElementById("seaTransx").style.display="none";
-
+					// $("#seaTrans").removeClass('active');
 				}else if(val=="陆运"){
 					document.getElementById("landTransx").style.display="none";
+					// $("#landTrans").removeClass('active');
 				}else if(val=="空运"){
 					document.getElementById("airTransx").style.display="none";
+					// $("#airTrans").removeClass('active');
 				}else if(val=="咨询"){
 					document.getElementById("consultx").style.display="none";
+					// $("#consult").removeClass('active');
 				}else if(val=="其他"){
 					document.getElementById("otherx").style.display="none";
+					// $("#other").removeClass('active');
 				}
+				// var inputyname=document.getElementsByName("check1");
+				//
+				// for(var i=0; 1<inputyname.length;i++){
+				// 	if(inputyname[i].checked){
+				//
+				// 		$(inputyname[i]).addClass('active');
+				// 		return;
+				// 	}
+				// }
 			}
 		})
 	})
