@@ -42,7 +42,7 @@ public class ImpShipperInfoController extends BaseController
     }
 
     /**
-     * 查询发货方基本信息操作列表
+     * 查询发货方基本信息列表
      */
     @RequiresPermissions("shipperInfo:data:list")
     @PostMapping("/list")
