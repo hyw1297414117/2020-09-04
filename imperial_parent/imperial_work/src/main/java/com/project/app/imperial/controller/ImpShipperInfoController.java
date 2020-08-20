@@ -67,7 +67,6 @@ public class ImpShipperInfoController extends BaseController
         ExcelUtil<ImpShipperInfo> util = new ExcelUtil<ImpShipperInfo>(ImpShipperInfo.class);
         return util.exportExcel(list, "imperial");
     }
-
     /**
      * 新增发货方基本信息操作
      */
