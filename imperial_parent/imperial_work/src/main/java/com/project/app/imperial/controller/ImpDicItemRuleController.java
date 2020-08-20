@@ -128,5 +128,4 @@ public class ImpDicItemRuleController extends BaseController
     {
         return toAjax(impDicItemRuleService.deleteImpDicItemRuleByIds(ids));
     }
-    //
 }
