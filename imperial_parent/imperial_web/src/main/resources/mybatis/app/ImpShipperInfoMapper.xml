@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpShipperInfoMapper">
+    
+    <resultMap type="ImpShipperInfo" id="ImpShipperInfoResult">
+        <result property="id"    column="id"    />
+        <result property="orgName"    column="org_name"    />
+        <result property="orgCode"    column="org_code"    />
+        <result property="orgLegal"    column="org_legal"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="email"    column="email"    />
+        <result property="goodsType"    column="goods_type"    />
+        <result property="costRuleRelate"    column="cost_rule_relate"    />
+        <result property="transType"    column="trans_type"    />
+        <result property="inserttime"    column="inserttime"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <sql id="selectImpShipperInfoVo">
+        select id, org_name, org_code, org_legal, telephone, email, goods_type, cost_rule_relate, trans_type, inserttime, updatetime from imp_shipper_info
+    </sql>
+
+    <select id="selectImpShipperInfoList" parameterType="ImpShipperInfo" resultMap="ImpShipperInfoResult">
+        <include refid="selectImpShipperInfoVo"/>
+        <where>  
+            <if test="orgName != null  and orgName != ''"> and org_name like concat('%', #{orgName}, '%')</if>
+            <if test="orgCode != null  and orgCode != ''"> and org_code = #{orgCode}</if>
+            <if test="orgLegal != null  and orgLegal != ''"> and org_legal = #{orgLegal}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="goodsType != null  and goodsType != ''"> and goods_type = #{goodsType}</if>
+            <if test="costRuleRelate != null  and costRuleRelate != ''"> and cost_rule_relate = #{costRuleRelate}</if>
+            <if test="transType != null  and transType != ''"> and trans_type = #{transType}</if>
+            <if test="inserttime != null "> and inserttime = #{inserttime}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpShipperInfoById" parameterType="Long" resultMap="ImpShipperInfoResult">
+        <include refid="selectImpShipperInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImpShipperInfo" parameterType="ImpShipperInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_shipper_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgName != null">org_name,</if>
+            <if test="orgCode != null">org_code,</if>
+            <if test="orgLegal != null">org_legal,</if>
+            <if test="telephone != null">telephone,</if>
+            <if test="email != null">email,</if>
+            <if test="goodsType != null">goods_type,</if>
+            <if test="costRuleRelate != null">cost_rule_relate,</if>
+            <if test="transType != null">trans_type,</if>
+            <if test="inserttime != null">inserttime,</if>
+            <if test="updatetime != null">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgName != null">#{orgName},</if>
+            <if test="orgCode != null">#{orgCode},</if>
+            <if test="orgLegal != null">#{orgLegal},</if>
+            <if test="telephone != null">#{telephone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="goodsType != null">#{goodsType},</if>
+            <if test="costRuleRelate != null">#{costRuleRelate},</if>
+            <if test="transType != null">#{transType},</if>
+            <if test="inserttime != null">#{inserttime},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpShipperInfo" parameterType="ImpShipperInfo">
+        update imp_shipper_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgName != null">org_name = #{orgName},</if>
+            <if test="orgCode != null">org_code = #{orgCode},</if>
+            <if test="orgLegal != null">org_legal = #{orgLegal},</if>
+            <if test="telephone != null">telephone = #{telephone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="goodsType != null">goods_type = #{goodsType},</if>
+            <if test="costRuleRelate != null">cost_rule_relate = #{costRuleRelate},</if>
+            <if test="transType != null">trans_type = #{transType},</if>
+            <if test="inserttime != null">inserttime = #{inserttime},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpShipperInfoById" parameterType="Long">
+        delete from imp_shipper_info where id = #{id}
+    </delete>
+
+    <delete id="deleteImpShipperInfoByIds" parameterType="String">
+        delete from imp_shipper_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
