@@ -84,9 +84,6 @@ function validateRule() {
         },
         messages: {
 
-        },
-        messages: {
-
             username: {
                 required: icon + "请输入您的用户名",
                 minlength: icon + "用户名不能小于2个字符"
@@ -114,3 +111,4 @@ function validateRule() {
         }
     })
 }
+

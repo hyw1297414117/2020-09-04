@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
+
     <th:block th:include="include :: header('发货机构注册页面')" />
     <style type="text/css">
+
+		a{
+			border: 0px solid red;
+		}
     	.leftFormDiv{
     		float:left;
     		width:48%;
@@ -35,7 +40,7 @@
     		transform: scale(1.1);
     	}
     </style>
-           
+
 </head>
 <body class="white-bg">
 	<div class="leftFormDiv">
@@ -83,17 +88,18 @@
 	                    <input name="reference1" class="form-control" type="text">
 	                </div>
 	            </div>
-	            <div class="form-group">   
-	            <label class="col-sm-3 control-label is-required">业务类型：</label>
-	            	<div class="col-sm-8" >
-							    <!--<select id="typeSelect" class="form-control">-->
-							        <!--<option value="none" selected disabled hidden>请选择</option> -->
-							        <!--<option>海运</option>-->
-							        <!--<option>陆运</option>-->
-							        <!--<option>空运</option>-->
-							        <!--<option>咨询</option>-->
-							        <!--<option>其他</option>-->
-							    <!--</select>-->
+	            <div class="form-group">
+						<label class="col-sm-3 control-label">业务类型：</label>
+					<div class="col-sm-8" >
+						<!--<div class="col-sm-5">-->
+							<!--&lt;!&ndash;<select id="typeSelect" name="typeSelect" class="selectpicker show-tick form-control" multiple data-live-search="false">&ndash;&gt;-->
+								<!--&lt;!&ndash;<option value="0" selected="selected">海运</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;<option value="1">陆运</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;<option value="2">空运</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;<option value="3">咨询</option>&ndash;&gt;-->
+								<!--&lt;!&ndash;<option value="4">其他</option>&ndash;&gt;-->
+							<!--&lt;!&ndash;</select>&ndash;&gt;-->
+						<!--</div>-->
 						<label  class="btn btn-default">
 							<input name="check1" type="checkbox" th:value="海运" checked="checked"> 海运
 						</label>
@@ -107,22 +113,22 @@
 							<input name="check1" type="checkbox" th:value="咨询"> 咨询
 						</label>
 						<label  class="btn btn-default">
-						<input name="check1" type="checkbox" th:value="其他"> 其他
-					</label>
-					</div>
-	            </div>
+							<input name="check1" type="checkbox" th:value="其他"> 其他
+						</label>
+	            	</div>
+				</div>
 	        </form>
 	    </div>
 	</div>
 	<div  class="rightTranRule" >
-		<ul class="nav nav-tabs itemTabs">
-		   <li class="active"><a href="#seaTrans" data-toggle="tab" id="seaTransx" style="border-bottom: 0px;">海运</a></li>
-		   <li ><a href="#landTrans" data-toggle="tab"  id="landTransx" style="display: none;border-bottom: 0px;">陆运</a></li>
-		   <li><a href="#airTrans" data-toggle="tab" id="airTransx" style="display: none;border-bottom: 0px;">空运</a></li>
-		   <li><a href="#consult" data-toggle="tab" id="consultx" style="display: none;border-bottom: 0px;">咨询</a></li>
-		   <li><a href="#other" data-toggle="tab" id="otherx" style="display: none;border-bottom: 0px;">其他</a></li>
-	    </ul>
-	<div class="tab-content" style="overflow: auto">
+		<ul class="nav nav-tabs itemTabs" style="border-bottom: 0px">
+		<li class="active"><a href="#seaTrans" data-toggle="tab" id="seaTransx"  style="border-bottom: 0px;margin-left: 5px;">海运</a></button></li>
+			<li ><a href="#landTrans" data-toggle="tab"  id="landTransx" style="display: none;border-bottom: 0px">陆运</a></button></li>
+			<li><a href="#airTrans" data-toggle="tab" id="airTransx" style="display: none;border-bottom: 0px">空运</a></button></li>
+			<li><a href="#consult" data-toggle="tab" id="consultx" style="display: none;border-bottom: 0px">咨询</a></button></li>
+			<li><a href="#other" data-toggle="tab" id="otherx" style="display: none;border-bottom: 0px">其他</a></button></li>
+	</ul>
+	<div class="tab-content" >
 		<div class="tab-pane active" id="seaTrans" >
 			1
 			<div style="float:left;width:50%;height:300px;padding:10px;">
@@ -298,59 +304,69 @@
 </div>
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
-	// $(function(){
-		//类型选择和右边tap页签进行关联		
-	// 	$('#typeSelect').change(function() {
-	// 		var options = $("#typeSelect option:selected").val();
-	// 		var itemTabs = $(".itemTabs").children("li");
-	// 		itemTabs.each(function(){
-	// 			if($(this).text()==options){
-	// 				$(this).addClass('active');
-	// 				$(this).siblings().removeClass('active');
-	// 			}
-	// 		})
-	// 	})
-	// })
-	$(document).ready(function(){
-		var check1 = $('input[name="check1"]')
-		check1.off('change').on('change',function(){
-			var val=$(this).val();
-			if($(this).is(':checked')){
-
-				if(val=="海运"){
-					document.getElementById("seaTransx").style.display="block";
-					document.getElementById("seaTransx").style.borderBottom="0px;";
-				}else if(val=="陆运"){
-					document.getElementById("landTransx").style.display="block";
-					document.getElementById("landTransx").style.borderBottom="0px;";
-				}else if(val=="空运"){
-					document.getElementById("airTransx").style.display="block";
-					document.getElementById("airTransx").style.borderBottom="0px;";
-				}else if(val=="咨询"){
-					document.getElementById("consultx").style.display="block";
-					document.getElementById("consultx").style.borderBottom="0px;";
-				}else if(val=="其他"){
-					document.getElementById("otherx").style.display="block";
-					document.getElementById("otherx").style.borderBottom="0px;";
+	$(function () {
+		$(window).on('load', function () {
+			$('#typeSelect').selectpicker({
+				'selectedText': 'cat'
+			});
+		});
+	})
+	$(document).ready(function() {
+		// $("#typeSelect").bind("change", function () {
+		// 	var dataname = $(this).val();
+		// 	for (var i = 0; i < dataname.length; i++) {
+		// 		if (dataname[i] == 0) {
+		// 			document.getElementById("seaTransx").style.display = "block";
+		// 		} else if (dataname[i] == 1) {
+		// 			document.getElementById("landTransx").style.display = "block";
+		// 		} else if (dataname[i] == 2) {
+		// 			document.getElementById("airTransx").style.display = "block";
+		// 		} else if (dataname[i] == 3) {
+		// 			document.getElementById("consultx").style.display = "block";
+		// 		} else if (dataname[i] == 4) {
+		// 			document.getElementById("otherx").style.display = "block";
+		// 		} else {
+		// 			return
+		// 		}
+		// 	}
+			var check1 = $('input[name="check1"]')
+			check1.off('change').on('change',function(){
+				var val=$(this).val();
+				if($(this).is(':checked')){
+					if(val=="海运"){
+						document.getElementById("seaTransx").style.display="block";
+					}else if(val=="陆运"){
+						document.getElementById("landTransx").style.display="block";
+					}else if(val=="空运"){
+						document.getElementById("airTransx").style.display="block";
+					}else if(val=="咨询"){
+						document.getElementById("consultx").style.display="block";
+					}else if(val=="其他"){
+						document.getElementById("otherx").style.display="block";
+					}
 				}
-			}
-			if(!$(this).is(':checked')){
-				if(val=="海运"){
-					document.getElementById("seaTransx").style.display="none";
-
-				}else if(val=="陆运"){
-					document.getElementById("landTransx").style.display="none";
-				}else if(val=="空运"){
-					document.getElementById("airTransx").style.display="none";
-				}else if(val=="咨询"){
-					document.getElementById("consultx").style.display="none";
-				}else if(val=="其他"){
-					document.getElementById("otherx").style.display="none";
+				if(!$(this).is(':checked')){
+					if(val=="海运"){
+						document.getElementById("seaTransx").style.display="none";
+					}else if(val=="陆运"){
+						document.getElementById("landTransx").style.display="none";
+					}else if(val=="空运"){
+						document.getElementById("airTransx").style.display="none";
+					}else if(val=="咨询"){
+						document.getElementById("consultx").style.display="none";
+					}else if(val=="其他"){
+						document.getElementById("otherx").style.display="none";
+					}
 				}
-			}
-		})
+			})
 	})
 
 </script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+	<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
 </body>
 </html>
