@@ -27,7 +27,7 @@
     <script th:src="@{/js/app/impbasicsubmit/submitreject.js}"></script>
 <script id="operatBtTpl" type="text/template">
 <div style="margin-top:5px">
-            	<a class="btn btn-primary single disabled" onclick="$.operate.basEditdraft()" shiro:hasPermission="shipperModule:data:edit">
+            	<a class="btn btn-primary single disabled" onclick="edit()" shiro:hasPermission="shipperModule:data:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="shipperModule:data:remove">
