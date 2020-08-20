@@ -39,6 +39,12 @@ $(function() {
         	$($(this).parents("tr")).addClass('selectTrbgColor');
         })
     })
+/**
+ * 初始化订单背景颜色
+ * @param params
+ * @returns
+ */
+bgColorInit();
 });
 
 function queryParamsPaging(params) {
@@ -129,7 +135,7 @@ function InitSubTable (mainNoIndex,bagNumberIndex, row, $thisDetail,mainOrderNo)
         uniqueId: "id",
         pagination : true,//是否分页
         queryParamsType:'limit',
-        pageSize:5,
+        pageSize:10,
         pageList: [5,10, 20],
         fixedColumns:true,
         fixedNumber:3,

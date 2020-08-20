@@ -134,7 +134,6 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         fixedColumns:true,
         fixedNumber:3,
         columns: [
-        	
         {field: 'id',title: 'null',visible: false},
         {field: 'tackingNumber1', title: '包裹追踪号1'},
         {field: 'tackingNumber2', title: '包裹追踪号2'},

@@ -1757,7 +1757,31 @@ function registCheckbox(tableid,index,$element) {
 function queryParams(params) {
     return JSON.stringify(params);
 };
-
+/**
+ * 清关系统订单颜色标识
+ */
+function bgColorInit(){
+	$(".bgColorIden1").hover(function(){
+    	$(this).text("审核通过");
+    },function(){
+    	$(this).text("");
+    })
+    $(".bgColorIden2").hover(function(){
+    	$(this).text("驳回");
+    },function(){
+    	$(this).text("");
+    })
+    $(".bgColorIden3").hover(function(){
+    	$(this).text("二次提交审核中...");
+    },function(){
+    	$(this).text("");
+    })
+    $(".bgColorIden4").hover(function(){
+    	$(this).text("审核中...");
+    },function(){
+    	$(this).text("");
+    })
+}
 /** 表格类型 */
 table_type = {
     bootstrapTable: 0,
