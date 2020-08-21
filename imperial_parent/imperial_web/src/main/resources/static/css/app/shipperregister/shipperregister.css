@@ -65,18 +65,23 @@ ul {
 .card-fouth{
     width: 100%;
     margin: 0 auto;
+	overflow: auto;
+
 }
- .case-container {
-    width: 100%;
-    margin: 0 auto;
-    height: 80%
+.case-container{
+	width: 99%;
+	height: 310px;
+
 }
 .card-fouth .case-panel {
    position: absolute;
     z-index: 1;
     opacity: 0;
     overflow: hidden;
-    padding-left: 35px
+	width: 800px;
+	height: 310px;
+
+
 }
 .card-fouth .case-panel.active {
     z-index: 100;
@@ -122,6 +127,8 @@ ul {
 		box-shadow:0px 10px 10px -5px #3d3b4f;
 		margin-left:10px;
 		padding:5px 20px 5px 5px;
+
+
    	}
    	.rightTranRule{
    		float:left;
@@ -129,6 +136,7 @@ ul {
    		height:80%;
    		margin-left:20px;
    		box-shadow:0px 10px 10px -5px #3d3b4f;
+
    	}
      .chargeRules{
 		width:100%;heigth:30px;font-size:25px;
@@ -140,8 +148,8 @@ ul {
    	
    	#batchImport{
    		float:left;
-   		width:96%;
-   		margin-left:2%;
+   		width:60%;
+   		margin-left:32%;
    		height:50px;
    		background-color:#d6ecf0;
    		text-align:center;
@@ -157,7 +165,7 @@ ul {
     ul,li{padding: 0;margin: 0}
 	.mySelect .inputWrap{
 		width:100%;
-		min-height: 40px;
+		min-height: 50px;
 		border: 1px solid #ccc;
 		border-radius: 3px;
 		position: relative;
@@ -175,7 +183,7 @@ ul {
 		display: inline-block;
 		background: #eaeaea;
 		padding: 5px;
-		margin: 5px 5px 5px 0;
+		margin: 5px 5px 0px 0;
 		border-radius: 5px;
 	}
 	.mySelect .fa-close{
@@ -187,7 +195,7 @@ ul {
 	.mySelect .mySelect-option{
 		width: 100%;
 		border: 1px solid #ccc;
-		max-height: 185px;
+		max-height: 160px;
 		overflow-y: scroll;
 		height: 0;
 		opacity:1 !important;
@@ -196,7 +204,7 @@ ul {
 	}
 	.mySelect .mySelect-option div{
 		padding: 5px;
-		height:30px;
+		height:25px;
 	}
 	.mySelect .inputWrap>i{
 		position: absolute;
