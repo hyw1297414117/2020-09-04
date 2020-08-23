@@ -1753,10 +1753,25 @@ function registCheckbox(tableid,index,$element) {
     });
 }
 
-//清关系统检索方法的封装
+/**
+ * 清关系统检索方法的封装
+ * @param params
+ * @returns
+ */
 function queryParams(params) {
     return JSON.stringify(params);
 };
+/**
+ * 清关分页参数
+ */
+function initPageParams(params){
+	return {
+		pageSize : params.limit,//分页的话，pageSize和pageNum两个参数必不可少！
+        pageNum: params.offset / params.limit + 1,
+        offset: params.offset,
+        isAsc:true,
+	}
+}
 /**
  * 清关系统 行被选中后 标记此行颜色
  * @param params

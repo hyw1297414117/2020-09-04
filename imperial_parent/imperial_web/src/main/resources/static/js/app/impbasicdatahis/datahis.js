@@ -26,73 +26,31 @@ $(function() {
     })
     $('#searchModule').append($("#searchTpl").html());  //添加搜索模块
     switchRender(); //渲染开关
-    /**
-     * 标记父子表中被选中的父表tr
-     * */
-    identifyRowColor("impbasicdatahisTb");
+    identifyRowColor("impbasicdatahisTb");//标记父子表中被选中的父表tr
+});
+
 /**
- * 初始化订单背景颜色
+ * 请求参数+分页参数
  * @param params
  * @returns
  */
-bgColorInit();
-});
-
 function queryParamsPaging(params) {
 	var dataMap = {};
 	dataMap.orderEndFlag = 1;
+	var pageParams = initPageParams(params);////分页参数的初始化
 	return {
-		pageSize : params.limit,//分页的话，pageSize和pageNum两个参数必不可少！
-        pageNum: params.offset / params.limit + 1,
-        offset: params.offset,
-        isAsc:true,
+		pageParams,
         impParams:queryParams(dataMap)
 	};
 }
 
 /**
- * 初始化包裹表格
- * */
-function InitBagNumberTable (mainNoIndex, fatRow, $fatDetail) {
-	var mainOrderNo = fatRow.mainOrderNo;
-	var switchState = $('.smsenable').bootstrapSwitch('state'); 
-	var dataMap = {};
-	if(switchState){   //如果开关状态为打开状态时，获取检索条件值
-		dataMap.tackingNumber1 = $("#tackingNumber1").val();
-		dataMap.bagNumber = $("#bagNumber").val();
-	}
-	dataMap.mainOrderNo = mainOrderNo;
-	dataMap.orderEndFlag = 1;
-	var cur_table = $fatDetail.append('<div id="bagDiv'+mainNoIndex+'" style="width:'+impbasicdatahisTbDivWid+'"><table id="bagTable'+mainNoIndex+'"></table></div>').find('table');
-	$(cur_table).bootstrapTable({
-    	id: "bagTable"+mainNoIndex,
-        url: "/shipperModule/impBasicData/getBagNumberList",
-        method: 'post',
-        contentType: "application/x-www-form-urlencoded",   // 编码类型
-        sidePagination : 'server',
-        queryParams: {impParams:queryParams(dataMap)},
-        detailView:true,
-        //striped: false,  //隔行变色
-        uniqueId: "id",
-        pagination : true,//是否分页
-        queryParamsType:'limit',
-        pageSize: 10,
-        pageNumber : 1, //初始化加载第一页
-        pageList: [10, 20],
-        isAsc:true,
-        columns: [
-            {field: 'id',title: 'null',visible: false},
-            {field: 'bagNumber',title: '包裹号'}],
-        //注册加载子表的事件。此处onExpandRow有且仅有三个参数
-        onExpandRow: function (index, row, $detail) {
-            InitSubTable(mainNoIndex,index,row,$detail,mainOrderNo);
-        }
-    });
-};
-
-/**
- * 重构订单列表表
- * */
+ * 初始化订单详情表格
+ * @param mainNoIndex
+ * @param fatRow
+ * @param $fatDetail
+ * @returns
+ */
 function InitSubTable (mainNoIndex,bagNumberIndex, row, $thisDetail,mainOrderNo) {
 	var tableidIndex = mainNoIndex+""+bagNumberIndex;   //加空字符连接，不加会出问题，比如0+0=0
 	var dataMap = {};
@@ -188,19 +146,6 @@ function InitSubTable (mainNoIndex,bagNumberIndex, row, $thisDetail,mainOrderNo)
 	});
 };
 
-/**
- * 检索方法的封装
- * */
-function queryParams(params) {
-    var impParams = {   					
-    	tackingNumber1:params.tackingNumber1,	
-    	orderEndFlag:params.orderEndFlag,
-    	pageSize:10,
-    	pageNum:1,
-    	isAsc:true
-    };
-    return JSON.stringify(impParams);
-};
 /**
  * 搜索方法
  * */
