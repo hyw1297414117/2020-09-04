@@ -1757,6 +1757,23 @@ function registCheckbox(tableid,index,$element) {
 function queryParams(params) {
     return JSON.stringify(params);
 };
+/**
+ * 清关系统 行被选中后 标记此行颜色
+ * @param params
+ * @returns
+ */
+function identifyRowColor(tableId){
+	$("#"+tableId+" tbody").on('click',function(){
+    	var plusiconObject = $("#"+tableId).find("tr").find("td").find(".glyphicon-plus");
+    	var minusiconObject = $("#"+tableId).find("tr").find("td").find(".glyphicon-minus");
+        $.each(plusiconObject,function(index,value){
+        	$($(this).parents("tr")).removeClass('selectTrbgColor');  //清除样式
+        })
+        $.each(minusiconObject,function(index,value){
+        	$($(this).parents("tr")).addClass('selectTrbgColor');
+        })
+    })
+}
 /** 表格类型 */
 table_type = {
     bootstrapTable: 0,

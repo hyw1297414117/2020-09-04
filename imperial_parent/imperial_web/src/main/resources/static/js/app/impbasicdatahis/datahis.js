@@ -29,16 +29,7 @@ $(function() {
     /**
      * 标记父子表中被选中的父表tr
      * */
-    $("#impbasicdatahisTb tbody").on('click',function(){
-    	var plusiconObject = $("#impbasicdatahisTb").find("tr").find("td").find(".glyphicon-plus");
-    	var minusiconObject = $("#impbasicdatahisTb").find("tr").find("td").find(".glyphicon-minus");
-        $.each(plusiconObject,function(index,value){
-        	$($(this).parents("tr")).removeClass('selectTrbgColor');  //清除样式
-        })
-        $.each(minusiconObject,function(index,value){
-        	$($(this).parents("tr")).addClass('selectTrbgColor');
-        })
-    })
+    identifyRowColor("impbasicdatahisTb");
 /**
  * 初始化订单背景颜色
  * @param params

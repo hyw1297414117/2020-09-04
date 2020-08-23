@@ -29,16 +29,7 @@ $(function() {
     /**
      * 标记父子表中被选中的父表tr
      * */
-    $("#ddplistTable tbody").on('click',function(){
-    	var plusiconObject = $("#ddplistTable").find("tr").find("td").find(".glyphicon-plus");
-    	var minusiconObject = $("#ddplistTable").find("tr").find("td").find(".glyphicon-minus");
-        $.each(plusiconObject,function(index,value){
-        	$($(this).parents("tr")).removeClass('selectTrbgColor');  //清除样式
-        })
-        $.each(minusiconObject,function(index,value){
-        	$($(this).parents("tr")).addClass('selectTrbgColor');
-        })
-    })
+    identifyRowColor("ddplistTable");
 });
 /**
  * 父表的搜索参数封装 分页用

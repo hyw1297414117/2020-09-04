@@ -29,16 +29,7 @@ $(function() {
     /**
      * 标记父子表中被选中的父表tr
      * */
-    $("#datadraftTable tbody").on('click',function(){
-    	var plusiconObject = $("#datadraftTable").find("tr").find("td").find(".glyphicon-plus");
-    	var minusiconObject = $("#datadraftTable").find("tr").find("td").find(".glyphicon-minus");
-        $.each(plusiconObject,function(index,value){
-        	$($(this).parents("tr")).removeClass('selectTrbgColor');  //清除样式
-        })
-        $.each(minusiconObject,function(index,value){
-        	$($(this).parents("tr")).addClass('selectTrbgColor');
-        })
-    })
+    identifyRowColor("datadraftTable");
 });
 
 function queryParamsPaging(params) {
