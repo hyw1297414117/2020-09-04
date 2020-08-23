@@ -73,6 +73,13 @@ public class ImpAgentController extends BaseController
         return prefix + "/ddulist";
     }
     
+    @GetMapping("/showCreateTaskPage")
+    @RequiresPermissions("createTask:data:view")
+    public String showCreateTaskPage()
+    {
+        return prefix + "/createtask";
+    }
+    
     /**
      * 
      * @Title ImpAgentController.java 
