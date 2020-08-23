@@ -39,12 +39,6 @@ $(function() {
         	$($(this).parents("tr")).addClass('selectTrbgColor');
         })
     })
-/**
- * 初始化订单背景颜色
- * @param params
- * @returns
- */
-bgColorInit();
 });
 
 /**
@@ -162,6 +156,9 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
             	if(row.checkFlag==2){  //提交 驳回的  粉红 
             		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核的  松花色
                 		return {css:{"background-color":'#bce672'}};
+                	}
+            		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==1){   //二次申请且被驳回 深红色
+                		return {css:{"background-color":'#db5a6b'}};
                 	}
             		return {css:{"background-color":'#f9906f'}};
             	}

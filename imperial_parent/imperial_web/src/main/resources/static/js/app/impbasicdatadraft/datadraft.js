@@ -39,12 +39,6 @@ $(function() {
         	$($(this).parents("tr")).addClass('selectTrbgColor');
         })
     })
-/**
- * 初始化订单背景颜色
- * @param params
- * @returns
- */
-bgColorInit();
 });
 
 function queryParamsPaging(params) {
@@ -141,9 +135,6 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         columns: [
         {field: 'state',checkbox: true},
         {field: 'id',title: 'null',visible: false},
-        {field: 'tackingNumber2',title: '状态标识', align: 'center',formatter: function(value, row, index) {
-        	return value = '';  //赋值为空
-        }},
         {field: 'tackingNumber1', title: '包裹追踪号1'},
         {field: 'tackingNumber2', title: '包裹追踪号2'},
         {field: 'bagNumber',title: '包裹号'},

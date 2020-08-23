@@ -39,12 +39,6 @@ $(function() {
         	$($(this).parents("tr")).addClass('selectTrbgColor');
         })
     })
-/**
- * 初始化订单背景颜色
- * @param params
- * @returns
- */
-bgColorInit();
 });
 
 function queryParamsPaging(params) {

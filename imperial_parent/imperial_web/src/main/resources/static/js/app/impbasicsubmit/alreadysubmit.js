@@ -39,12 +39,6 @@ $(function() {
         	$($(this).parents("tr")).addClass('selectTrbgColor');
         })
     })
-/**
- * 初始化订单背景颜色
- * @param params
- * @returns
- */
-bgColorInit();
 });
 function queryParamsPaging(params) {
 	var dataMap = {};
@@ -152,89 +146,92 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         fixedNumber:3,
         columns: [
         	{field: 'id',title: 'null',visible: false},
-        	{field: 'state',checkbox: true,formatter: function(value, row, index) {
+        	{field: 'state',checkbox: false/*,formatter: function(value, row, index) {
         	//1、第一次提交且未审核 2、二次提交且未审核  3、审核成功
             if(row.checkFlag==0||(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0)||row.checkFlag==1){
                 return { disabled : true}    //不可操作
             }else{
                 return { disabled : false}  //可操作
-            }}},
-        {field: '',title: '状态标识', align: 'center',cellStyle: function (value, row, index) {
-            if (row.checkFlag==0) {  //已提交 未审核 灰色
-                return {css:{"background-color":"#a1afc9"}}; 
-            }
-            if(row.checkFlag==1){    //提交 批准成功的  蓝色
-        		return {css:{"background-color":'#44cef6'}};
-        	} 
-        	if(row.checkFlag==2){  //提交被驳回  粉红 
-        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
-            		return {css:{"background-color":'#bce672'}};
-            	}
-        		return {css:{"background-color":'#f9906f'}};
-        	}
-            return '';
-        },formatter: function(value, row, index) {
-        	return value = '';
-        }/*,formatter: function(value, row, index) {
-        	if (row.checkFlag==0) {  
-                return value = '审核中...'; 
-            }
-        	if(row.checkFlag==1){
-        		return value = '审核通过'; 
-        	}
-        	if(row.checkFlag==2){
-        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){
-            		return value = '二次提交审核中...'; 
-            	}
-        		return value = '驳回'; 
-        	}
-        	return value = '';  //赋值为空
-        }*/},
-        {field: 'tackingNumber1', title: '包裹追踪号1'},
-        {field: 'tackingNumber2', title: '包裹追踪号2'},
-        {field: 'bagNumber',title: '包裹号'},
-        {field: 'boxNumber',title: '外箱号'},
-        {field: 'palletNumber',title: '托盘号'},
-        {field: 'containerNumber',title: '集装箱号码'},
-        {field: 'reference1',title: '参考编码1'},
-        {field: 'referrnce2',title: '参考编码2'},
-        {field: 'shipperName',title: '发货人'},
-        {field: 'shipperReference',title: '发货方识别码'},
-        {field: 'consigneeName',title: '收货人姓名'},
-        {field: 'lineAddress1',title: '收货地址1',},
-        {field: 'lineAddress2',title: '收货地址2'},
-        {field: 'lineAddress3',title: '收货地址3'},
-        {field: 'town',title: '城镇'},
-        {field: 'state',title: '州郡'},
-        {field: 'postCode',title: '邮编'},
-        {field: 'countryCode',title: '国家代码'},
-        {field: 'email',title: '电子邮箱'},
-        {field: 'phone',title: '电话'},
-        {field: 'pieces',title: '包裹数量'},
-        {field: 'weight',title: '重量'},
-        {field: 'weightUom',title: '重量单位'},
-        {field: 'value',title: '价值'},
-        {field: 'shippingRate',title: '运费'},
-        {field: 'currency',title: '币种'},
-        {field: 'incoterms',title: '贸易术语 DDU/DDP'},
-        {field: 'importPurpose',title: '进口目的'},
-        {field: 'eoriNumber',title: '未知'},
-        {field: 'mossNumber',title: '未知'},
-        {field: 'description',title: '货物描述'},
-        {field: 'hsCode',title: '海关代码'},
-        {field: 'itemQuantity',title: '物品件数'},
-        {field: 'itemValue',title: '物品单价'},
-        {field: 'skuNumber',title: '未知'},
-        {field: 'returnInstruction',title: '退货方式'},
-        {field: 'salesLink',title: '销售连结'},
-        {field: 'lastMileProvider',title: '末端派送商'},
-        {field: 'lastMileAccountName',title: '末端派送账户名'},
-        {field: 'orderIsdraftFlag',visible: false},
-        {field: 'orderEndFlag',visible: false},
-        {field: 'submitFlag',visible: false}],
-        onLoadSuccess: function () {
-            registCheckbox(tableid,tableidIndex,$('#'+tableid+tableidIndex))
-        },
+            }}*/},
+	        {field: '',title: '状态标识', align: 'center',cellStyle: function (value, row, index) {
+	            if (row.checkFlag==0) {  //已提交 未审核 灰色
+	                return {css:{"background-color":"#a1afc9"}}; 
+	            }
+	            if(row.checkFlag==1){    //提交 批准成功的  蓝色
+	        		return {css:{"background-color":'#44cef6'}};
+	        	} 
+	        	if(row.checkFlag==2){  //提交被驳回  粉红 
+	        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
+	            		return {css:{"background-color":'#bce672'}};
+	            	}
+	        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==1){   //二次申请且被驳回 深红色
+	            		return {css:{"background-color":'#db5a6b'}};
+	            	}
+	        		return {css:{"background-color":'#f9906f'}};
+	        	}
+	            return '';
+	        },formatter: function(value, row, index) {
+	        	return value = '';
+	        }/*,formatter: function(value, row, index) {
+	        	if (row.checkFlag==0) {  
+	                return value = '审核中...'; 
+	            }
+	        	if(row.checkFlag==1){
+	        		return value = '审核通过'; 
+	        	}
+	        	if(row.checkFlag==2){
+	        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){
+	            		return value = '二次提交审核中...'; 
+	            	}
+	        		return value = '驳回'; 
+	        	}
+	        	return value = '';  //赋值为空
+	        }*/},
+	        {field: 'tackingNumber1', title: '包裹追踪号1'},
+	        {field: 'tackingNumber2', title: '包裹追踪号2'},
+	        {field: 'bagNumber',title: '包裹号'},
+	        {field: 'boxNumber',title: '外箱号'},
+	        {field: 'palletNumber',title: '托盘号'},
+	        {field: 'containerNumber',title: '集装箱号码'},
+	        {field: 'reference1',title: '参考编码1'},
+	        {field: 'referrnce2',title: '参考编码2'},
+	        {field: 'shipperName',title: '发货人'},
+	        {field: 'shipperReference',title: '发货方识别码'},
+	        {field: 'consigneeName',title: '收货人姓名'},
+	        {field: 'lineAddress1',title: '收货地址1',},
+	        {field: 'lineAddress2',title: '收货地址2'},
+	        {field: 'lineAddress3',title: '收货地址3'},
+	        {field: 'town',title: '城镇'},
+	        {field: 'state',title: '州郡'},
+	        {field: 'postCode',title: '邮编'},
+	        {field: 'countryCode',title: '国家代码'},
+	        {field: 'email',title: '电子邮箱'},
+	        {field: 'phone',title: '电话'},
+	        {field: 'pieces',title: '包裹数量'},
+	        {field: 'weight',title: '重量'},
+	        {field: 'weightUom',title: '重量单位'},
+	        {field: 'value',title: '价值'},
+	        {field: 'shippingRate',title: '运费'},
+	        {field: 'currency',title: '币种'},
+	        {field: 'incoterms',title: '贸易术语 DDU/DDP'},
+	        {field: 'importPurpose',title: '进口目的'},
+	        {field: 'eoriNumber',title: '未知'},
+	        {field: 'mossNumber',title: '未知'},
+	        {field: 'description',title: '货物描述'},
+	        {field: 'hsCode',title: '海关代码'},
+	        {field: 'itemQuantity',title: '物品件数'},
+	        {field: 'itemValue',title: '物品单价'},
+	        {field: 'skuNumber',title: '未知'},
+	        {field: 'returnInstruction',title: '退货方式'},
+	        {field: 'salesLink',title: '销售连结'},
+	        {field: 'lastMileProvider',title: '末端派送商'},
+	        {field: 'lastMileAccountName',title: '末端派送账户名'},
+	        {field: 'orderIsdraftFlag',visible: false},
+	        {field: 'orderEndFlag',visible: false},
+	        {field: 'submitFlag',visible: false}],
+	        onLoadSuccess: function () {
+	            registCheckbox(tableid,tableidIndex,$('#'+tableid+tableidIndex))
+	        },
     });
 	$('#alreadysubmitSunTable'+tableidIndex).on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table", function () {
 		var rows = $('#alreadysubmitSunTable'+tableidIndex).bootstrapTable('getSelections');
