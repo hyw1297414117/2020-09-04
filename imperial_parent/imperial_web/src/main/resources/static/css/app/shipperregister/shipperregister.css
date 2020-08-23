@@ -148,8 +148,8 @@ ul {
    	
    	#batchImport{
    		float:left;
-   		width:60%;
-   		margin-left:32%;
+   		width:96%;
+   		margin-left:2%;
    		height:50px;
    		background-color:#d6ecf0;
    		text-align:center;
@@ -165,7 +165,7 @@ ul {
     ul,li{padding: 0;margin: 0}
 	.mySelect .inputWrap{
 		width:100%;
-		min-height: 50px;
+		min-height: 30px;
 		border: 1px solid #ccc;
 		border-radius: 3px;
 		position: relative;
