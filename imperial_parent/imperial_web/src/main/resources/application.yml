@@ -8,7 +8,7 @@ itl:
   copyrightYear: 2020
   # 实例演示开关
   demoEnabled: true
-  profile: C:\Users\Administrator\Desktop\zdyfy\javaKY\mn_maven\mn_parent\imperial_web
+  profile: D:\itl_git\imperial_parent\imperial_web
   # 获取ip地址开关
   addressEnabled: false
 
