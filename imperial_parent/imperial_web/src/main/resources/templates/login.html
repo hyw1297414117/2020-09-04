@@ -28,27 +28,29 @@
             </div>
             <div class="col-sm-5">
                 <form id="signupForm" autocomplete="off">
-                    <h4 class="no-margins">登录：</h4>
-                    <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value="admin"    />
-                    <input type="password" name="password" class="form-control pword"     placeholder="密码"   value="admin123" />
+                    <h4 class="no-margins">[[#{user.login}]]：</h4>
+                    <input type="text"     name="username" class="form-control uname"     th:placeholder="#{user.login.message.username}" value="admin"    />
+                    <input type="password" name="password" class="form-control pword"     th:placeholder="#{user.login.message.password}"   value="admin123" />
 					<div class="row m-t" th:if="${captchaEnabled==true}">
 						<div class="col-xs-6">
-						    <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5" />
+						    <input type="text" name="validateCode" class="form-control code" th:placeholder="#{user.login.message.verificationcode}" maxlength="5" />
 						</div>
 						<div class="col-xs-6">
-							<a href="javascript:void(0);" title="点击更换验证码">
+							<a href="javascript:void(0);" th:title="#{user.login.message.changeVerificationCode}">
 								<img th:src="@{captcha/captchaImage(type=${captchaType})}" class="imgcode" width="85%"/>
 							</a>
 						</div>
 					</div>
                     <div class="checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
-				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
+				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">[[#{user.login.message.rememberme}]]</label>
 				    </div>
 				      <div class="signin-info">
 	                    <!--<strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>-->
-                          <strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a href="javascript:void(0);" onclick="zhuche()">立即注册&raquo;</a></strong>
+                          <strong th:if="${@config.getKey('sys.account.registerUser')}">[[#{user.login.message.Noaccountyet}]] <a href="javascript:void(0);" onclick="zhuche()">[[#{user.login.message.register}]]&raquo;</a></strong>
 	                  </div>
-                    <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>
+                    <button class="btn btn-success btn-block" id="btnSubmit"  data-loading="正在验证登录，请稍后...">[[#{user.login}]]</button>
+                    <a class="btn btn-sm" th:href="@{/login(lang='en_US')}">English</a>
+                    <a class="btn btn-sm" th:href="@{/login(lang='zh_CN')}">中文</a>
                 </form>
             </div>
         </div>
