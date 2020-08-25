@@ -55,12 +55,18 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
 	var mainOrderNo = row.mainOrderNo;
 	var tableidIndex = mainNoIndex;   //加空字符连接，不加会出问题，比如0+0=0
 	var dataMap = {};
+	dataMap.mainOrderNo = mainOrderNo;
+	dataMap.bagNumber = row.bagNumber;
+	dataMap.checkFlag=0
 	var switchState = $('.smsenable').bootstrapSwitch('state'); 
 	if(switchState){   //如果开关状态为打开状态时，获取检索条件值
 		dataMap.tackingNumber1 = $("#tackingNumber1").val();
+		dataMap.checkFlag = $("#stateSelect").val();
+		dataMap.shipperName = $("#shipperName").val();
+		dataMap.consigneeName = $("#consigneeName").val();
+		dataMap.incoterms = $("#typeSelect").val();
 	}
-	dataMap.mainOrderNo = mainOrderNo;
-	dataMap.bagNumber = row.bagNumber;
+
 	$thisDetail.append('<div id="smsenable'+tableidIndex+'" style="width:'+impbasicDataDivWid+'">'+$("#operatBtTpl").html()+'</div>');
 	var cur_table = $thisDetail.append('<div id="detailDiv'+tableidIndex+'" style="width:'+impbasicDataDivWid+'"><table id="impbasicDataSunTable'+tableidIndex+'"></table></div>').find('table');
 	var tableid = 'impbasicDataSunTable';
@@ -105,18 +111,19 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         		return {css:{"background-color":'#44cef6'}};
         	} 
         	if(row.checkFlag==2){  //提交被驳回  粉红 
-        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
-            		return {css:{"background-color":'#bce672'}};
-            	}
-        		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==1){   //二次申请且被驳回
-            		return {css:{"background-color":'#db5a6b'}};
-            	}
+        		// if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
+            	// 	return {css:{"background-color":'#bce672'}};
+            	// }
+        		// if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==1){   //二次申请且被驳回
+            	// 	return {css:{"background-color":'#db5a6b'}};
+            	// }
         		return {css:{"background-color":'#f9906f'}};
         	}
             return '';
         },formatter: function(value, row, index) {
         	return value = '';
-        }/*,formatter: function(value, row, index) {
+        }
+        /*,formatter: function(value, row, index) {
         	if (row.submitFlag == 1&&row.checkFlag==0) {  //1、已提交未审核 2、二次提交未审核
                 return value = '审核中...'; 
             }
@@ -201,9 +208,17 @@ function searchFun(){
 	var mainOrderNo = $("#mainOrderNo").val();
 	var tackingNumber1 = $("#tackingNumber1").val();
 	var bagNumber = $("#bagNumber").val();
+	var stateSelect = $("#stateSelect").val();
+	var shipperName = $("#shipperName").val();
+	var consigneeName = $("#consigneeName").val();
+	var typeSelect = $("#typeSelect").val();
 	dataMap.mainOrderNo = mainOrderNo;
 	dataMap.tackingNumber1 = tackingNumber1;
 	dataMap.bagNumber = bagNumber;
+	dataMap.checkFlag = stateSelect;
+	dataMap.shipperName = shipperName;
+	dataMap.consigneeName = consigneeName;
+	dataMap.incoterms = typeSelect;
 	var params = {impParams:queryParams(dataMap)};
 	$.operate.impAjax(prefix + "/getMainOrderNoList",params,function(json){
 		$("#impbasicDataTable").bootstrapTable('load',json);//主要是要这种写法
@@ -350,4 +365,17 @@ function add(){
 		}
 	});
 }
-        
+
+/**
+ * 状态图例展示
+ * */
+function showIllustrations() {
+
+	layer.tips('<span class="glyphicon glyphicon-stop" style="color: #44cef6"></span>通过' +
+		'<span class="glyphicon glyphicon-stop" style="color: #f9906f"></span>驳回' +
+		'<span class="glyphicon glyphicon-stop" style="color: #a1afc9"></span>审核中', '#illustrations_button', {
+		tips: 4
+	});
+}
+
+

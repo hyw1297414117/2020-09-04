@@ -95,4 +95,19 @@ function add(){
             return false;
 		}
 	});
+}/**
+ * 点击添加按钮展示草稿箱页面
+ * */
+function toDrafts(){
+	var url = "/shipperModule/impBasicDataDraft";
+	var height = $(window).height()-50+"px";
+	var index = layer.open({
+		type: 2,
+		fix: false,
+		maxmin: true,
+		shade: 0.3,
+		title: '基础表数据草稿箱',
+		area: ["1200px", height], //宽高
+		content: url
+	});
 }

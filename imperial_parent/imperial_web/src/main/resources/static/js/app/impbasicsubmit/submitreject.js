@@ -55,13 +55,17 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
 	var mainOrderNo = row.mainOrderNo;
 	var tableidIndex = mainNoIndex;   //加空字符连接，不加会出问题，比如0+0=0
 	var dataMap = {};
-	var switchState = $('.smsenable').bootstrapSwitch('state'); 
-	if(switchState){   //如果开关状态为打开状态时，获取检索条件值
-		dataMap.tackingNumber1 = $("#tackingNumber1").val();
-	}
 	dataMap.mainOrderNo = mainOrderNo;
 	dataMap.bagNumber = row.bagNumber;
 	dataMap.checkFlag = 2;
+	var switchState = $('.smsenable').bootstrapSwitch('state'); 
+	if(switchState){   //如果开关状态为打开状态时，获取检索条件值
+		dataMap.tackingNumber1 = $("#tackingNumber1").val();
+		dataMap.shipperName = $("#shipperName").val();
+		dataMap.consigneeName = $("#consigneeName").val();
+		dataMap.incoterms = $("#typeSelect").val();
+	}
+
 	$thisDetail.append('<div id="smsenable'+tableidIndex+'" style="width:'+submitrejectTbDivWid+'">'+$("#operatBtTpl").html()+'</div>');
 	var cur_table = $thisDetail.append('<div id="detailDiv'+tableidIndex+'" style="width:'+submitrejectTbDivWid+'"><table id="submitrejectSunTable'+tableidIndex+'"></table></div>').find('table');
 	var tableid = 'submitrejectSunTable';
@@ -91,32 +95,37 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         fixedNumber:3,
         columns: [
         {field: 'id',title: 'null',visible: false},
-        {field: 'state',checkbox: true,formatter: function(value, row, index) {
-        	//1、二次提交
-            if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){
-                return { disabled : true}    //不可操作
-            }else{
-                return { disabled : false}  //可操作
-            }}},
-        {field: '',title: '状态标识', align: 'center',cellStyle: function (value, row, index) {
-        	if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
-        		return {css:{"background-color":'#bce672'}};
-        	}
-        	if(row.checkFlag==2&&row.isresubmitCheckFlag==1){   //二次申请被驳回
-        		return {css:{"background-color":'#db5a6b'}};
-        	}
-            return '';
-        },formatter: function(value, row, index) {
-        	return value = '';
-        }/*,formatter: function(value, row, index) {
-        	if (row.isresubmitFlag==1&&row.isresubmitCheckFlag==0) {  //1二次提交未审核
-                return value = '二次审核中...'; 
-            }
-        	if(row.checkFlag==2&&row.isresubmitCheckFlag==1){   //二次申请被驳回
-        		return value = '二次申请被驳回'; 
-        	}
-        	return value = '';  //赋值为空
-        }*/},
+        {field: 'state',checkbox: true
+			// ,formatter: function(value, row, index) {
+        	// //1、二次提交
+            // if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){
+            //     return { disabled : true}    //不可操作
+            // }else{
+            //     return { disabled : false}  //可操作
+            // }}
+		},
+        // {field: '',title: '状态标识', align: 'center'
+		// 	,cellStyle: function (value, row, index) {
+		// 		if(row.isresubmitFlag==1&&row.isresubmitCheckFlag==0){   //二次申请且未审核 松花色
+		// 			return {css:{"background-color":'#bce672'}};
+		// 		}
+		// 		if(row.checkFlag==2&&row.isresubmitCheckFlag==1){   //二次申请被驳回
+		// 			return {css:{"background-color":'#db5a6b'}};
+		// 		}
+		// 		return '';
+        // 	}
+        // 	,formatter: function(value, row, index) {
+        // 		return value = '';
+        // 	}/*,formatter: function(value, row, index) {
+        // 	if (row.isresubmitFlag==1&&row.isresubmitCheckFlag==0) {  //1二次提交未审核
+        //         return value = '二次审核中...';
+        //     }
+        // 	if(row.checkFlag==2&&row.isresubmitCheckFlag==1){   //二次申请被驳回
+        // 		return value = '二次申请被驳回';
+        // 	}
+        // 	return value = '';  //赋值为空
+        // }*/
+		// },
         {title: '驳回详情', field: '', align: 'center', valign: 'middle', formatter:function(value,row,index){
 			return "<a title='驳回详情' onclick='refuseMsg(&#39;"+row.tackingNumber1+"&#39;)'>详情</a>"
 		}},
@@ -244,10 +253,16 @@ function searchFun(){
 	var mainOrderNo = $("#mainOrderNo").val();
 	var tackingNumber1 = $("#tackingNumber1").val();
 	var bagNumber = $("#bagNumber").val();
+	var shipperName = $("#shipperName").val();
+	var consigneeName = $("#consigneeName").val();
+	var typeSelect = $("#typeSelect").val();
 	dataMap.mainOrderNo = mainOrderNo;
 	dataMap.tackingNumber1 = tackingNumber1;
 	dataMap.bagNumber = bagNumber;
 	dataMap.checkFlag = 2;
+	dataMap.shipperName = shipperName;
+	dataMap.consigneeName = consigneeName;
+	dataMap.incoterms = typeSelect;
 	var params = {impParams:queryParams(dataMap)};
 	$.operate.impAjax("/shipperModule/impBasicData/getMainOrderNoList",params,function(json){
 		$("#submitrejectTable").bootstrapTable('load',json);//主要是要这种写法

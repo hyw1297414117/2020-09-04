@@ -20,25 +20,28 @@
 <body class="gray-bg">
      <div class="container-div">
         <div class="row">
-        	<a>
-				<input type="checkbox" name="smsenable" class="smsenable"/>
-			</a>
+            <div style="margin-top: 5px">
+                <a>
+                <input type="checkbox" name="smsenable" class="smsenable"/>
+                </a>
+            </div>
+
 			<div id="searchModule"></div>
-            <div class="col-sm-12 select-table table-bordered" id="submitrejectTbDiv" style="position: relative;height: 70%;">
+            <div class="col-sm-12 select-table table-bordered" id="submitrejectTbDiv" style="position: relative;height: 85%;">
                 <table id="submitrejectTable" data-height="500" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></table>
             </div>
-            <div style="clear:both"></div>
-            <div style="position:absolute;bottom:10px;">
-                <div style="float: left;margin-left: 10px">
-                    <div class="bgColorIden2" style="color:white;text-align:center;line-height:30px;background-color: #f9906f;width: 110px;height: 30px;">驳回</div>
-                </div>
-                <div style="float: left;margin-left: 10px">
-                    <div class="bgColorIden3" style="color:white;text-align:center;line-height:30px;background-color: #bce672;width: 110px;height: 30px;">二次提交审核中</div>
-                </div>
-                <div style="float: left;margin-left: 10px">
-                    <div class="bgColorIden5" style="color:white;text-align:center;line-height:30px;background-color: #db5a6b;width: 110px;height: 30px;">二次提交被驳回</div>
-                </div>
-            </div>
+<!--            <div style="clear:both"></div>-->
+<!--            <div style="position:absolute;bottom:10px;">-->
+<!--                <div style="float: left;margin-left: 10px">-->
+<!--                    <div class="bgColorIden2" style="color:white;text-align:center;line-height:30px;background-color: #f9906f;width: 110px;height: 30px;">驳回</div>-->
+<!--                </div>-->
+<!--                <div style="float: left;margin-left: 10px">-->
+<!--                    <div class="bgColorIden3" style="color:white;text-align:center;line-height:30px;background-color: #bce672;width: 110px;height: 30px;">二次提交审核中</div>-->
+<!--                </div>-->
+<!--                <div style="float: left;margin-left: 10px">-->
+<!--                    <div class="bgColorIden5" style="color:white;text-align:center;line-height:30px;background-color: #db5a6b;width: 110px;height: 30px;">二次提交被驳回</div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <th:block th:include="include :: footer" />
@@ -51,13 +54,12 @@
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="shipperModule:data:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                
+                <a class="btn btn-success multiple disabled" onclick="secondSubmit()" shiro:hasPermission="shipperModule:data:submit">
+                    <i class="fa fa-random"></i> 提交审核
+                </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="shipperModule:data:export">
-			            <i class="fa fa-upload"></i> 导出
-			    </a>
-			    <a class="btn btn-success multiple disabled" onclick="secondSubmit()" shiro:hasPermission="shipperModule:data:submit">
-			            <i class="fa fa-random"></i> 二次提交审核
-			    </a>
+                    <i class="fa fa-upload"></i> 导出
+                </a>
 </div>
 </script>    
   <!-- 导入区域 -->

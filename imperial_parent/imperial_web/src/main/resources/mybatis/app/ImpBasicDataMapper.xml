@@ -110,6 +110,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<if test="orderIsdraftFlag != null"> and ibd.order_isdraft_flag = #{orderIsdraftFlag}</if>
     	<if test="orderEndFlag != null"> and ibd.order_end_flag = #{orderEndFlag}</if>
     	<if test="checkFlag != null"> and ibd.check_flag = #{checkFlag}</if>
+    	<if test="shipperName != null and shipperName != ''"> and ibd.shipper_name = #{shipperName}</if>
+    	<if test="consigneeName != null and consigneeName != ''"> and ibd.consignee_name = #{consigneeName}</if>
     	<where>  1=1
             <if test="mainOrderNo != null and mainOrderNo != ''"> and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
             <if test="taskNumber != null and taskNumber != ''"> and ibr.task_number = #{taskNumber}</if>
@@ -133,6 +135,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isresubmitFlag != null"> and ibd.isresubmit_flag = #{isresubmitFlag}</if>
             <if test="isresubmitCheckFlag != null"> and ibd.isresubmit_check_flag = #{isresubmitCheckFlag}</if>
             <if test="incoterms != null and incoterms != ''"> and ibd.incoterms = #{incoterms}</if>
+            <if test="shipperName != null and shipperName != ''"> and ibd.shipper_name = #{shipperName}</if>
+            <if test="consigneeName != null and consigneeName != ''"> and ibd.consignee_name = #{consigneeName}</if>
         </where>
     </select>
     
