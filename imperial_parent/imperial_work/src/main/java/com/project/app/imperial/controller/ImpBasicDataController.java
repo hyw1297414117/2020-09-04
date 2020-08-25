@@ -260,11 +260,6 @@ public class ImpBasicDataController extends BaseController
     @ResponseBody
     public int checkTackNumUnique(String tackingNumber1,Integer draftFlag)
     {
-//    	JSONObject json = JSONObject.parseObject(rebate);
-//		Map<String,Object> map = (Map)json;
-//		Integer draftFlag =  Integer.parseInt((String)map.get("draftFlag"));
-//		map.remove("draftFlag"); //把String属性的键移除
-//		map.put("draftFlag", draftFlag); //加上Integer的键
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("tackingNumber1",tackingNumber1);//快递号1
         map.put("draftFlag",draftFlag);
