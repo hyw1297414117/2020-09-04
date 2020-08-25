@@ -1,10 +1,4 @@
 		var prefix = ctx + "shipperModule/impBasicData"
-        var tackingNumber1 = $.common.trim($("#tackingNumber1").val());
-		var draftFlag = '0';
-		var dataMap = {};
-		dataMap.tackingNumber1 = tackingNumber1;
-		dataMap.draftFlag = draftFlag;
-		var str = JSON.stringify(dataMap);
         $("#form-data-add").validate({
         	onkeyup: false,
         	rules:{
@@ -17,7 +11,8 @@
                         type: "post",
                         dataType: "json",
                         data: {
-                        	"rebate":str
+                        	"tackingNumber1":function(){return $("#tackingNumber1").val().trim()}
+                            ,"draftFlag":0
                         },
                         dataFilter: function(data, type) {
                         	return $.validate.unique(data);

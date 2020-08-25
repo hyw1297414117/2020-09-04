@@ -1,5 +1,6 @@
 package com.project.app.imperial.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
@@ -262,13 +258,16 @@ public class ImpBasicDataController extends BaseController
      */
     @PostMapping("/checkTackNumUnique")
     @ResponseBody
-    public int checkTackNumUnique(String rebate)
+    public int checkTackNumUnique(String tackingNumber1,Integer draftFlag)
     {
-    	JSONObject json = JSONObject.parseObject(rebate);
-		Map<String,Object> map = (Map)json;
-		Integer draftFlag =  Integer.parseInt((String)map.get("draftFlag"));
-		map.remove("draftFlag"); //把String属性的键移除
-		map.put("draftFlag", draftFlag); //加上Integer的键
+//    	JSONObject json = JSONObject.parseObject(rebate);
+//		Map<String,Object> map = (Map)json;
+//		Integer draftFlag =  Integer.parseInt((String)map.get("draftFlag"));
+//		map.remove("draftFlag"); //把String属性的键移除
+//		map.put("draftFlag", draftFlag); //加上Integer的键
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("tackingNumber1",tackingNumber1);//快递号1
+        map.put("draftFlag",draftFlag);
         return impBasicDataService.checkTackNumUnique(map);
     }
 }
