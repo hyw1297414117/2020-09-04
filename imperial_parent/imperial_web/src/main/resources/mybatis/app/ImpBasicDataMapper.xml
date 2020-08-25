@@ -150,9 +150,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <!-- 检车快递号是否唯一 -->
+    <!-- 检查快递号是否唯一 -->
     <select id="checkTackNumUnique" parameterType="java.util.Map" resultType="int">
-		select count(1) from imp_basic_data 
+		select count(tacking_number_1) from imp_basic_data
 		<where> 1=1
 			<if test="tackingNumber1 != null  and tackingNumber1 != ''"> and tacking_number_1 = #{tackingNumber1}</if>
         	<if test="draftFlag != null"> and order_isdraft_flag = #{draftFlag}</if>
