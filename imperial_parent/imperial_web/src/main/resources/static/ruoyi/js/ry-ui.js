@@ -1789,6 +1789,17 @@ function identifyRowColor(tableId){
         })
     })
 }
+/**
+ * 清关系统状态图例展示
+ * */
+function showIllustrations() {
+	var operationDivId = $(event.target).parent().parent()[0].id; //获取点击修改按钮所在的div的id
+	layer.tips('<span class="glyphicon glyphicon-stop" style="color: #44cef6"></span>通过' +
+		'<span class="glyphicon glyphicon-stop" style="color: #f9906f"></span>驳回' +
+		'<span class="glyphicon glyphicon-stop" style="color: #a1afc9"></span>审核中', '#'+operationDivId+' .illustrations_button', {
+		tips: 4
+	});
+}
 /** 表格类型 */
 table_type = {
     bootstrapTable: 0,
