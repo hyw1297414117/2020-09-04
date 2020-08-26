@@ -77,6 +77,12 @@ public class User extends BaseEntity
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
+    /** 激活标志（0代表已激活 1代表未激活） */
+    private String activeState;
+
+    /** 激活码 */
+    private String activeCode;
+
     /** 最后登陆IP */
     @Excel(name = "最后登陆IP", type = Type.EXPORT)
     private String loginIp;
@@ -349,6 +355,22 @@ public class User extends BaseEntity
     public void setPostIds(Long[] postIds)
     {
         this.postIds = postIds;
+    }
+
+    public String getActiveState() {
+        return activeState;
+    }
+
+    public void setActiveState(String activeState) {
+        this.activeState = activeState;
+    }
+
+    public String getActiveCode() {
+        return activeCode;
+    }
+
+    public void setActiveCode(String activeCode) {
+        this.activeCode = activeCode;
     }
 
     @Override

@@ -34,14 +34,14 @@ function register() {
         },
         success: function(r) {
             if (r.code == 0) {
-            	layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", {
+            	layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！请前往您的邮箱查收激活邮件，进行<strong>账号激活！</strong></font>", {
         	        icon: 1,
         	        title: "系统提示"
         	    },
         	    function(index) {
         	        //关闭弹窗
         	        layer.close(index);
-        	        location.href = ctx + 'register';
+        	        location.href = ctx + 'login';
         	    });
             } else {
             	$.modal.closeLoading();

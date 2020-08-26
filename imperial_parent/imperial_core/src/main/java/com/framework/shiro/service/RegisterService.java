@@ -1,18 +1,23 @@
 package com.framework.shiro.service;
 
+import com.common.constant.Constants;
+import com.common.utils.MailUtils;
+import com.common.utils.MessageUtils;
+import com.framework.manager.AsyncManager;
+import com.framework.manager.factory.AsyncFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.common.constant.Constants;
 import com.common.constant.ShiroConstants;
 import com.common.constant.UserConstants;
-import com.common.utils.MessageUtils;
 import com.common.utils.ServletUtils;
-import com.framework.manager.AsyncManager;
-import com.framework.manager.factory.AsyncFactory;
 import com.project.system.user.domain.User;
 import com.project.system.user.service.IUserService;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import java.util.UUID;
 
 /**
  * 注册校验方法
@@ -24,13 +29,17 @@ public class RegisterService
 {
     @Autowired
     private IUserService userService;
+    @Autowired
+    private MailUtils mailUtils;
+    @Autowired
+    private TemplateEngine templateEngine;
 
     /**
      * 注册
      */
-    public String register(User user)
+    public String register(User user,String serverUrl)
     {
-        String msg = "", username = user.getUserName(),loginname=user.getLoginName(), password = user.getPassword(),emal=user.getEmail(),phonenome=user.getPhonenumber();
+        String msg = "", username = user.getUserName(),loginname=user.getLoginName(), password = user.getPassword(),email=user.getEmail(),phonenome=user.getPhonenumber();
         if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
         {
             msg = "验证码错误";
@@ -42,7 +51,7 @@ public class RegisterService
         else if (StringUtils.isEmpty(loginname))
         {
             msg = "登录名不能为空";
-        }else if (StringUtils.isEmpty(emal))
+        }else if (StringUtils.isEmpty(email))
         {
             msg = "邮箱不能为空";
         }
@@ -70,6 +79,8 @@ public class RegisterService
         }
         else
         {
+            String activeCode = UUID.randomUUID().toString();
+            user.setActiveCode(activeCode);
             boolean regFlag = userService.registerUser(user);
             if (!regFlag)
             {
@@ -77,6 +88,15 @@ public class RegisterService
             }
             else
             {
+                //          发送账户激活邮件
+                //          渲染html模板
+                Context context = new Context();
+                context.setVariable("activeCode", activeCode);
+                context.setVariable("url", serverUrl);
+                String emailContent = templateEngine.process("register/emailTemplate", context);
+
+                mailUtils.sendHtmlMail(email, "账户激活", emailContent);//发邮件
+
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }

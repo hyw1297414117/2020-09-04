@@ -1,5 +1,6 @@
 package com.framework.shiro.service;
 
+import com.common.exception.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -7,11 +8,6 @@ import org.springframework.util.StringUtils;
 import com.common.constant.Constants;
 import com.common.constant.ShiroConstants;
 import com.common.constant.UserConstants;
-import com.common.exception.user.CaptchaException;
-import com.common.exception.user.UserBlockedException;
-import com.common.exception.user.UserDeleteException;
-import com.common.exception.user.UserNotExistsException;
-import com.common.exception.user.UserPasswordNotMatchException;
 import com.common.utils.DateUtils;
 import com.common.utils.MessageUtils;
 import com.common.utils.ServletUtils;
@@ -98,6 +94,12 @@ public class LoginService
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
             throw new UserBlockedException();
+        }
+
+        if (UserStatus.INACTIVE.getCode().equals(user.getActiveState()))
+        {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.inactive")));
+            throw new UserInactiveException();
         }
 
         passwordService.validate(user, password);

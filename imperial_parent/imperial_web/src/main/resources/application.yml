@@ -69,7 +69,21 @@ spring:
     restart:
       # 热部署开关
       enabled: false
-
+  mail:
+    #邮箱服务器
+    host: smtp.qq.com
+    #发件邮箱
+    username: 2034089353@qq.com
+    #密码
+    password: lrntdstvgkfpbiii
+    properties:
+      mail:
+        smtp:
+          auth: true  # 开启邮箱验证
+          timeout: 25000 # 超时
+          starttls:
+            enable: true  # 安全协议
+            required: true
 # MyBatis
 mybatis:
     # 搜索指定包别名
