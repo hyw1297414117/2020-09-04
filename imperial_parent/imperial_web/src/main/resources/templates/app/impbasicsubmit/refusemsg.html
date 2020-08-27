@@ -13,6 +13,19 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var orderNumber=[[#{orderNumber}]];
+    var Detail=[[#{Detail}]];
+    var Rejectiondetails=[[#{Rejection.details}]];
+    var Reviewer=[[#{Reviewer}]];
+    var Rejectiontype=[[#{Rejection.type}]];
+    var Reasonsforrejection=[[#{Reasons.for.rejection}]];
+    var Timeofrejection=[[#{Time.of.rejection}]];
+
+
+
+
+</script>
     <script th:src="@{/js/app/impbasicsubmit/refusemsg.js}"></script>
 </body>
 </html>

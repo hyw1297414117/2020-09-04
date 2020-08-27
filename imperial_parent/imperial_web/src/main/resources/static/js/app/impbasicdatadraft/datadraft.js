@@ -18,7 +18,7 @@ $(function() {
         queryParams: queryParamsPaging,
         columns: [
         {field: 'id',title: 'null',visible: false},
-        {field: 'mainOrderNo',title: '主单号'}],
+        {field: 'mainOrderNo',title: MainOrderNo}],
         //注册加载子表的事件。注意下这里的三个参数！
         onExpandRow: function (index, row, $detail) {
         	InitSubTable(index, row, $detail);
@@ -93,7 +93,7 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         {field: 'state',checkbox: true},
         {field: 'id',title: 'null',visible: false},
         {field: 'tackingNumber1', title: BagTrackNumber1},
-        {field: 'tackingNumber2', title: BagTrackNumber1},
+        {field: 'tackingNumber2', title: BagTrackNumber2},
             {field: 'bagNumber',title: packetnumber},
             {field: 'boxNumber',title: Outerboxnumber},
             {field: 'palletNumber',title: Palletnumber},
@@ -180,10 +180,10 @@ function edit(){
 		fix: false,
 		maxmin: true,
 		shade: 0.3,
-		title: '修改清关草稿数据',
+        title: Modifycustomsclearancedata,
 		area: ["800px", height], //宽高
 		content: "/shipperModule/impBasicDataDraft/editdraft/"+rows[0].id,
-		btn: ['转为标准数据', '关闭','存入草稿'],
+        btn:  [Converttostandarddata, Close,Savetodraft],
 		btn1:function(index,layero){
 		    var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandlerToSta(index, layero);

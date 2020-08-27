@@ -18,7 +18,7 @@ $(function() {
         queryParams: queryParamsPaging,
         columns: [
         {field: 'id',title: 'null',visible: false},
-        {field: 'mainOrderNo',title: '主单号'}],
+        {field: 'mainOrderNo',title: MainOrderNo}],
         //注册加载子表的事件。注意下这里的三个参数！
         onExpandRow: function (index, row, $detail) {
         	InitSubTable(index, row, $detail);
@@ -126,8 +126,8 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         // 	return value = '';  //赋值为空
         // }*/
 		// },
-        {title: '驳回详情', field: '', align: 'center', valign: 'middle', formatter:function(value,row,index){
-			return "<a title='驳回详情' onclick='refuseMsg(&#39;"+row.tackingNumber1+"&#39;)'>详情</a>"
+        {title: Rejectiondetails, field: '', align: 'center', valign: 'middle', formatter:function(value,row,index){
+			return "<a  onclick='refuseMsg(&#39;"+row.tackingNumber1+"&#39;)'>Detail</a>"
 		}},
 			{field: 'tackingNumber1', title: BagTrackNumber1},
 			{field: 'tackingNumber2', title: BagTrackNumber2},
@@ -203,7 +203,8 @@ function rowStyle(row, index) {  //# e0eee8
 function refuseMsg(tackingNumber1){
 	var index = layer.open({
 		type: 2,
-		title: '订单号为['+tackingNumber1+']的驳回详情',
+		// title: '订单号为['+tackingNumber1+']的驳回详情',
+		title: Rejectiondetails,
 		area: ['800px', '350px'], //宽高
 		fix: false, //不固定
 		content: '/shipperModule/impBasicDataSubmit/to_refuseMsg/'+tackingNumber1
@@ -286,7 +287,7 @@ function edit(){
 		title: Modifycustomsclearancedata,
 		area: ["800px", height], //宽高
 		content: "/shipperModule/impBasicData/toEditPage/"+rows[0].id,
-		btn:  ['确定', '关闭','存入草稿'],
+		btn:  [Subm, Close,Savetodraft],
 		btn1:function(index,layero){
 		    var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandlerToSta(index, layero);
