@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.project.app.imperial.domain.ImpBasicData;
 import com.project.app.imperial.domain.ImpBagNumber;
-import com.project.app.imperial.domain.ImpBasicRation;
+import com.project.app.imperial.domain.ImpMainnoTackNo;
 import com.project.system.user.domain.User;
 
 /**
@@ -100,5 +100,5 @@ public interface IImpBasicDataService
     /**
      * 查询主单号的list
      * */
-    public List<ImpBasicRation> selectMainOrderNoList(Map<String,Object> map);
+    public List<ImpMainnoTackNo> selectMainOrderNoList(Map<String,Object> map);
 }

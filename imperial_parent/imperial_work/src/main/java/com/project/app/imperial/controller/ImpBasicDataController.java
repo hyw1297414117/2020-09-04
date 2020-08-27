@@ -24,7 +24,7 @@ import com.framework.web.domain.AjaxResult;
 import com.framework.web.page.TableDataInfo;
 import com.project.app.imperial.domain.ImpBasicData;
 import com.project.app.imperial.domain.ImpBagNumber;
-import com.project.app.imperial.domain.ImpBasicRation;
+import com.project.app.imperial.domain.ImpMainnoTackNo;
 import com.project.app.imperial.service.IImpBasicDataService;
 import com.project.system.user.domain.User;
 
@@ -95,7 +95,7 @@ public class ImpBasicDataController extends BaseController
     public TableDataInfo getMainOrderNoList(@RequestParam Map<String, Object> params) {
     	JSONObject jsStr = JSONObject.parseObject((String)params.get("impParams"));
     	startPage();
-    	List<ImpBasicRation> list = impBasicDataService.selectMainOrderNoList(jsStr);
+    	List<ImpMainnoTackNo> list = impBasicDataService.selectMainOrderNoList(jsStr);
     	return getDataTable(list);
     }
     

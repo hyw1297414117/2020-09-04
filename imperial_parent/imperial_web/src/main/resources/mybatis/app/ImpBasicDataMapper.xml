@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="consigneeName"    column="consignee_name"    />
     </resultMap>
     
-    <resultMap type="ImpBasicRation" id="ImpBasicRationResult">
+    <resultMap type="ImpMainnoTackNo" id="ImpMainnoTacknoResult">
         <result property="id"    column="ID"    />
         <result property="mainOrderNo"    column="main_order_no"    />
         <result property="taskNumber"    column="task_number"    />
@@ -75,8 +75,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 当前用户订单数据 包含有效的、历史的、草稿的-->
     <select id="selectImpBasicDataList" parameterType="java.util.Map" resultMap="ImpBasicDataResult">
         <include refid="selectImpBasicDataVo"/>
-        join imp_basic_relation ibr on ibr.tack_number1 = ibd.tacking_number_1 
-        <if test="mainOrderNo != null  and mainOrderNo != ''"> and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+        join imp_mainno_tackno imt on imt.tack_number1 = ibd.tacking_number_1 
+        <if test="mainOrderNo != null  and mainOrderNo != ''"> and imt.main_order_no like concat('%',#{mainOrderNo},'%')</if>
         <where>  1=1
             <if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
             <if test="tackingNumber2 != null  and tackingNumber2 != ''"> and ibd.tacking_number_2 = #{tackingNumber2}</if>
@@ -100,9 +100,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 查询主单号构成的第一层表 -->
-    <select id ="selectMainOrderNoList" parameterType="java.util.Map" resultMap="ImpBasicRationResult" >
-    	select distinct ibr.main_order_no from imp_basic_relation ibr
-    	join imp_basic_data ibd on ibr.tack_number1 = ibd.tacking_number_1 
+    <select id ="selectMainOrderNoList" parameterType="java.util.Map" resultMap="ImpMainnoTacknoResult" >
+    	select distinct imt.main_order_no from imp_mainno_tackno imt
+    	join imp_basic_data ibd on imt.tack_number1 = ibd.tacking_number_1 
     	<if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
     	<if test="bagNumber != null  and bagNumber != ''"> and ibd.bag_number = #{bagNumber}</if>
     	<if test="submitFlag != null"> and ibd.submit_flag = #{submitFlag}</if>
@@ -113,18 +113,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<if test="shipperName != null and shipperName != ''"> and ibd.shipper_name = #{shipperName}</if>
     	<if test="consigneeName != null and consigneeName != ''"> and ibd.consignee_name = #{consigneeName}</if>
     	<where>  1=1
-            <if test="mainOrderNo != null and mainOrderNo != ''"> and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
-            <if test="taskNumber != null and taskNumber != ''"> and ibr.task_number = #{taskNumber}</if>
-            <if test="tackNumber2 != null and tackNumber2 != ''"> and ibr.tack_number2 = #{tackNumber2}</if>
+            <if test="mainOrderNo != null and mainOrderNo != ''"> and imt.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+            <if test="taskNumber != null and taskNumber != ''"> and imt.task_number = #{taskNumber}</if>
+            <if test="tackNumber2 != null and tackNumber2 != ''"> and imt.tack_number2 = #{tackNumber2}</if>
         </where>
     </select>
     
     <!-- 查询包裹号构成的第二层表 -->
     <select id="selectBagNumberList" parameterType="java.util.Map" resultMap="bagNumberResult">
     	select distinct ibd.bag_number FROM imp_basic_data ibd
-    	join imp_basic_relation ibr on 
-    	ibr.tack_number1 = ibd.tacking_number_1
-    	<if test="mainOrderNo != null and mainOrderNo != ''">and ibr.main_order_no like concat('%',#{mainOrderNo},'%')</if>
+    	join imp_mainno_tackno imt on 
+    	imt.tack_number1 = ibd.tacking_number_1
+    	<if test="mainOrderNo != null and mainOrderNo != ''">and imt.main_order_no like concat('%',#{mainOrderNo},'%')</if>
     	<where>  1=1
             <if test="tackingNumber1 != null  and tackingNumber1 != ''"> and ibd.tacking_number_1 = #{tackingNumber1}</if>
     		<if test="bagNumber != null  and bagNumber != ''"> and ibd.bag_number = #{bagNumber}</if>

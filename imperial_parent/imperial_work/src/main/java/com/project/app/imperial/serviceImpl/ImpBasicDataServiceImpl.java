@@ -14,7 +14,7 @@ import com.common.utils.StringUtils;
 import com.common.utils.text.Convert;
 import com.project.app.imperial.domain.ImpBasicData;
 import com.project.app.imperial.domain.ImpBagNumber;
-import com.project.app.imperial.domain.ImpBasicRation;
+import com.project.app.imperial.domain.ImpMainnoTackNo;
 import com.project.app.imperial.mapper.ImpBasicDataMapper;
 import com.project.app.imperial.service.IImpBasicDataService;
 
@@ -198,7 +198,7 @@ public class ImpBasicDataServiceImpl implements IImpBasicDataService
 	}
 
 	@Override
-	public List<ImpBasicRation> selectMainOrderNoList(Map<String,Object> map) {
+	public List<ImpMainnoTackNo> selectMainOrderNoList(Map<String,Object> map) {
 		// TODO Auto-generated method stub
 		return impBasicDataMapper.selectMainOrderNoList(map);
 	}
