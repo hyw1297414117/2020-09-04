@@ -271,14 +271,15 @@ function remove(){
 	var dataMap = {};
 	dataMap.ids = ids;
 	dataMap.submitFlag = 1;
-	var layerIndex = layer.confirm("确定删除&nbsp;<font color=red>"+rows.length+"</font>&nbsp;条数据吗？", {
-		btn: ["确定","取消"] //按钮
+	var layerIndex = layer.confirm(Confirmthedeletion+"&nbsp;<font color=red>"+rows.length+"</font>&nbsp;"+Thedata, {
+		btn: [Subm, Close] ,//按钮
+		title:message
 		}, function(){
 			$.operate.impAjax("/shipperModule/impBasicData/remove",dataMap,function(){
-				layer.msg("删除成功", {icon: 1,time: 2000});
+				layer.msg(successfullydelete, {icon: 1,time: 2000});
 		        $("#impbasicDataSunTable"+operationDivId.substr(9)).bootstrapTable('refresh');//主要是要这种写法
 			},function(){
-				layer.msg("删除失败", {icon: 2,time: 1000});
+				layer.msg(failtodelete, {icon: 2,time: 1000});
 			});
 		}, function(){
 			layer.close(layerIndex);

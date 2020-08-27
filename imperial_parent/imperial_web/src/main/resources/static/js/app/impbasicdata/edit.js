@@ -32,19 +32,21 @@ $("#form-data-edit").validate({
 	},
 	messages: {
         "tackingNumber1": {
-            remote: "订单号已经存在"
+            remote: Theordernumberalreadyexists
         }
     },
     focusCleanup: true
 });
 //存为标准数据
 function submitHandlerToSta() {
+
     if ($.validate.form()) {
         $.operate.save(prefix + "/edit", $('#form-data-edit').serialize());
     }
 }
 //存为草稿
 function submitHandlerToDra() {
+
     if ($.validate.form()) {
         $.operate.save(prefix + "/editToDraft", $('#form-data-edit').serialize());
     }

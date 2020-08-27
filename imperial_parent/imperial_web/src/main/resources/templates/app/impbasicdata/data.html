@@ -201,5 +201,13 @@
 
      </script>
 <script th:src="@{/js/app/impbasicdata/data.js}"></script>
+     <script th:inline="javascript">
+         var Theordernumberalreadyexists=[[#{The.order.number.already.exists}]];
+         var successfullydelete=[[#{successfully.delete}]];
+         var failtodelete=[[#{fail.to.delete}]];
+         var Confirmthedeletion=[[#{Confirm.the.deletion}]];
+         var Thedata=[[#{The.data}]];
+         var message=[[#{message}]];
+     </script>
 </body>
 </html>
