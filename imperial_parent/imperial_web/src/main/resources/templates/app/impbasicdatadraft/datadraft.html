@@ -48,13 +48,13 @@
 <script id="operatBtTpl" type="text/template">
 <div style="margin-top:5px">
 				<a class="btn btn-primary btn-sm single test disabled" onclick="edit(this)" shiro:hasPermission="shipperModule:data:edit">
-                    <i class="fa fa-edit"></i> 修改
+                    <i class="fa fa-edit"></i> [[#{Update}]]
                 </a>
                 <a class="btn btn-danger btn-sm multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="shipperModule:data:remove">
-                    <i class="fa fa-remove"></i> 删除
+                    <i class="fa fa-remove"></i> [[#{Delete}]]
                 </a>
             	<a class="btn btn-warning btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="shipperModule:data:export">
-			            <i class="fa fa-upload"></i> 导出
+			            <i class="fa fa-upload"></i> [[#{Export}]]
 			    </a>
 </div>
 </script>
@@ -65,32 +65,32 @@
                     <div class="select-list" style= "float:left;width:90%">
                         <ul>
                             <li style="width:30%">
-                                <label>主单号：</label>
+                                <label th:text="#{MASTER_BILL_OF_LADING}">主单号：</label>
                                 <input type="text" id="mainOrderNo" name="mainOrderNo"/>
                             </li>
 							<li style="width:30%">
-                                <label>包编号：</label>
+                                <label th:text="#{packet.number}">包编号：</label>
                                 <input type="text" id="bagNumber" name="bagNumber"/>
                             </li>
                             <li style="width:30%">
-                                <label>追踪号1：</label>
+                                <label th:text="#{Tracking.number1}">追踪号1：</label>
                                 <input type="text" id="tackingNumber1" name="tackingNumber1"/>
                             </li>
                         </ul>
 						<div style="clear:both"></div>
 						<ul>
 							<li style="width:30%;">
-                                <label>发货人姓名：</label>
+                                <label th:text="#{Shipper.Name}">发货人姓名：</label>
                                 <input type="text" id="shipperName" name="shipperName"/>
                             </li>
                             <li style="width:30%">
-                                <label>收货人姓名：</label>
+                                <label th:text="#{Consignee.Name}">收货人姓名：</label>
                                 <input type="text" id="consigneeName" name="consigneeName"/>
                             </li>
                             <li style="width:30%">
-							    <label>类型：</label>
+							    <label th:text="#{type}"> 类型：</label>
 							    <select id="typeSelect" class="form-control">
-							        <option value="none" selected disabled hidden>请选择</option> 
+							        <option value="none" selected disabled hidden>[[#{select}]]:</option>
 							        <option>DDU</option>
 							        <option>DDP</option>
 							    </select>
@@ -98,14 +98,63 @@
 						</ul>
                     </div>
                     <div style = "float:left;margin-left:10px;">
-                         <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFun()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                         <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFun()"><i class="fa fa-search"></i>&nbsp;[[#{Search}]]</a>
                          <br>
                          <p style="height:5px;"></p>
-                         <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                         <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;[[#{Reset}]]</a>
                     </div>
             </form>
 </div>
 <div style="clear:both"></div>
 </script>
+     <script th:inline="javascript">
+         var MainOrderNo=[[#{MASTER_BILL_OF_LADING}]];
+         var stateIdentification=[[#{state.identification}]];
+         var BagTrackNumber1=[[#{Bag.TrackNumber1}]];
+         var BagTrackNumber2=[[#{Bag.TrackNumber2}]];
+         var packetnumber=[[#{packet.number}]];
+         var Outerboxnumber=[[#{Outer.box.number}]];
+         var Palletnumber=[[#{Pallet.number}]];
+         var Containernumber=[[#{Container.number}]];
+         var Referencecode1=[[#{Reference.code1}]];
+         var Referencecode2=[[#{Reference.code2}]];
+         var ShipperName=[[#{Shipper.Name}]];
+         var Shipperidentificationcode=[[#{Shipper.identification.code}]];
+         var ConsigneeName=[[#{Consignee.Name}]];
+         var Shippingaddress1=[[#{Shipping.address1}]];
+         var Shippingaddress2=[[#{Shipping.address2}]];
+         var Shippingaddress3=[[#{Shipping.address3}]];
+         var City=[[#{City}]];
+         var Statesandcounties=[[#{States.and.counties}]];
+         var zipcode=[[#{zipcode}]];
+         var Countrycode=[[#{Country.code}]];
+         var Tel=[[#{Tel}]];
+         var Email=[[#{Email}]];
+         var Numberofpackages=[[#{Number.of.packages}]];
+         var Weight=[[#{Weight}]];
+         var Unitofweight=[[#{Unit.of.weight}]];
+         var Val=[[#{Value}]];
+         var Currency=[[#{Currency}]];
+         var Importpurpose=[[#{Import.purpose}]];
+         var Unknown=[[#{unknown}]];
+         var Descriptionofgoods=[[#{Description.of.goods}]];
+         var customscode=[[#{customs.code}]];
+         var Thequantityofgoods=[[#{The.quantity.of.goods}]];
+         var Thepriceofgoods=[[#{The.price.of.goods}]];
+         var returnway=[[#{return.way}]];
+         var Saleslink=[[#{Sales.link}]];
+         var Terminaldispatcher=[[#{Terminal.dispatcher}]];
+         var Terminalaccountname=[[#{Terminal.account.name}]];
+         var freight=[[#{freight}]];
+         var pass=[[#{pass}]];
+         var reject=[[#{reject}]];
+         var inreview=[[#{in.review}]];
+         var Modifycustomsclearancedata=[[#{Modify.customs.clearance.data}]];
+         var Subm=[[#{Subm}]];
+         var Close=[[#{Close}]];
+         var Savetodraft=[[#{Save.to.draft}]];
+
+
+     </script>
 </body>
 </html>

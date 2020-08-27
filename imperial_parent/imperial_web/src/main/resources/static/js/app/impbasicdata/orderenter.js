@@ -29,15 +29,15 @@ function importExcel(formId) {
 		//不固定
 		maxmin: true,
 		shade: 0.3,
-		title: '导入订单数据',
+		title: Importorderdata,
 		content: $('#' + currentId).html(),
-		btn: ['<i class="fa fa-check"></i> 导入', '<i class="fa fa-remove"></i> 取消'],
+		btn: ['<i class="fa fa-check"></i> '+tolead+'', '<i class="fa fa-remove"></i> '+cancel+''],
 		// 弹层外区域关闭
 		shadeClose: true,
 		btn1: function(index, layero){
 			var file = layero.find('#file').val();
 			if (file == '' || (!$.common.endWith(file, '.xls') && !$.common.endWith(file, '.xlsx') && !$.common.endWith(file, '.csv'))){
-				$.modal.msgWarning("请选择后缀为 'xls'、'xlsx'、'csv'的文件。");
+				$.modal.msgWarning(toleaderr);
 				return false;
 			}
 			var index = layer.load(2, {shade: false});
@@ -81,10 +81,10 @@ function add(){
 		fix: false,
 		maxmin: true,
 		shade: 0.3,
-		title: '添加清关系统基础表数据',
+		title: addbasic,
 		area: ["800px", height], //宽高
 		content: url,
-		btn: ['确定', '关闭','存入草稿'],
+		btn: [Subm, cancel,Savetodraft],
 		btn1:function(index,layero){
 		    var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandler(index, layero);
@@ -106,7 +106,7 @@ function toDrafts(){
 		fix: false,
 		maxmin: true,
 		shade: 0.3,
-		title: '基础表数据草稿箱',
+		title: Basictabledatadraftbox,
 		area: ["1200px", height], //宽高
 		content: url
 	});

@@ -7,235 +7,235 @@
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-data-add">
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">快递号1：</label>
+                <label class="col-sm-3 control-label is-required">[[#{Bag.TrackNumber1}]]：</label>
                 <div class="col-sm-8">
                     <input name="tackingNumber1" id="tackingNumber1" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">快递号2：</label>
+                <label class="col-sm-3 control-label">[[#{Bag.TrackNumber2}]]：</label>
                 <div class="col-sm-8">
                     <input name="tackingNumber2" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label is-required">包编号：</label>
+                <label class="col-sm-3 control-label is-required">[[#{packet.number}]]：</label>
                 <div class="col-sm-8">
                     <input name="bagNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">箱编号：</label>
+                <label class="col-sm-3 control-label">[[#{Outer.box.number}]]：</label>
                 <div class="col-sm-8">
                     <input name="boxNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">运货板编号：</label>
+                <label class="col-sm-3 control-label">[[#{Pallet.number}]]：</label>
                 <div class="col-sm-8">
                     <input name="palletNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">集装箱编号：</label>
+                <label class="col-sm-3 control-label">[[#{Container.number}]]：</label>
                 <div class="col-sm-8">
                     <input name="containerNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">参考编码1：</label>
+                <label class="col-sm-3 control-label">[[#{Reference.code1}]]：</label>
                 <div class="col-sm-8">
                     <input name="reference1" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">参考编码2：</label>
+                <label class="col-sm-3 control-label">[[#{Reference.code2}]]：</label>
                 <div class="col-sm-8">
                     <input name="referrnce2" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">发货人姓名：</label>
+                <label class="col-sm-3 control-label">[[#{Shipper.Name}]]：</label>
                 <div class="col-sm-8">
                     <input name="shipperName" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">发货人参考信息：</label>
+                <label class="col-sm-3 control-label">[[#{Shipper.identification.code}]]：</label>
                 <div class="col-sm-8">
                     <input name="shipperReference" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">收货人姓名：</label>
+                <label class="col-sm-3 control-label">[[#{Consignee.Name}]]：</label>
                 <div class="col-sm-8">
                     <input name="consigneeName" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">地址1：</label>
+                <label class="col-sm-3 control-label">[[#{Shipping.address1}]]：</label>
                 <div class="col-sm-8">
                     <textarea name="lineAddress1" class="form-control"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">地址2：</label>
+                <label class="col-sm-3 control-label">[[#{Shipping.address2}]]：</label>
                 <div class="col-sm-8">
                     <textarea name="lineAddress2" class="form-control"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">地址3：</label>
+                <label class="col-sm-3 control-label">[[#{Shipping.address3}]]：</label>
                 <div class="col-sm-8">
                     <textarea name="lineAddress3" class="form-control"></textarea>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">集镇：</label>
+                <label class="col-sm-3 control-label">[[#{City}]]：</label>
                 <div class="col-sm-8">
                     <input name="town" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">国家：</label>
+                <label class="col-sm-3 control-label">[[#{States.and.counties}]]：</label>
                 <div class="col-sm-8">
                     <input name="state" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">邮政编码：</label>
+                <label class="col-sm-3 control-label">[[#{zipcode}]]：</label>
                 <div class="col-sm-8">
                     <input name="postCode" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">国家代码：</label>
+                <label class="col-sm-3 control-label">[[#{Country.code}]]：</label>
                 <div class="col-sm-8">
                     <input name="countryCode" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">邮箱：</label>
+                <label class="col-sm-3 control-label">[[#{Email}]]：</label>
                 <div class="col-sm-8">
                     <input name="email" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">电话：</label>
+                <label class="col-sm-3 control-label">[[#{Tel}]]：</label>
                 <div class="col-sm-8">
                     <input name="phone" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">数量单位：</label>
+                <label class="col-sm-3 control-label">[[#{Number.of.packages}]]：</label>
                 <div class="col-sm-8">
                     <input name="pieces" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">重量：</label>
+                <label class="col-sm-3 control-label">[[#{Weight}]]：</label>
                 <div class="col-sm-8">
                     <input name="weight" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">重量单位：</label>
+                <label class="col-sm-3 control-label">[[#{Unit.of.weight}]]：</label>
                 <div class="col-sm-8">
                     <input name="weightUom" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">未知：</label>
+                <label class="col-sm-3 control-label">[[#{Value}]]：</label>
                 <div class="col-sm-8">
                     <input name="value" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">运费、发货税率：</label>
+                <label class="col-sm-3 control-label">[[#{freight}]]：</label>
                 <div class="col-sm-8">
                     <input name="shippingRate" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">货币：</label>
+                <label class="col-sm-3 control-label">[[#{Currency}]]：</label>
                 <div class="col-sm-8">
                     <input name="currency" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">贸易术语 DDU/DDP：</label>
+                <label class="col-sm-3 control-label">DDU/DDP：</label>
                 <div class="col-sm-8">
                     <input name="incoterms" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">进口目的：</label>
+                <label class="col-sm-3 control-label">[[#{Import.purpose}]]：</label>
                 <div class="col-sm-8">
                     <input name="importPurpose" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">未知：</label>
+                <label class="col-sm-3 control-label">[[#{unknown}]]：</label>
                 <div class="col-sm-8">
                     <input name="eoriNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">未知：</label>
+                <label class="col-sm-3 control-label">[[#{unknown}]]：</label>
                 <div class="col-sm-8">
                     <input name="mossNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">说明：</label>
+                <label class="col-sm-3 control-label">[[#{Description.of.goods}]]：</label>
                 <div class="col-sm-8">
                     <textarea name="description" class="form-control"></textarea>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">未知：</label>
+                <label class="col-sm-3 control-label">[[#{customs.code}]]：</label>
                 <div class="col-sm-8">
                     <input name="hsCode" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">项目数量：</label>
+                <label class="col-sm-3 control-label">[[#{The.quantity.of.goods}]]：</label>
                 <div class="col-sm-8">
                     <input name="itemQuantity" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">产品sku编号：</label>
+                <label class="col-sm-3 control-label">[[#{The.price.of.goods}]]：</label>
                 <div class="col-sm-8">
                     <input name="itemValue" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">未知：</label>
+                <label class="col-sm-3 control-label">[[#{unknown}]]：</label>
                 <div class="col-sm-8">
                     <input name="skuNumber" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">返回指令：</label>
+                <label class="col-sm-3 control-label">[[#{return.way}]]：</label>
                 <div class="col-sm-8">
                     <input name="returnInstruction" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">销售连结：</label>
+                <label class="col-sm-3 control-label">[[#{Sales.link}]]：</label>
                 <div class="col-sm-8">
                     <textarea name="salesLink" class="form-control"></textarea>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">末端供应商：</label>
+                <label class="col-sm-3 control-label">[[#{Terminal.dispatcher}]]：</label>
                 <div class="col-sm-8">
                     <input name="lastMileProvider" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">末端账户名：</label>
+                <label class="col-sm-3 control-label">[[#{Terminal.account.name}]]：</label>
                 <div class="col-sm-8">
                     <input name="lastMileAccountName" class="form-control" type="text">
                 </div>

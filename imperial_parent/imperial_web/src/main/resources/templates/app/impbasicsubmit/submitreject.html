@@ -125,5 +125,55 @@
 </div>
 <div style="clear:both"></div>
 </script>
+     <script th:inline="javascript">
+         var MainOrderNo=[[#{MASTER_BILL_OF_LADING}]];
+         var stateIdentification=[[#{state.identification}]];
+         var BagTrackNumber1=[[#{Bag.TrackNumber1}]];
+         var BagTrackNumber2=[[#{Bag.TrackNumber2}]];
+         var packetnumber=[[#{packet.number}]];
+         var Outerboxnumber=[[#{Outer.box.number}]];
+         var Palletnumber=[[#{Pallet.number}]];
+         var Containernumber=[[#{Container.number}]];
+         var Referencecode1=[[#{Reference.code1}]];
+         var Referencecode2=[[#{Reference.code2}]];
+         var ShipperName=[[#{Shipper.Name}]];
+         var Shipperidentificationcode=[[#{Shipper.identification.code}]];
+         var ConsigneeName=[[#{Consignee.Name}]];
+         var Shippingaddress1=[[#{Shipping.address1}]];
+         var Shippingaddress2=[[#{Shipping.address2}]];
+         var Shippingaddress3=[[#{Shipping.address3}]];
+         var City=[[#{City}]];
+         var Statesandcounties=[[#{States.and.counties}]];
+         var zipcode=[[#{zipcode}]];
+         var Countrycode=[[#{Country.code}]];
+         var Tel=[[#{Tel}]];
+         var Email=[[#{Email}]];
+         var Numberofpackages=[[#{Number.of.packages}]];
+         var Weight=[[#{Weight}]];
+         var Unitofweight=[[#{Unit.of.weight}]];
+         var Val=[[#{Value}]];
+         var Currency=[[#{Currency}]];
+         var Importpurpose=[[#{Import.purpose}]];
+         var Unknown=[[#{unknown}]];
+         var Descriptionofgoods=[[#{Description.of.goods}]];
+         var customscode=[[#{customs.code}]];
+         var Thequantityofgoods=[[#{The.quantity.of.goods}]];
+         var Thepriceofgoods=[[#{The.price.of.goods}]];
+         var returnway=[[#{return.way}]];
+         var Saleslink=[[#{Sales.link}]];
+         var Terminaldispatcher=[[#{Terminal.dispatcher}]];
+         var Terminalaccountname=[[#{Terminal.account.name}]];
+         var freight=[[#{freight}]];
+         var pass=[[#{pass}]];
+         var reject=[[#{reject}]];
+         var inreview=[[#{in.review}]];
+         var Modifycustomsclearancedata=[[#{Modify.customs.clearance.data}]];
+         var Subm=[[#{Subm}]];
+         var Close=[[#{Close}]];
+         var Savetodraft=[[#{Save.to.draft}]];
+
+
+
+     </script>
 </body>
 </html>
