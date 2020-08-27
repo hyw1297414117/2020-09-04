@@ -530,4 +530,16 @@ public class UserServiceImpl implements IUserService
     {
         return userMapper.updateUser(user);
     }
+
+    /**
+     * 用户激活
+     *
+     * @param activeCode 用户激活码
+     * @return 结果
+     */
+    @Override
+    public int activeUser(String activeCode)
+    {
+        return userMapper.activeUser(activeCode);
+    }
 }

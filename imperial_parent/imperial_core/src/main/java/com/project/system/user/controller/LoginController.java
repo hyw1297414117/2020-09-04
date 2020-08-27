@@ -2,8 +2,11 @@ package com.project.system.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.common.exception.user.UserInactiveException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
@@ -47,6 +50,15 @@ public class LoginController extends BaseController
             subject.login(token);
             return success();
         }
+        catch (DisabledAccountException e)
+        {
+            String msg = "用户未激活，请前往邮箱激活后再登录！";
+            if (StringUtils.isNotEmpty(e.getMessage()))
+            {
+                msg = e.getMessage();
+            }
+            return error(msg);
+        }
         catch (AuthenticationException e)
         {
             String msg = "用户或密码错误";
@@ -56,6 +68,7 @@ public class LoginController extends BaseController
             }
             return error(msg);
         }
+
     }
 
     @GetMapping("/unauth")

@@ -122,4 +122,14 @@ public interface UserMapper
      * @return 结果
      */
     public User checkEmailUnique(String email);
+
+    /**
+     * 修改用户激活状态为已激活
+     *
+     * @param activeCode 用户激活码
+     * @return 结果
+     */
+    public int activeUser(String activeCode);
+
+
 }

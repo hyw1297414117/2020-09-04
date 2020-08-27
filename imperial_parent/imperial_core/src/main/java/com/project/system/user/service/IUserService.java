@@ -204,4 +204,12 @@ public interface IUserService
      * @return 结果
      */
     public int changeStatus(User user);
+
+    /**
+     * 用户激活
+     *
+     * @param activeCode 用户激活码
+     * @return 结果
+     */
+    public int activeUser(String activeCode);
 }

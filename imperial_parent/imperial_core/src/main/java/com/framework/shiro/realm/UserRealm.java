@@ -2,16 +2,10 @@ package com.framework.shiro.realm;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.common.exception.user.*;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -20,12 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.common.exception.user.CaptchaException;
-import com.common.exception.user.RoleBlockedException;
-import com.common.exception.user.UserBlockedException;
-import com.common.exception.user.UserNotExistsException;
-import com.common.exception.user.UserPasswordNotMatchException;
-import com.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.common.utils.security.ShiroUtils;
 import com.framework.shiro.service.LoginService;
 import com.project.system.menu.service.IMenuService;
@@ -122,6 +110,10 @@ public class UserRealm extends AuthorizingRealm
         catch (RoleBlockedException e)
         {
             throw new LockedAccountException(e.getMessage(), e);
+        }
+        catch (UserInactiveException e)
+        {
+            throw new DisabledAccountException(e.getMessage(), e);
         }
         catch (Exception e)
         {
