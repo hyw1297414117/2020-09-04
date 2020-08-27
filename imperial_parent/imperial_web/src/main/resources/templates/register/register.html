@@ -18,26 +18,26 @@
     <style type="text/css">label.error { position:inherit;  }</style>
 </head>
 <body class="signin" style="background-image:url('../img/login-background2.jpg')">
-<h1 style="text-align:center;margin-top:60px;">欢迎使用 <strong>请注册你的账号</strong></h1>
+<h1 style="text-align:center;margin-top:60px;">[[#{welcome}]]<strong>[[#{Please.register.your.account}]]</strong></h1>
     <div class="signinpanel" style="margin-left: 800px;">
         <div class="row" style="margin-top:-90px;margin-left: 90px;">
             <div class="col-sm-7">
             </div>
             <div class="col-sm-7">
                 <form id="registerForm" autocomplete="off">
-                    <h4 class="no-margins">注册：</h4>
-                    <input type="text"     name="username" class="form-control uname"         placeholder="真实名称"   maxlength="20" />
-                    <input type="text"     name="loginName" class="form-control uname"         placeholder="登录名称"   maxlength="20" />
-                    <input type="text"     name="email" class="form-control pword"         placeholder="邮箱"   maxlength="20" />
-                    <input type="text"     name="phonenumber" class="form-control uname"         placeholder="手机号"   maxlength="20" />
-                    <input type="password" name="password" class="form-control pword"         placeholder="密码"     maxlength="20" />
-                    <input type="password" name="confirmPassword" class="form-control pword"  placeholder="确认密码" maxlength="20" />
-					<div class="row m-t" th:if="${captchaEnabled==true}">
+                    <h4 class="no-margins">[[#{user.login.message.register}]]：</h4>
+                    <input type="text"     name="username" class="form-control uname"         th:placeholder="#{user.register.username.placeholder}"   maxlength="20" />
+                    <input type="text"     name="loginName" class="form-control uname"         th:placeholder="#{user.register.loginname.placeholder}"   maxlength="20" />
+                    <input type="text"     name="email" class="form-control pword"         th:placeholder="#{user.register.useremil.placeholder}"   maxlength="20" />
+                    <input type="text"     name="phonenumber" class="form-control uname"         th:placeholder="#{user.register.userphone.placeholder}"   maxlength="20" />
+                    <input type="password" name="password" class="form-control pword"         th:placeholder="#{user.register.userpassword.placeholder}"     maxlength="20" />
+                    <input type="password" name="confirmPassword" class="form-control pword"  th:placeholder="#{user.register.userrepassword.placeholder}" maxlength="20" />
+                    <div class="row m-t" th:if="${captchaEnabled==true}">
 						<div class="col-xs-6">
-						    <input type="text" name="validateCode" class="form-control code"  placeholder="验证码"   maxlength="5" >
+						    <input type="text" name="validateCode" class="form-control code"  th:placeholder="#{user.login.message.verificationcode}"   maxlength="5" >
 						</div>
 						<div class="col-xs-6">
-							<a href="javascript:void(0);" title="点击更换验证码">
+							<a href="javascript:void(0);" th:title="#{user.login.message.changeVerificationCode}">
 								<img th:src="@{captcha/captchaImage(type=${captchaType})}" class="imgcode" width="85%"/>
 							</a>
 						</div>
@@ -65,5 +65,21 @@
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
 <script src="../static/ruoyi/register.js" th:src="@{/js/app/register/register.js}"></script>
+
+<script th:inline="javascript">
+    var usernameisnull=[[#{user.register.usernameisnull}]];
+    var usernamelength=[[#{user.register.usernamelength}]];
+    var loginname=[[#{user.register.loginname}]];
+    var  loginnamelength=[[#{user.register.loginnamelength}]];
+    var  useremil=[[#{user.register.useremil}]];
+    var useremillength=[[#{user.register.useremillength}]];
+    var userphone=[[#{user.register.userphone}]];
+    var userphonelength=[[#{user.register.userphonelength}]];
+    var userpassword=[[#{user.register.userpassword}]];
+    var userpasswordlength=[[#{user.register.userpasswordlength}]];
+    var userrepassword=[[#{user.register.userrepassword}]];
+    var userpasswordeq=[[#{user.register.userpasswordeq}]];
+    var phonetyep=[[#{user.register.phonetyep}]];
+</script>
 </body>
 </html>

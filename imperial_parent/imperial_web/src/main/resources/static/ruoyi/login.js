@@ -55,10 +55,10 @@ function validateRule() {
         },
         messages: {
             username: {
-                required: icon + "请输入您的用户名",
+                required: icon + usernameisnull,
             },
             password: {
-                required: icon + "请输入您的密码",
+                required: icon + userpassword,
             }
         }
     })
@@ -66,9 +66,9 @@ function validateRule() {
 
 function validateKickout() {
 	if (getParam("kickout") == 1) {
-	    layer.alert("<font color='red'>您已在别处登录，请您修改密码或重新登录</font>", {
+        layer.alert("<font color='red'>"+login_distance+"</font>", {
 	        icon: 0,
-	        title: "系统提示"
+	        title: system_prompt
 	    },
 	    function(index) {
 	        //关闭弹窗
@@ -93,6 +93,6 @@ function getParam(paramName) {
     if (r != null) return decodeURI(r[2]);
     return null;
 }
-function zhuche() {
+function register() {
     window.open("/register");
 }

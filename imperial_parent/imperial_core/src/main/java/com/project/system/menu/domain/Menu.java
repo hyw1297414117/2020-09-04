@@ -19,6 +19,26 @@ public class Menu extends BaseEntity
 
     /** 菜单ID */
     private Long menuId;
+    /** 英文 */
+    private String English;
+    /** 中文 */
+    private String Chinese;
+
+    public String getEnglish() {
+        return English;
+    }
+
+    public void setEnglish(String english) {
+        English = english;
+    }
+
+    public String getChinese() {
+        return Chinese;
+    }
+
+    public void setChinese(String chinese) {
+        Chinese = chinese;
+    }
 
     /** 菜单名称 */
     private String menuName;

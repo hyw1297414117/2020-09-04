@@ -39,8 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectMenuNormalAll" resultMap="MenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, ifnull(m.perms,'') as perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, ifnull(m.perms,'') as perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time,ml.*
 		from sys_menu m
+		  join sys_menu_language ml
+		on m.menu_id=ml.menuId
 		where m.menu_type in ('M', 'C') and m.visible = 0
 		order by m.parent_id, m.order_num
 	</select>

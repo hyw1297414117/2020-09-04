@@ -27,9 +27,11 @@ import com.framework.web.domain.AjaxResult;
 @Controller
 public class LoginController extends BaseController
 {
+    static String LoginMenulinguistictype="";
     @GetMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response)
+    public String login(HttpServletRequest request, HttpServletResponse response,String linguistic)
     {
+        LoginMenulinguistictype =linguistic;
         // 如果是Ajax请求，返回Json字符串。
         if (ServletUtils.isAjaxRequest(request))
         {

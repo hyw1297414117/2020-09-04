@@ -61,7 +61,7 @@ function validateRule() {
         //方法中又有三个参数:value:被验证的值， element:当前验证的dom对象，param:参数(多个即是数组)
         //alert(value + "," + $(element).val() + "," + param[0] + "," + param[1]);
         return new RegExp(/1(3|5|8)\d{9}$/).test(value);
-    }, "手机号码不正确必须是13/15/18开头");
+    }, phonetyep);
     $("#registerForm").validate({
         rules: {
             username: {
@@ -94,28 +94,28 @@ function validateRule() {
         messages: {
 
             username: {
-                required: icon + "请输入您的真实姓名",
-                minlength: icon + "真实姓名不能小于2个字符",
+                required: icon + usernameisnull,
+                minlength: icon + usernamelength,
             },
             loginName: {
-                required: icon + "请输入您的登录名",
-                minlength: icon + "登录名不能小于2个字符"
+                required: icon +loginname ,
+                minlength: icon +loginnamelength
             },
             email: {
-                required: icon + "请输入您的邮箱",
-                minlength: icon + "邮箱不能小于2个字符"
+                required: icon +useremil ,
+                minlength: icon +useremillength
             },
             phonenumber: {
-                required: icon + "请输入您的手机号码",
-                minlength: icon + "手机号码不能小于11个字符"
+                required: icon + userphone,
+                minlength: icon +userphonelength
             },
             password: {
-            	required: icon + "请输入您的密码",
-                minlength: icon + "密码不能小于5个字符",
+                required: icon +userpassword,
+                minlength: icon + userpasswordlength,
             },
             confirmPassword: {
-                required: icon + "请再次输入您的密码",
-                equalTo: icon + "两次密码输入不一致"
+                required: icon + userrepassword,
+                equalTo: icon +userpasswordeq
             }
         }
     })
