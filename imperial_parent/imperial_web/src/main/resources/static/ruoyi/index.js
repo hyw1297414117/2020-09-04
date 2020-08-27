@@ -118,6 +118,8 @@ function SmoothlyMenu() {
 /**
  * iframe处理
  */
+
+
 $(function() {
     //计算元素集合的总宽度
     function calSumWidth(elements) {
@@ -546,6 +548,8 @@ $(function() {
         $('a[href$="' + url + '"]').click();
     };
 
+
+
     // 右键菜单实现
     $.contextMenu({
         selector: ".menuTab",
@@ -553,14 +557,14 @@ $(function() {
         autoHide: true,
         items: {
             "close_current": {
-                name: "关闭当前",
+                name: CloseCurrent,
                 icon: "fa-close",
                 callback: function(key, opt) {
                 	opt.$trigger.find('i').trigger("click");
                 }
             },
             "close_other": {
-                name: "关闭其他",
+                name: CloseOther,
                 icon: "fa-window-close-o",
                 callback: function(key, opt) {
                 	setActiveTab(this);
@@ -568,7 +572,7 @@ $(function() {
                 }
             },
             "close_left": {
-                name: "关闭左侧",
+                name: CloseLeft,
                 icon: "fa-reply",
                 callback: function(key, opt) {
                 	setActiveTab(this);
@@ -583,7 +587,7 @@ $(function() {
                 }
             },
             "close_right": {
-                name: "关闭右侧",
+                name: CloseRight,
                 icon: "fa-share",
                 callback: function(key, opt) {
                 	setActiveTab(this);
@@ -594,7 +598,7 @@ $(function() {
                 }
             },
             "close_all": {
-                name: "全部关闭",
+                name: CloseAll,
                 icon: "fa-window-close",
                 callback: function(key, opt) {
                     tabCloseAll();
@@ -602,7 +606,7 @@ $(function() {
             },
             "step": "---------",
             "full": {
-                name: "全屏显示",
+                name: FullScreenToggle,
                 icon: "fa-arrows-alt",
                 callback: function(key, opt) {
                 	setActiveTab(this);
@@ -611,7 +615,7 @@ $(function() {
                 }
             },
             "refresh": {
-                name: "刷新页面",
+                name: Reflash,
                 icon: "fa-refresh",
                 callback: function(key, opt) {
                 	setActiveTab(this);
@@ -624,7 +628,7 @@ $(function() {
                 }
             },
             "open": {
-                name: "新窗口打开",
+                name: NewWindow,
                 icon: "fa-link",
                 callback: function(key, opt) {
                 	var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
@@ -633,4 +637,6 @@ $(function() {
             },
         }
     })
+
+
 });

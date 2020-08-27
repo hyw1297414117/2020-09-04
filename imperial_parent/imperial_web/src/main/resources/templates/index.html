@@ -27,6 +27,7 @@
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
                 <span class="logo-lg">Imperial System</span>
+
             </li>
          </a>
         <div class="sidebar-collapse">
@@ -180,29 +181,29 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen" th:text="#{menu.FullScreenToggle}" ><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
 							<span class="hidden-xs">[[${#strings.defaultString(user.userName, '-')}]]</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li class="mt5">
-								<a th:href="@{/system/user/profile}" class="menuItem">
-								<i class="fa fa-user"></i> 个人中心</a>
+							<li class="mt5" >
+								<a th:href="@{/system/user/profile}" class="menuItem" >
+								<i class="fa fa-user"></i><span  th:text="#{menu.MyZOE}">个人中心</span></a>
 							</li>
 							<li>
 								<a onclick="resetPwd()">
-								<i class="fa fa-key"></i> 修改密码</a>
+								<i class="fa fa-key"></i><span  th:text="#{menu.ChangePassword}">修改密码</span></a>
 							</li>
 							<li>
 								<a onclick="switchSkin()">
-								<i class="fa fa-dashboard"></i> 切换主题</a>
+								<i class="fa fa-dashboard"></i><span  th:text="#{menu.ToggleTheme}">切换主题</span></a>
 							</li>
 							<li class="divider"></li>
 							<li>
 								<a th:href="@{logout}">
-								<i class="fa fa-sign-out"></i> 退出登录</a>
+								<i class="fa fa-sign-out"></i><span  th:text="#{menu.SignOut}">退出登录</span></a>
 							</li>
 						</ul>
 					</li>
@@ -215,13 +216,13 @@
             </button>
             <nav class="page-tabs menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active menuTab" data-id="/system/main">首页</a>
+                    <a href="javascript:;" class="active menuTab" data-id="/system/main" ><span  th:text="#{menu.PageHome}">首页</span></a>
                 </div>
             </nav>
             <button class="roll-nav roll-right tabRight">
                 <i class="fa fa-forward"></i>
             </button>
-            <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
+            <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i><span  th:text="#{menu.Reflash}">刷新</span></a>
         </div>
 
         <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
@@ -289,7 +290,7 @@ function switchSkin() {
 	})
 }
 
-/** 刷新时访问路径页签 */
+/** 刷新时访问路径页签*/
 function applyPath(url) {
 	$('a[href$="' + decodeURI(url) + '"]').click();
 	if (!$('a[href$="' + url + '"]').hasClass("noactive")) {
@@ -311,6 +312,16 @@ $(function() {
 	    }
 	}
 });
+</script>
+<script th:inline="javascript">
+    var CloseCurrent=[[#{menu.CloseCurrent}]];
+    var CloseOther=[[#{menu.CloseOther}]];
+    var CloseLeft=[[#{menu.CloseLeft}]];
+    var CloseRight=[[#{menu.CloseRight}]];
+    var CloseAll=[[#{menu.CloseAll}]];
+    var FullScreenToggle=[[#{menu.FullScreenToggle}]];
+    var Reflash=[[#{menu.Reflash}]];
+    var NewWindow=[[#{menu.NewWindow}]];
 </script>
 </body>
 </html>

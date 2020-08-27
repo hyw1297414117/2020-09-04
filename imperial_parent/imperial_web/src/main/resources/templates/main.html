@@ -38,25 +38,25 @@
 </style>
 <body class="gray-bg">
 	<div id= "staging">
-		<div class="stagingTitle">待办事项<span class="refreshSpan"><img src="../img/app/refresh.png"></img></span></div>
+		<div class="stagingTitle" th:text="#{project.backlog}">待办事项<span class="refreshSpan"><img src="../img/app/refresh.png"></img></span></div>
 		<div>
-			<div class="checkpending">
-				<span class="remindSpan"><img src="../img/app/remind.png"></img></span>
-					&nbsp;&nbsp;待审核订单总数
+			<div class="checkpending" >
+				<span class="remindSpan" ><img src="../img/app/remind.png"></img></span>
+				<span th:text="#{project.TotalNumberOfOrdersToBeAudited}">待审核订单总数</span>
 				<span style="float:right;border-radius: 50%;height: 30px;width: 30px;display: inline-block;background: #ff2121;vertical-align: top;">
       				<span style="display: block;color: #FFFFFF;height: 30px;line-height: 30px;text-align: center">12</span>
  				</span>
 			</div>
-			<div class="div2">
+			<div class="div2" >
 				<span class="remindSpan"><img src="../img/app/remind.png"></img></span>
-					&nbsp;&nbsp;待审核机构
+				<span th:text="#{project.OrganizationToBeAudited}">待审核机构</span>
 				<span style="float:right;border-radius: 50%;height: 30px;width: 30px;display: inline-block;background: #ff2121;vertical-align: top;">
       				<span style="display: block;color: #FFFFFF;height: 30px;line-height: 30px;text-align: center">20</span>
  				</span>
 			</div>
-			<div class="div2">
+			<div class="div2" >
 				<span class="remindSpan"><img src="../img/app/remind.png"></img></span>
-					&nbsp;&nbsp;日报填写
+				<span th:text="#{project.DailyToFillOut}">日报填写</span>
 				<span style="float:right;border-radius: 50%;height: 30px;width: 30px;display: inline-block;background: #ff2121;vertical-align: top;">
       				<span style="display: block;color: #FFFFFF;height: 30px;line-height: 30px;text-align: center">2</span>
  				</span>
@@ -69,4 +69,5 @@
 	<th:block th:include="include :: footer" />
 </body>
 <script th:src="@{/js/app/main/main.js}"></script>
+
 </html>

@@ -8,22 +8,22 @@
     <div class="main-content">
         <form id="form-user-add" class="form-horizontal">
             <input name="deptId" type="hidden" id="treeId"/>
-            <h4 class="form-header h4">基本信息</h4>
+            <h4 class="form-header h4"><span  th:text="#{userManager.BaseInformation}">基本信息</span></h4>
             <div class="row">
             	<div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">用户名称：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{userManager.UserName}">用户名称</span>：</label>
                         <div class="col-sm-8">
-                            <input name="userName" placeholder="请输入用户名称" class="form-control" type="text" maxlength="30" required>
+                            <input name="userName" th:placeholder="#{Please.enter.user.name}" class="form-control" type="text" maxlength="30" required>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">归属部门：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{userManager.DepartmentName}">归属部门</span>：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                            	<input name="deptName" onclick="selectDeptTree()" id="treeName" type="text" placeholder="请选择归属部门" class="form-control" required>
+                            	<input name="deptName" onclick="selectDeptTree()" id="treeName" type="text" th:placeholder="#{Please.select.Department}" class="form-control" required>
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
@@ -33,10 +33,10 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">手机号码：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{userManager.PhoneNumber}">手机号码</span>：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" required>
+                                <input id="phonenumber" name="phonenumber" th:placeholder="#{Please.enter.your.mobile.phone.number}" class="form-control" type="text" maxlength="11" required>
                                 <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                             </div>
                         </div>
@@ -44,10 +44,10 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">邮箱：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{Email}">邮箱</span>：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="email" name="email" class="form-control email" type="text" maxlength="20" placeholder="请输入邮箱" required>
+                                <input id="email" name="email" class="form-control email" type="text" maxlength="20" th:placeholder="#{Please.enter.email.address}" required>
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                             </div>
                         </div>
@@ -57,19 +57,19 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">登录账号：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{userManager.LoginName}">登录账号</span>：</label>
                         <div class="col-sm-8">
-                            <input id="loginName" name="loginName" placeholder="请输入登录账号" class="form-control" type="text" maxlength="30" required>
+                            <input id="loginName" name="loginName" th:placeholder="#{Please.enter.the.login.account}" class="form-control" type="text" maxlength="30" required>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">登录密码：</label>
+                        <label class="col-sm-4 control-label is-required"><span  th:text="#{userManager.Password}">登录密码</span>：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="password" name="password" placeholder="请输入登录密码" class="form-control" type="password" th:value="${@config.getKey('sys.user.initPassword')}" required>
-                                <span class="input-group-addon" title="登录密码,鼠标按下显示密码"
+                                <input id="password" name="password" th:placeholder="#{Please.enter.the.login.password}" class="form-control" type="password" th:value="${@config.getKey('sys.user.initPassword')}" required>
+                                <span class="input-group-addon" th:title="#{Login.password.click}"
                                     onmousedown="$('#password').attr('type','text')"
                                     onmouseup="$('#password').attr('type','password')"><i class="fa fa-key"></i></span>
                             </div>
@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">用户性别：</label>
+                        <label class="col-sm-4 control-label"><span  th:text="#{Sex}">用户性别</span>：</label>
                         <div class="col-sm-8">
                             <select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
 				                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">用户状态：</label>
+                        <label class="col-sm-4 control-label"><span  th:text="#{userManager.UserStatus}">用户状态</span>：</label>
                         <div class="col-sm-8">
                             <label class="toggle-switch switch-solid">
 	                            <input type="checkbox" id="status" checked>
@@ -103,7 +103,7 @@
             <div class="row">
             	<div class="col-sm-12">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">岗位：</label>
+                        <label class="col-xs-2 control-label"><span  th:text="#{Post}">岗位</span>：</label>
                         <div class="col-xs-4">
                             <select id="post" class="form-control select2-multiple" multiple>
 								<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:disabled="${post.status == '1'}"></option>
@@ -115,7 +115,7 @@
             <div class="row">
             	<div class="col-sm-12">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">角色：</label>
+                        <label class="col-xs-2 control-label"><span  th:text="#{Role}">角色</span>：</label>
                         <div class="col-xs-10">
                             <label th:each="role:${roles}" class="check-box">
 								<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}">
@@ -124,11 +124,11 @@
                     </div>
                 </div>
             </div>
-            <h4 class="form-header h4">其他信息</h4>
+            <h4 class="form-header h4"><span  th:text="#{userManager.OtherInformation}">其他信息</span></h4>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">备注：</label>
+                        <label class="col-xs-2 control-label"><span  th:text="#{Remarks}">备注</span>：</label>
                         <div class="col-xs-10">
                             <textarea name="remark" maxlength="500" class="form-control" rows="3"></textarea>
                         </div>
@@ -140,8 +140,8 @@
       
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i><span  th:text="#{Save}">保 存</span></button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i><span  th:text="#{Close}">关 闭 </span></button>
         </div>
     </div>
 	<th:block th:include="include :: footer" />
@@ -208,13 +208,13 @@
         	},
         	messages: {
                 "loginName": {
-                    remote: "用户已经存在"
+                    remote: LoginNameCheck
                 },
         		"email": {
-                    remote: "Email已经存在"
+                    remote: EmailCheck
                 },
         		"phonenumber":{
-                	remote: "手机号码已经存在"
+                	remote: PhoneNumberCheck
         		}
             },
             focusCleanup: true
@@ -239,7 +239,7 @@
         	var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
         	var url = ctx + "system/dept/selectDeptTree/" + deptId;
 			var options = {
-				title: '选择部门',
+				title: DepartmentName,
 				width: "380",
 				url: url,
 				callBack: doSubmit
@@ -259,10 +259,17 @@
 
 		$(function() {
             $('#post').select2({
-                placeholder: "请选择岗位",
+                placeholder: PleaseSelectPost,
                 allowClear: true
             });
         })
+    </script>
+    <script th:inline="javascript">
+        var PleaseSelectPost=[[#{Please.select.post}]];
+        var LoginNameCheck=[[#{LoginNameCheck}]];
+        var EmailCheck=[[#{EmailCheck}]];
+        var PhoneNumberCheck=[[#{PhoneNumberCheck}]];
+        var DepartmentName=[[#{Please.select.Department}]];
     </script>
 </body>
 </html>

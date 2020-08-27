@@ -73,20 +73,20 @@
 
 <script id="operatBtTpl" type="text/template">
 <div style="margin-top:5px">
-    <a class="btn btn-primary btn-sm single test disabled" onclick="edit(this)" shiro:hasPermission="shipperModule:data:edit">
-        <i class="fa fa-edit"></i> 修改
+    <a class="btn btn-primary btn-sm single test disabled" onclick="edit(this)" shiro:hasPermission="shipperModule:data:edit" >
+        <i class="fa fa-edit"></i>[[#{Update}]]
     </a>
     <a class="btn btn-danger btn-sm multiple disabled" onclick="remove()" shiro:hasPermission="shipperModule:data:remove">
-        <i class="fa fa-remove"></i> 删除
+        <i class="fa fa-remove"></i>[[#{Delete}]]
     </a>
     <a class="btn btn-success btn-sm multiple disabled" onclick="submit()" shiro:hasPermission="shipperModule:data:submit">
-        <i class="fa fa-random"></i> 提交审核
+        <i class="fa fa-random"></i>[[#{review.submit}]]
     </a>
     <a class="btn btn-warning btn-sm" onclick="exportExcel()" shiro:hasPermission="shipperModule:data:export">
-        <i class="fa fa-upload"></i> 导出
+        <i class="fa fa-upload"></i>[[#{Export}]]
     </a>
 
-    <a class="btn btn-default illustrations_button" style="float: right" href="#" role="button" onclick="showIllustrations()">状态图例</a>
+    <a class="btn btn-default illustrations_button" style="float: right" href="#" role="button" onclick="showIllustrations()" th:text="#{State.of.legend}">状态图例</a>
 
 </div>
 </script>
@@ -97,40 +97,40 @@
                     <div class="select-list" style= "float:left;width:90%">
                         <ul>
 							<li class="search_option">
-                                <label>主单号：</label>
+                                <label><span  th:text="#{MASTER_BILL_OF_LADING}">主单号</span>：</label>
                                 <input type="text" id="mainOrderNo" name="mainOrderNo"/>
                             </li>
 							<li class="search_option">
-                                <label>包编号：</label>
+                                <label><span  th:text="#{packet.number}">包编号</span>：</label>
                                 <input type="text" id="bagNumber" name="bagNumber"/>
                             </li>
                             <li class="search_option">
-                                <label>追踪号1：</label>
+                                <label><span  th:text="#{Tracking.number1}">追踪号1</span>：</label>
                                 <input type="text" id="tackingNumber1" name="tackingNumber1"/>
                             </li>
                             <li class="search_option">
-                                <label>状态：</label>
+                                <label><span  th:text="#{status}">状态</span>：</label>
                                 <select id="stateSelect" class="form-control">
-                                    <option value="0" selected>审核中</option>
-                                    <option value="1">通过</option>
-                                    <option value="2">驳回</option>
+                                    <option value="0" selected th:text="#{in.review}">审核中</option>
+                                    <option value="1" th:text="#{pass}">通过</option>
+                                    <option value="2" th:text="#{reject}">驳回</option>
                                 </select>
                             </li>
                         </ul>
 						<div style="clear:both"></div>
 						<ul>
 							<li class="search_option">
-                                <label>发货人姓名：</label>
+                                <label><span  th:text="#{Shipper.Name}">发货人姓名</span>：</label>
                                 <input type="text" id="shipperName" name="shipperName"/>
                             </li>
                             <li class="search_option">
-                                <label>收货人姓名：</label>
+                                <label><span  th:text="#{Consignee.Name}">收货人姓名</span>：</label>
                                 <input type="text" id="consigneeName" name="consigneeName"/>
                             </li>
                             <li class="search_option">
-							    <label>类型：</label>
+							    <label><span  th:text="#{type}">类型</span>：</label>
 							    <select id="typeSelect" class="form-control">
-							        <option value="none" selected disabled hidden>请选择</option> 
+							        <option value="none" selected disabled hidden th:text="#{select}">请选择</option>
 							        <option value="DDU">DDU</option>
 							        <option value="DDP">DDP</option>
 							    </select>
@@ -138,17 +138,68 @@
 						</ul>
                     </div>
                     <div style = "float:left;margin-left:10px;">
-                         <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFun()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                         <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFun()"><i class="fa fa-search"></i><span  th:text="#{Search}">搜索</span>&nbsp;</a>
                          <br>
                          <p style="height:5px;"></p>
-                         <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                         <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i><span  th:text="#{Reset}">重置</span>&nbsp;</a>
                     </div>
             </form>
 </div>
 <div style="clear:both"></div>
 
 </script>
+     <script th:inline="javascript">
+         var MainOrderNo=[[#{MASTER_BILL_OF_LADING}]];
+         var stateIdentification=[[#{state.identification}]];
+         var BagTrackNumber1=[[#{Bag.TrackNumber1}]];
+         var BagTrackNumber2=[[#{Bag.TrackNumber2}]];
+         var packetnumber=[[#{packet.number}]];
+         var Outerboxnumber=[[#{Outer.box.number}]];
+         var Palletnumber=[[#{Pallet.number}]];
+         var Containernumber=[[#{Container.number}]];
+         var Referencecode1=[[#{Reference.code1}]];
+         var Referencecode2=[[#{Reference.code2}]];
+         var ShipperName=[[#{Shipper.Name}]];
+         var Shipperidentificationcode=[[#{Shipper.identification.code}]];
+         var ConsigneeName=[[#{Consignee.Name}]];
+         var Shippingaddress1=[[#{Shipping.address1}]];
+         var Shippingaddress2=[[#{Shipping.address2}]];
+         var Shippingaddress3=[[#{Shipping.address3}]];
+         var City=[[#{City}]];
+         var Statesandcounties=[[#{States.and.counties}]];
+         var zipcode=[[#{zipcode}]];
+         var Countrycode=[[#{Country.code}]];
+         var Tel=[[#{Tel}]];
+         var Email=[[#{Email}]];
+         var Numberofpackages=[[#{Number.of.packages}]];
+         var Weight=[[#{Weight}]];
+         var Unitofweight=[[#{Unit.of.weight}]];
+         var Val=[[#{Value}]];
+         var Currency=[[#{Currency}]];
+         var Importpurpose=[[#{Import.purpose}]];
+         var Unknown=[[#{unknown}]];
+         var Descriptionofgoods=[[#{Description.of.goods}]];
+         var customscode=[[#{customs.code}]];
+         var Thequantityofgoods=[[#{The.quantity.of.goods}]];
+         var Thepriceofgoods=[[#{The.price.of.goods}]];
+         var returnway=[[#{return.way}]];
+         var Saleslink=[[#{Sales.link}]];
+         var Terminaldispatcher=[[#{Terminal.dispatcher}]];
+         var Terminalaccountname=[[#{Terminal.account.name}]];
+         var freight=[[#{freight}]];
+         var pass=[[#{pass}]];
+         var reject=[[#{reject}]];
+         var inreview=[[#{in.review}]];
 
+
+         var Modifycustomsclearancedata=[[#{Modify.customs.clearance.data}]];
+         var Subm=[[#{Subm}]];
+         var Close=[[#{Close}]];
+         var Savetodraft=[[#{Save.to.draft}]];
+
+
+
+     </script>
 <script th:src="@{/js/app/impbasicdata/data.js}"></script>
 </body>
 </html>

@@ -10,13 +10,13 @@
 		<div class="box box-main">
 			<div class="box-header">
 				<div class="box-title">
-					<i class="fa icon-grid"></i> 组织机构
+					<i class="fa icon-grid"></i> <span  th:text="#{userManager.Organization}">组织机构</span>
 				</div>
 				<div class="box-tools pull-right">
-				    <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
-					<button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
-					<button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
-					<button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新部门"><i class="fa fa-refresh"></i></button>
+				    <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" th:title="#{userManager.Management}"><i class="fa fa-edit"></i></a>
+					<button type="button" class="btn btn-box-tool" id="btnExpand" th:title="#{Open}" style="display:none;"><i class="fa fa-chevron-up"></i></button>
+					<button type="button" class="btn btn-box-tool" id="btnCollapse" th:title="#{FoldUp}"><i class="fa fa-chevron-down"></i></button>
+					<button type="button" class="btn btn-box-tool" id="btnRefresh" th:title="#{userManager.ReflashDepartment}"><i class="fa fa-refresh"></i></button>
 				</div>
 			</div>
 			<div class="ui-layout-content">
@@ -35,26 +35,26 @@
 						<div class="select-list">
 							<ul>
 								<li>
-									登录名称：<input type="text" name="loginName"/>
+									<span  th:text="#{userManager.LoginName}">登录名称</span>：<input type="text" name="loginName"/>
 								</li>
 								<li>
-									手机号码：<input type="text" name="phonenumber"/>
+									<span  th:text="#{userManager.PhoneNumber}">手机号码</span>：<input type="text" name="phonenumber"/>
 								</li>
 								<li>
-									用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
-										<option value="">所有</option>
+									<span  th:text="#{userManager.UserStatus}">用户状态</span>：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
+										<option value="" th:text="#{All}">所有</option>
 										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 									</select>
 								</li>
 								<li class="select-time">
-									<label>创建时间： </label>
-									<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+									<label><span  th:text="#{userManager.CreatedTime}">创建时间</span>： </label>
+									<input type="text" class="time-input" id="startTime" th:placeholder="#{userManager.StartTime}" name="params[beginTime]"/>
 									<span>-</span>
-									<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+									<input type="text" class="time-input" id="endTime" th:placeholder="#{userManager.EndTime}" name="params[endTime]"/>
 								</li>
 								<li>
-									<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+									<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp<span  th:text="#{Search}">搜索</span></a>
+								    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i> <span  th:text="#{Reset}">重置</span></a>
 								</li>
 							</ul>
 						</div>
@@ -63,19 +63,19 @@
 				
 		        <div class="btn-group-sm" id="toolbar" role="group">
 		        	<a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">
-		                <i class="fa fa-plus"></i> 新增
+		                <i class="fa fa-plus"></i>[[#{Add}]]
 		            </a>
 		             <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="system:user:edit">
-			            <i class="fa fa-edit"></i> 修改
+			            <i class="fa fa-edit"></i>[[#{Update}]]
 			        </a>
 		            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:user:remove">
-		                <i class="fa fa-remove"></i> 删除
+		                <i class="fa fa-remove"></i>[[#{Delete}]]
 		            </a>
 		            <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
-			            <i class="fa fa-upload"></i> 导入
+			            <i class="fa fa-upload"></i>[[#{Import}]]
 			        </a>
 		            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
-			            <i class="fa fa-download"></i> 导出
+			            <i class="fa fa-download"></i>[[#{Export}]]
 			        </a>
 		        </div>
 		        

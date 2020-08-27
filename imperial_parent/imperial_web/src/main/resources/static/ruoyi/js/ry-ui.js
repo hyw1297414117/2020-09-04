@@ -1794,9 +1794,9 @@ function identifyRowColor(tableId){
  * */
 function showIllustrations() {
 	var operationDivId = $(event.target).parent().parent()[0].id; //获取点击修改按钮所在的div的id
-	layer.tips('<span class="glyphicon glyphicon-stop" style="color: #44cef6"></span>通过' +
-		'<span class="glyphicon glyphicon-stop" style="color: #f9906f"></span>驳回' +
-		'<span class="glyphicon glyphicon-stop" style="color: #a1afc9"></span>审核中', '#'+operationDivId+' .illustrations_button', {
+	layer.tips('<span class="glyphicon glyphicon-stop" style="color: #44cef6" ></span>'+ pass+'' +
+		'<span class="glyphicon glyphicon-stop" style="color: #f9906f" ></span>'+ reject +'' +
+		'<span class="glyphicon glyphicon-stop" style="color: #a1afc9" ></span>'+ inreview+'', '#'+operationDivId+' .illustrations_button', {
 		tips: 4
 	});
 }
