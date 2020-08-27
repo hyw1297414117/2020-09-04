@@ -283,7 +283,7 @@ function edit(){
 		fix: false,
 		maxmin: true,
 		shade: 0.3,
-		title: "修改清关数据",
+		title: Modifycustomsclearancedata,
 		area: ["800px", height], //宽高
 		content: "/shipperModule/impBasicData/toEditPage/"+rows[0].id,
 		btn:  ['确定', '关闭','存入草稿'],
