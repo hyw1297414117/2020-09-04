@@ -6,6 +6,8 @@ import com.common.utils.MessageUtils;
 import com.framework.manager.AsyncManager;
 import com.framework.manager.factory.AsyncFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +19,7 @@ import com.project.system.user.service.IUserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -96,7 +99,6 @@ public class RegisterService
                 String emailContent = templateEngine.process("register/emailTemplate", context);
 
                 mailUtils.sendHtmlMail(email, "账户激活", emailContent);//发邮件
-
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
