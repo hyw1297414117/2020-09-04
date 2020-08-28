@@ -26,7 +26,7 @@
         	},
         	messages: {
                 "tackingNumber1": {
-                    remote: "订单号已经存在"
+                    remote: Importorderdata
                 }
             },
             focusCleanup: true

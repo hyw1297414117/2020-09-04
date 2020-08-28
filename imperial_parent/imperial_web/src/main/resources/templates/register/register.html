@@ -65,7 +65,7 @@
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
 <script src="../static/ruoyi/register.js" th:src="@{/js/app/register/register.js}"></script>
-
+<!--i18n国际化字符串 begin-->
 <script th:inline="javascript">
     var usernameisnull=[[#{user.register.usernameisnull}]];
     var usernamelength=[[#{user.register.usernamelength}]];
@@ -81,5 +81,6 @@
     var userpasswordeq=[[#{user.register.userpasswordeq}]];
     var phonetyep=[[#{user.register.phonetyep}]];
 </script>
+<!--end-->
 </body>
 </html>
