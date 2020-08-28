@@ -96,10 +96,12 @@ public class LoginService
             throw new UserBlockedException();
         }
 
-        if (UserStatus.INACTIVE.getCode().equals(user.getActiveState()))
-        {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.inactive")));
-            throw new UserInactiveException();
+        if("01".equals(user.getUserType())){
+            if (UserStatus.INACTIVE.getCode().equals(user.getActiveState()))
+            {
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.inactive")));
+                throw new UserInactiveException();
+            }
         }
 
         passwordService.validate(user, password);

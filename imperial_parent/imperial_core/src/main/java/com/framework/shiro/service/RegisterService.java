@@ -39,7 +39,12 @@ public class RegisterService
      */
     public String register(User user,String serverUrl)
     {
-        String msg = "", username = user.getUserName(),loginname=user.getLoginName(), password = user.getPassword(),email=user.getEmail(),phonenome=user.getPhonenumber();
+        String msg = "",
+                username = user.getUserName(),
+                loginname=user.getLoginName(),
+                password = user.getPassword(),
+                email=user.getEmail(),
+                phonenome=user.getPhonenumber();
         if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
         {
             msg = "验证码错误";
@@ -79,6 +84,7 @@ public class RegisterService
         }
         else
         {
+            user.setUserType("01");
             String activeCode = UUID.randomUUID().toString();
             user.setActiveCode(activeCode);
             boolean regFlag = userService.registerUser(user);

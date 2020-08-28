@@ -18,17 +18,38 @@
 	<div class="leftFormDiv" style=" overflow:scroll;">
 		<div class="">
 			<form class="form-horizontal m" id="form-data-add">
-
 				<div class="form-group">
 					<label class="col-sm-4 control-label is-required">业务类型：</label>
-
 					<div class="col-sm-8">
-						<select id="typeSelect" name="typeSelect" class="selectpicker show-tick form-control" >
+						<select id="typeSelect" name="businessType" class="selectpicker show-tick form-control" >
 							<option value="0" >进口</option>
 							<option value="1" selected="selected">出口</option>
 							<option value="2">国内</option>
 							<option value="3">其他</option>
 						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">任务分类：</label>
+					<!--                    <div class="col-sm-8">-->
+					<!--                        <div id="mySelect" class="mySelect dropup" style=""></div>-->
+					<!--                    </div>-->
+					<div class="col-sm-8">
+						<label class="radio-inline">
+							<input type="radio" checked="" value="A" id="optionsRadiosA" name="transportRadios" >空运
+						</label>
+						<label class="radio-inline">
+							<input type="radio" value="B" id="optionsRadiosB" name="transportRadios">陆运
+						</label>
+						<label class="radio-inline">
+							<input type="radio" value="C" id="optionsRadiosC" name="transportRadios">海运
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" value="D" name="taskCheckbox" id="taskCheckbox4">咨询
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" value="E" name="taskCheckbox" id="taskCheckbox5">其他
+						</label>
 					</div>
 				</div>
 				<div class="form-group">
@@ -44,10 +65,10 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 control-label is-required">关联任务：</label>
+					<label class="col-sm-4 control-label is-required">关联主单：</label>
 
 					<div class="col-sm-8">
-						<select id="task" name="task" class="selectpicker show-tick form-control">
+						<select id="taskRelate" name="taskRelate" class="selectpicker show-tick form-control">
 							<option >请选择</option>
 						</select>
 					</div>
@@ -56,7 +77,7 @@
 					<label class="col-sm-4 control-label is-required">选择客户：</label>
 
 					<div class="col-sm-8">
-						<select id="client " name="client " class="selectpicker show-tick form-control">
+						<select id="customer " name="customer" class="selectpicker show-tick form-control">
 							<option >请选择</option>
 						</select>
 					</div>
@@ -64,7 +85,7 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label is-required">选择待审核文档：</label>
 					<div class="col-sm-8">
-						<select id="document " name="document " class="selectpicker show-tick form-control">
+						<select id="pendCheckDoc " name="pendCheckDoc " class="selectpicker show-tick form-control">
 							<option >请选择</option>
 						</select>
 					</div>
@@ -72,19 +93,19 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label is-required">任务起始地：</label>
 					<div class="col-sm-8">
-						<input name="originalplace" class="form-control" type="text" >
+						<input name="taskOrigin" class="form-control" type="text" >
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label is-required">任务目的地：</label>
 					<div class="col-sm-8">
-						<input name="destination" class="form-control" type="text">
+						<input name="taskDestination" class="form-control" type="text">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label is-required">收费标准：</label>
 					<div class="col-sm-8">
-						<input name="rates " class="form-control" type="text">
+						<input name="tariff" class="form-control" type="text">
 					</div>
 				</div>
 				<div class="form-group">
@@ -93,16 +114,10 @@
 						<select class="selectpicker show-tick form-control" >
 							<option value="1" >是</option>
 							<option value="0" selected="selected">否</option>
-
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">任务分类：</label>
-					<div class="col-sm-8">
-						<div id="mySelect" class="mySelect dropup" style=""></div>
-					</div>
-				</div>
+
 			</form>
 		</div>
 	</div>
@@ -111,38 +126,38 @@
 			<div class="chargeRules">任务类别详情</div>
 			<div class="desc desc-list" >
 
-				<div class="industry first">
-					<span>海运</span>
+				<div class="trantabhead industry first active" id="tabheadA">
+					<span>空运</span>
 				</div>
-				<div class="industry">
+				<div class="trantabhead industry" id="tabheadB" style="display: none">
 					<span>陆运</span>
 				</div>
 
-				<div class="industry">
-					<span>空运</span>
+				<div class="trantabhead industry" id="tabheadC" style="display: none">
+					<span>海运</span>
 				</div>
 
-				<div class="industry">
+				<div class="industry" id="tabheadD" style="display: none">
 					<span>咨询</span>
 				</div>
-				<div class="industry">
+				<div class="industry" id="tabheadE" style="display: none">
 					<span>其他</span>
 				</div>
 			</div>
 			<div class="case-container" >
-				<div class="case-panel tab-1 active" >
-					<form  class="form-horizontal m" id="airTransform" style=" overflow: auto;width: 100%;">
+				<div class="trantab case-panel tab-A active">
+					<form  class="form-horizontal m" id="transportFormA" style=" overflow: auto;width: 100%;">
 						<div style="width: 49%;float: left;">
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">主单号：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="airMainOrderNo" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">航班号：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="flightNumber" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -150,32 +165,38 @@
 								<div class="col-sm-6">
 									<div class="input-group date">
 										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="form-control" value="2020-08-20" >
+										<input type="text" name="arrivalTime" class="form-control" value="2020-08-20" >
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label ">航空公司名：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="airlineName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label ">航空公司代码：</label>
+								<div class="col-sm-6">
+									<input name="airlineCode" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">计费重量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="chargedWeight" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">实际重量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="actualWeight" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label is-required">装载方式：</label>
+								<label class="col-sm-4 control-label is-required">装载单位：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="loadUnit" class="form-control" type="text">
 								</div>
 
 							</div>
@@ -185,14 +206,14 @@
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">数量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="number" min="1" onkeyup="value=value.replace(/[^\d]/g,'') ">
+									<input name="loadAmount" class="form-control" type="number" min="1" onkeyup="value=value.replace(/[^\d]/g,'') ">
 								</div>
 
 							</div>
 							<div class="form-group" >
 								<label class="col-sm-4 control-label is-required" >付费方式：</label>
 								<div class="col-sm-6">
-									<select id="way" name="way" class="selectpicker show-tick form-control" >
+									<select id="way" name="payType" class="selectpicker show-tick form-control" >
 										<option value="0" selected="selected">运费预付</option>
 										<option value="1">运费到付</option>
 									</select>
@@ -201,31 +222,43 @@
 							<div class="form-group ">
 								<label class="col-sm-4 control-label">补充备注：</label>
 								<div class="col-sm-6">
-									<textarea type="text" name="" class="form-control" placeholder="请输入文本"></textarea>
+									<textarea type="text" name="notes" class="form-control" placeholder="请输入文本"></textarea>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="case-panel tab-2"  >
-					<from class="form-horizontal m" id="seaTransform">
+				<div class="trantab case-panel tab-B"   style="display: none">
+					<from class="form-horizontal m" id="transportFormB">
 						<div style="width: 49%;height: 99%;float: left;">
 							<div class="form-group">
-								<label class="col-sm-4 control-label is-required">MAWB空运主单号：</label>
+								<label class="col-sm-4 control-label is-required">主单号：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="seaMainOrderNo" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">集装箱号：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="containerNumber" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label ">船运公司名：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="shippingName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label ">船运公司代码：</label>
+								<div class="col-sm-6">
+									<input name="shippingCode" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label ">船班次号：</label>
+								<div class="col-sm-6">
+									<input name="shipFrequency" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -233,20 +266,20 @@
 								<div class="col-sm-6">
 									<div class="input-group date">
 										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="form-control" value="2020-08-20" >
+										<input type="text" name="arrivalTime" class="form-control" value="2020-08-20" >
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">计费重量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="chargedWeight" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">实际重量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="actualWeight" class="form-control" type="text">
 								</div>
 							</div>
 						</div>
@@ -254,27 +287,26 @@
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">体积：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="volume" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label is-required">装载方式：</label>
+								<label class="col-sm-4 control-label is-required">装载单位：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="text">
+									<input name="loadUnit" class="form-control" type="text">
 								</div>
 
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label is-required">数量：</label>
 								<div class="col-sm-6">
-									<input name="rates " class="form-control" type="number" min="1" onkeyup="value=value.replace(/[^\d]/g,'') ">
+									<input name="loadAmount" class="form-control" type="number" min="1" onkeyup="value=value.replace(/[^\d]/g,'') ">
 								</div>
-
 							</div>
 							<div class="form-group" >
 								<label class="col-sm-4 control-label is-required" >付费方式：</label>
 								<div class="col-sm-6" >
-									<select  class="selectpicker show-tick form-control" >
+									<select name="payType" class="selectpicker show-tick form-control" >
 										<option value="0" selected="selected">运费预付</option>
 										<option value="1">运费到付</option>
 									</select>
@@ -283,7 +315,7 @@
 							<div class="form-group" >
 								<label class="col-sm-4 control-label is-required" >放行方式：</label>
 								<div class="col-sm-6" >
-									<select  class="selectpicker show-tick form-control" >
+									<select name="releaseWay" class="selectpicker show-tick form-control" >
 										<option value="0" selected="selected">原始单据</option>
 										<option value="1">电放提单</option>
 									</select>
@@ -292,50 +324,57 @@
 							<div class="form-group ">
 								<label class="col-sm-4 control-label">补充备注：</label>
 								<div class="col-sm-6">
-									<textarea type="text" name="" class="form-control" placeholder="请输入文本"></textarea>
+									<textarea type="text" name="notes" class="form-control" placeholder="请输入文本"></textarea>
 								</div>
 							</div>
 						</div>
 				</from>
 				</div>
-				<div class="case-panel tab-3"  >
+				<div class="trantab case-panel tab-C"   style="display: none">
 					<div style="width: 70%;height: 99%">
-					<form  class="form-horizontal m" id="landTransform">
+					<form  class="form-horizontal m" id="transportFormC">
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">主单号：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="roadMainOrderNo" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">承运人名：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="carrier" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">计费重量：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="chargedWeight" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">实际重量：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="actualWeight" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-4 control-label is-required">装载方式：</label>
+							<label class="col-sm-4 control-label is-required">装载单位：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="loadUnit" class="form-control" type="text">
 							</div>
 
 						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label is-required">数量：</label>
+							<div class="col-sm-6">
+								<input name="loadAmount" class="form-control" type="number" min="1" onkeyup="value=value.replace(/[^\d]/g,'') ">
+							</div>
+						</div>
+
 						<div class="form-group" >
 							<label class="col-sm-4 control-label is-required" >付费方式：</label>
 							<div class="col-sm-5" >
-								<select  class="selectpicker show-tick form-control" >
+								<select name="payType" class="selectpicker show-tick form-control" >
 									<option value="0" selected="selected">运费预付</option>
 									<option value="1">运费到付</option>
 								</select>
@@ -344,52 +383,52 @@
 						<div class="form-group ">
 							<label class="col-sm-4 control-label">补充备注：</label>
 							<div class="col-sm-5">
-								<textarea type="text" name="" class="form-control" placeholder="请输入文本"></textarea>
+								<textarea type="text" name="notes" class="form-control" placeholder="请输入文本"></textarea>
 							</div>
 						</div>
 					</form>
 					</div>
 				</div>
-				<div class="case-panel tab-4"  >
+				<div class="case-panel tab-D"   style="display: none">
 					<form  class="form-horizontal m" id="consultform">
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">咨询领域：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="consultField" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">咨询期：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="consultPeriod" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group ">
 							<label class="col-sm-4 control-label">补充备注：</label>
 							<div class="col-sm-5">
-								<textarea type="text" name="" class="form-control" placeholder="请输入文本"></textarea>
+								<textarea type="text" name="notes" class="form-control" placeholder="请输入文本"></textarea>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="case-panel tab-5"  >
+				<div class="case-panel tab-E"   style="display: none">
 					<form  class="form-horizontal m" id="otherform">
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">附加输入1：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="123" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">附加输入2：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="123" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label is-required">附加输入3：</label>
 							<div class="col-sm-5">
-								<input name="rates " class="form-control" type="text">
+								<input name="123" class="form-control" type="text">
 							</div>
 						</div>
 						<div class="form-group ">
@@ -400,7 +439,7 @@
 						</div>
 					</form>
 				</div>
-				<button type="button" id="selChargeType" class="btn btn-primary" style="position:absolute;bottom: 24%;right: 8%;">选择此规则</button>
+<!--				<button type="button" id="selChargeType" class="btn btn-primary" style="position:absolute;bottom: 24%;right: 8%;">选择此规则</button>-->
 			</div>
 		</div>
 	</div>
@@ -408,40 +447,10 @@
 
 <div style="clear:both"></div>
 <div>
-	<a id ="batchImport" onclick="">保存</a>
+	<a id ="batchImport">保存</a>
 </div>
 <th:block th:include="include :: footer" />
-<script type="text/javascript">
-	$(function () {
-		var bussiTypeArr = [];   //存储下拉框内容 数组形式
-		var mySelect= $("#mySelect").mySelect({
-			mult:true,//true为多选,false为单选
-			option:[//选项数据
-				{label:"海运",value:0},
-				{label:"陆运",value:1},
-				{label:"空运",value:2},
-				{label:"咨询",value:3},
-				{label:"其他",value:4}
-			],
-			onChange:function(res){//选择框值变化返回结果
-              //console.log(res)
-            }
-		});
-		//点击 选择此规则之后 将tap页签和左边业务类型下拉框内容保持一致
-		$("#selChargeType").on('click',function(){
-			var activeObjectIndex = $('.desc-list').find(".active").index();
-			if($.inArray(activeObjectIndex,bussiTypeArr)<0){    //只添加不重复的数据
-				bussiTypeArr.push(activeObjectIndex);
-			}
-			mySelect.setResult(bussiTypeArr);   //给左边业务类型下拉框 重新赋值
-		})
-		//tap状态
-		$('.industry').hover(function() {
-			var i = $(this).index(); //当前索引
-			$(this).addClass('active').siblings().removeClass('active');
-			$('.case-panel').eq(i).addClass('active').siblings().removeClass('active');
-		})
-	})
-</script>
+<script th:src="@{/js/app/agent/createtask.js}"></script>
+
 </body>
 </html>
