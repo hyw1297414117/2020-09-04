@@ -50,6 +50,31 @@
 	<script th:src="@{/ruoyi/js/common.js?v=4.3.0}"></script>
 	<script th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
 	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+	<script th:inline="javascript">
+		var message=[[#{message}]];
+		var Subm=[[#{Subm}]];
+		var Makesureallexported=[[#{Make.sure.all.exported}]];
+		var Exportingdatapleasewait=[[#{Exporting.data.please.wait}]];
+		var tolead=[[#{to.lead}]];
+		var data=[[#{data}]];
+		var cancel=[[#{cancel}]];
+		var toleaderr2=[[#{to.lead.err2}]];
+		var Close=[[#{Close}]];
+		var buding=[[#{buding}]];
+		var Detail=[[#{Detail}]];
+		var Pleaseselectatleastonerecord=[[#{Please.select.at.least.one.record}]];
+		var Confirmthedeletion=[[#{Confirm.the.deletion}]];
+		var Thedata=[[#{The.data}]];
+		var Makesuretoemptyall=[[#{Make.sure.to.empty.all}]];
+		var Add=[[#{Add}]];
+		var Update=[[#{Update}]];
+		var savesuccess=[[#{save.success}]];
+		var Pleaseselectthenodeandsubmit=[[#{Please.select.the.node.and.submit}]];
+		var Therootnodecannotbeselected=[[#{The.root.node.cannot.be.selected}]];
+		var Thelastlevelnodecannotbeselected=[[#{The.last.level.node.cannot.be.selected}]];
+		var Dataloading=[[#{Data.loading}]];
+
+	</script>
 </div>
 
 <!-- ztree树插件 -->
@@ -195,3 +220,4 @@
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.min.js}"></script>
     <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js}"></script>
 </div>
+

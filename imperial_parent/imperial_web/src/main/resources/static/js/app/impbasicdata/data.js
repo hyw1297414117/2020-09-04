@@ -242,14 +242,14 @@ function submit(){
 	var dataMap = {};
 	dataMap.ids = ids;
 	dataMap.submitFlag = 1;
-	var layerIndex = layer.confirm("确定对这&nbsp;<font color=red>"+rows.length+"</font>&nbsp;条数据提交审核吗？", {
-		btn: ["确定","取消"] //按钮
+	var layerIndex = layer.confirm(Sureaboutthis+"&nbsp;<font color=red>"+rows.length+"</font>&nbsp;"+Issubmitted, {
+		btn: [Subm,cancel] //按钮
 		}, function(){
 			$.operate.impAjax("/shipperModule/impBasicData/submit",dataMap,function(){
-				layer.msg("提交成功", {icon: 1,time: 2000});
+				layer.msg(submitsuccessfully, {icon: 1,time: 2000});
 		        $("#impbasicDataSunTable"+operationDivId.substr(9)).bootstrapTable('refresh');//主要是要这种写法
 			},function(){
-				layer.msg("提交失败", {icon: 2,time: 1000});
+				layer.msg(submitfailure, {icon: 2,time: 1000});
 			});
 		}, function(){
 			layer.close(layerIndex);
@@ -290,7 +290,7 @@ function remove(){
  */
 function exportExcel(formId) {
 	//table.set();
-	$.modal.confirm("确定导出目标数据吗？", function() {
+	$.modal.confirm(exportthedata, function() {
 		var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
 		var operationDivId = $(event.target).parent().parent().next()[0].id; //获取点击修改按钮所在的div的id
 		var tableId = "impbasicDataSunTable"+operationDivId.substr(9); //获取点击按钮所属的tableid
@@ -298,7 +298,7 @@ function exportExcel(formId) {
 		var dataParam = $("#" + currentId).serializeArray();
 		dataParam.push({ "name": "orderByColumn", "value": params.sortName });
 		dataParam.push({ "name": "isAsc", "value": params.sortOrder });
-		$.modal.loading("正在导出数据，请稍后...");
+		$.modal.loading(Exportingdatapleasewait);
 		$.post(prefix+"/export", dataParam, function(result) {
 			if (result.code == web_status.SUCCESS) {
 		        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
@@ -329,7 +329,7 @@ function edit(){
 		area: ["800px", height], //宽高
 		content: "/shipperModule/impBasicData/toEditPage/"+rows[0].id,
 		btn:  [Subm, Close,Savetodraft],
-		btn1:function(index,layero){
+			btn1:function(index,layero){
 		    var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandlerToSta(index, layero);
 		},

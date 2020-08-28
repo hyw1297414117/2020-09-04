@@ -225,8 +225,8 @@ function secondSubmit(){
 	ids = ids.join();
 	dataMap.isresubmitFlag = 1; //二次提交标识
 	dataMap.ids = ids;
-	var layerIndex = layer.confirm("确定对这&nbsp;<font color=red>"+rows.length+"</font>&nbsp;条数据进行二次提交审核吗？", {
-		btn: ["确定","取消"] //按钮
+	var layerIndex = layer.confirm(Sureaboutthis+"&nbsp;<font color=red>"+rows.length+"</font>&nbsp;"+Issubmittedtwo, {
+		btn: [Subm,cancel] //按钮
 		}, function(){
 			$.ajax({
 		        type: "post",
@@ -234,11 +234,11 @@ function secondSubmit(){
 		        data: dataMap, 
 		        dataType:"json",
 		        success:function(result) {
-		        	layer.msg("提交成功", {icon: 1,time: 2000});
+		        	layer.msg(submitsuccessfully, {icon: 1,time: 2000});
 		           $("#"+tableId).bootstrapTable('refresh');
 		       },
 		        error:function(){
-		        	layer.msg("提交失败", {icon: 2,time: 1000});
+		        	layer.msg(submitfailure, {icon: 2,time: 1000});
 		       }
 		   });
 		}, function(){

@@ -53,7 +53,7 @@
 	                    <!--<strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>-->
                           <strong th:if="${@config.getKey('sys.account.registerUser')}">[[#{user.login.message.Noaccountyet}]] <a href="javascript:void(0);" onclick="register()">[[#{user.login.message.register}]]&raquo;</a></strong>
 	                  </div>
-                    <button class="btn btn-success btn-block" id="btnSubmit"  data-loading="正在验证登录，请稍后...">[[#{user.login}]]</button>
+                    <button class="btn btn-success btn-block" id="btnSubmit"  th:data-loading="#{Login.being}">[[#{user.login}]]</button>
 
                 </form>
             </div>
@@ -88,6 +88,30 @@
     var userpassword=[[#{user.register.userpassword}]];
     var login_distance=[[#{user.login.long.distance}]];
     var system_prompt=[[#{system.prompt}]];
+
+
+
+    var message=[[#{message}]];
+    var Subm=[[#{Subm}]];
+    var Makesureallexported=[[#{Make.sure.all.exported}]];
+    var Exportingdatapleasewait=[[#{Exporting.data.please.wait}]];
+    var tolead=[[#{to.lead}]];
+    var data=[[#{data}]];
+    var cancel=[[#{cancel}]];
+    var toleaderr2=[[#{to.lead.err2}]];
+    var Close=[[#{Close}]];
+    var buding=[[#{buding}]];
+    var Detail=[[#{Detail}]];
+    var Pleaseselectatleastonerecord=[[#{Please.select.at.least.one.record}]];
+    var Confirmthedeletion=[[#{Confirm.the.deletion}]];
+    var Thedata=[[#{The.data}]];
+    var Makesuretoemptyall=[[#{Make.sure.to.empty.all}]];
+    var Add=[[#{Add}]];
+    var Update=[[#{Update}]];
+    var savesuccess=[[#{save.success}]];
+    var Pleaseselectthenodeandsubmit=[[#{Please.select.the.node.and.submit}]];
+    var Therootnodecannotbeselected=[[#{The.root.node.cannot.be.selected}]];
+    var Thelastlevelnodecannotbeselected=[[#{The.last.level.node.cannot.be.selected}]];
 </script>
 </body>
 </html>
