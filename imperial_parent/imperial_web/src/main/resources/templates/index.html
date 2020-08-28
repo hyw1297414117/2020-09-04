@@ -346,6 +346,7 @@ $(function() {
 	}
 });
 </script>
+<!--i18n国际化字符串 begin-->
 <script th:inline="javascript">
     var CloseCurrent=[[#{menu.CloseCurrent}]];
     var CloseOther=[[#{menu.CloseOther}]];
@@ -364,5 +365,6 @@ $(function() {
         window.location.href= "/index?lang="+linguistictype+"&linguistic="+linguistictype+"";
     }
 </script>
+<!--end-->
 </body>
 </html>

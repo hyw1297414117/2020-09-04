@@ -52,6 +52,18 @@
     		transform: scale(1.3);
     	}
     </style>
+	<!--i18n国际化字符串 begin-->
+	<script th:inline="javascript">
+		var Importorderdata=[[#{Import.order.data}]];
+		var tolead=[[#{to.lead}]];
+		var cancel=[[#{cancel}]];
+		var toleaderr=[[#{to.lead.err}]];
+		var addbasic=[[#{add.basic}]];
+		var Savetodraft=[[#{Save.to.draft}]];
+		var Subm=[[#{Subm}]];
+		var Basictabledatadraftbox=[[#{Basic.table.data.draft.box}]];
+	</script>
+	<!--end-->
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -77,15 +89,6 @@
 	</div>
 </form>
 </script>
-<script th:inline="javascript">
-		 var Importorderdata=[[#{Import.order.data}]];
-		 var tolead=[[#{to.lead}]];
-		 var cancel=[[#{cancel}]];
-		 var toleaderr=[[#{to.lead.err}]];
-		 var addbasic=[[#{add.basic}]];
-		 var Savetodraft=[[#{Save.to.draft}]];
-		 var Subm=[[#{Subm}]];
-		 var Basictabledatadraftbox=[[#{Basic.table.data.draft.box}]];
-</script>
+
 </body>
 </html>

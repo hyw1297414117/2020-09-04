@@ -127,7 +127,7 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
         // }*/
 		// },
         {title: Rejectiondetails, field: '', align: 'center', valign: 'middle', formatter:function(value,row,index){
-			return "<a  onclick='refuseMsg(&#39;"+row.tackingNumber1+"&#39;)'>Detail</a>"
+			return "<a  onclick='refuseMsg(&#39;"+row.tackingNumber1+"&#39;)'>"+Detail+"</a>"
 		}},
 			{field: 'tackingNumber1', title: BagTrackNumber1},
 			{field: 'tackingNumber2', title: BagTrackNumber2},

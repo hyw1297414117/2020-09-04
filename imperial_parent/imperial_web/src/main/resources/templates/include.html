@@ -20,36 +20,7 @@
 <!-- 通用JS -->
 <div th:fragment="footer">
     <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
-	<script th:src="@{/js/jquery.min.js}"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/bootstrap-switch.js}"></script>
-	<script th:src="@{/js/echarts.js}"></script>
-	<script th:src="@{/js/select.js}"></script>
-	<script th:src="@{/js/jquery.i18n.properties.min.js}"></script>
-
-	<!-- bootstrap-table 表格插件 -->
-	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=20200529}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.js}"></script>
-	<!-- jquery-validate 表单验证插件 -->
-	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
-	<script th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
-	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js}"></script>
-	<!-- jquery-validate 表单树插件 -->
-	<script th:src="@{/ajax/libs/bootstrap-treetable/bootstrap-treetable.js}"></script>
-	<!-- jquery-export 表格导出插件 -->
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
-	<!-- 遮罩层 -->
-	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-    <script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
-	<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-	<script th:src="@{/ajax/libs/layui/layui.js}"></script>
-	<script th:src="@{/ruoyi/js/common.js?v=4.3.0}"></script>
-	<script th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
-	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+	<!--i18n国际化字符串 begin-->
 	<script th:inline="javascript">
 		var message=[[#{message}]];
 		var Subm=[[#{Subm}]];
@@ -73,8 +44,56 @@
 		var Therootnodecannotbeselected=[[#{The.root.node.cannot.be.selected}]];
 		var Thelastlevelnodecannotbeselected=[[#{The.last.level.node.cannot.be.selected}]];
 		var Dataloading=[[#{Data.loading}]];
+		var required=[[#{required}]];
 
+		var Pleasecorrectthisield=[[#{Please.correct.this.ield}]];
+		var Pleaseenteravalidemail=[[#{Please.enter.a.valid.email}]];
+		var Pleaseenteravalidurl=[[#{Please.enter.a.valid.url}]];
+		var Pleaseenteravaliddtae=[[#{Please.enter.a.valid.date}]];
+		var Pleaseenteravaliddtaeymd=[[#{Please.enter.a.valid.dateymm}]];
+		var Pleaseenterthecorrectnumber=[[#{Please.enter.the.correct.number}]];
+		var EnteronlyNumbers=[[#{Enter.only.Numbers}]];
+		var Pleaseenteravalidcreditcardnumber=[[#{Please.enter.a.valid.credit.card.number}]];
+		var Yourinputisdifferent=[[#{Your.input.is.different}]];
+		var Pleaseenteravalidsuffix=[[#{Please.enter.a.valid.suffix}]];
+		var Maxwords=[[#{Max.words}]];
+		var Minwords=[[#{Min.words}]];
+		var lengzhijian=[[#{lengzhijian}]];
+		var lengzhijiannum=[[#{lengzhijiannum}]];
+		var Pleaseenteravaluenogreaterthan=[[#{Please.enter.a.value.no.greater.than}]];
+		var Pleaseenteravaluenolessthan=[[#{Please.enter.a.value.no.less.than}]];
 	</script>
+	<!--end-->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/bootstrap-switch.js}"></script>
+	<script th:src="@{/js/echarts.js}"></script>
+	<script th:src="@{/js/select.js}"></script>
+	<script th:src="@{/js/jquery.i18n.properties.min.js}"></script>
+	<!-- bootstrap-table 表格插件 -->
+	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=20200529}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.js}"></script>
+	<!-- jquery-validate 表单验证插件 -->
+	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js}"></script>
+	<!-- jquery-validate 表单树插件 -->
+	<script th:src="@{/ajax/libs/bootstrap-treetable/bootstrap-treetable.js}"></script>
+	<!-- jquery-export 表格导出插件 -->
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
+	<!-- 遮罩层 -->
+	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
+	<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+	<script th:src="@{/ajax/libs/layui/layui.js}"></script>
+	<script th:src="@{/ruoyi/js/common.js?v=4.3.0}"></script>
+	<script th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
+	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+
 </div>
 
 <!-- ztree树插件 -->

@@ -251,9 +251,11 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:src="@{/js/app/impbasicdatadraft/editdraft.js}"></script>
+    <!--i18n国际化字符串 begin-->
     <script th:inline="javascript">
         var Theordernumberalreadyexists=[[#{The.order.number.already.exists}]];
 
     </script>
+<!--end-->
 </body>
 </html>

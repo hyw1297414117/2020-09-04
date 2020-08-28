@@ -60,7 +60,17 @@ public class RegisterController extends BaseController
     @GetMapping("/active/{activeCode}")
     public String ajaxRegister(@PathVariable("activeCode") String activeCode, Model model)
     {
-        int i = userService.activeUser(activeCode);
+        try {
+            int i = userService.activeUser(activeCode);
+            if (i!=1){
+                model.addAttribute("isSucc",0);
+            } else {
+                model.addAttribute("isSucc",1);
+            }
+        } catch (Exception e) {
+            model.addAttribute("isSucc",0);
+            e.printStackTrace();
+        }
         return "/register/active";
     }
 }

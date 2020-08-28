@@ -78,14 +78,30 @@ public class ImpAgentController extends BaseController
     {
         return prefix + "/ddulist";
     }
-    
+
+    /**
+     * @ Description:任务创建页面
+    */
     @GetMapping("/showCreateTaskPage")
     @RequiresPermissions("createTask:data:view")
     public String showCreateTaskPage()
     {
         return prefix + "/createtask";
     }
-    
+
+    /**
+     * @ author     :LianZheng
+     * @ Description:创建任务
+     * @ Date       :2020-08-28
+    */
+    @PostMapping("/createTask")
+    @RequiresPermissions("createTask:data:view")
+    @ResponseBody
+    public String createTask()
+    {
+        return "createtask";
+    }
+
     /**
      * 
      * @Title ImpAgentController.java 

@@ -7,9 +7,17 @@
 </head>
 <body class="signin" style="background-image:url('/img/login-background2.jpg')">
 <div class="signinpanel" style="alignment: center;text-align:center;">
-    <h1 style="text-align:center;margin-top:60px;color: #f0ad4e">您的账户已激活！<span id="countdown">6</span>秒后跳转到<a href="/login">登录页面</a></h1>
+    <div th:if=" ${isSucc} eq 1">
+        <h1 style="text-align:center;margin-top:60px;color: #f0ad4e">您的账户已激活！<span id="countdown">6</span>秒后跳转到<a href="/login">登录页面</a></h1>
+    </div>
+    <div th:if=" ${isSucc} eq 0">
+        <h1 style="text-align:center;margin-top:60px;color: #8a1f11">账户激活失败！请尝试再次点击激活链接或联系客服。</h1>
+    </div>
 </div>
 
+<script th:inline="javascript">
+    var isSucc = [[${isSucc}]];
+</script>
 <script src="#" th:src="@{/js/app/register/active.js}"></script>
 </body>
 </html>
