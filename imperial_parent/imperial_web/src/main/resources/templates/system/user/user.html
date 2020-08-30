@@ -80,7 +80,7 @@
 		        </div>
 		        
 		        <div class="col-sm-12 select-table table-striped">
-				    <table id="bootstrap-table"></table>
+				    <table id="sysUser"></table>
 				</div>
 			</div>
 		</div>
@@ -107,6 +107,7 @@
 
 		function queryUserList() {
 		    var options = {
+		    	id: "sysUser",
 		        url: prefix + "/list",
 		        createUrl: prefix + "/add",
 		        updateUrl: prefix + "/edit/{id}",
