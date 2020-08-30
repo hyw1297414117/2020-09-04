@@ -55,7 +55,7 @@
 		        </a>
 	        </div>
 	        <div class="col-sm-12 select-table table-striped">
-	            <table id="bootstrap-table"></table>
+	            <table id="sysConfig"></table>
 	        </div>
 	    </div>
 	</div>
@@ -68,6 +68,7 @@
 
         $(function() {
             var options = {
+            	id: "sysConfig",
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
