@@ -50,7 +50,7 @@
 	        </div>
 	        
 	        <div class="col-sm-12 select-table table-striped">
-			    <table id="bootstrap-table"></table>
+			    <table id="sysDict"></table>
 			</div>
 		</div>
 	</div>
@@ -61,9 +61,9 @@
 		var removeFlag = [[${@permission.hasPermi('system:dict:remove')}]];
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/dict/data";
-
 		$(function() {
 			var options = {
+				id: "sysDict",
 				url: prefix + "/list",
 				createUrl: prefix + "/add/{id}",
 				updateUrl: prefix + "/edit/{id}",
