@@ -56,7 +56,7 @@
 	        </div>
 	        
 			<div class="col-sm-12 select-table table-striped">
-				<table id="bootstrap-table"></table>
+				<table id="sysOperlog"></table>
 			</div>
 		</div>
 	</div>
@@ -70,6 +70,7 @@
 
 		$(function() {
 		    var options = {
+		        id: "sysOperlog",
 		        url: prefix + "/list",
 		        cleanUrl: prefix + "/clean",
 		        detailUrl: prefix + "/detail/{id}",
