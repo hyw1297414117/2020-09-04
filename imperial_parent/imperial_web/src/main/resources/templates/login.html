@@ -17,14 +17,21 @@
     <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{favicon.ico}"/>
     <style type="text/css">label.error { position:inherit;  }</style>
     <script>
-        if(window.top!==window.self){alert('未登录或登录超时。请重新登录');window.top.location=window.location};
+
+        if(window.top!==window.self)
+        {
+            alert('未登录或登录超时。请重新登录');
+            window.top.location=window.location
+        };
     </script>
 </head>
 <body class="signin">
-<select id="linguistictype" name="linguistictype"  class="selectpicker show-tick form-control" onchange="linguistictypechange()" style="color: black;width: 200px;margin-left: 80%">
+<select id="languagetype" name="languagetype"  class="selectpicker show-tick form-control" onchange="linguistictypechange()" style="color: black;width: 200px;margin-left: 80%">
     <option >[[#{Please.select.language}]]</option>
     <option value="en_US" >English</option>
     <option value="zh_CN" >中文</option>
+    <option value="ja_JP">わぶん</option>
+    <option th:value="fr_FR ">français</option>
 </select>
 <h1 style="text-align:center;margin-top:60px;">[[#{welcome}]] <strong>[[#{Customs.clearance.background.management.system}]] </strong></h1>
     <div class="signinpanel">
@@ -76,22 +83,18 @@
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.3.0}"></script>
 <script src="../static/ruoyi/login.js" th:src="@{/ruoyi/login.js}"></script>
-<script type="text/javascript">
-    function linguistictypechange(){
-        var linguistictype=$("#linguistictype option:selected").val();
-        window.location.href= "/login?lang="+linguistictype+"&linguistic="+linguistictype+"";
 
-    }
-</script>
 <!--i18n国际化字符串 begin-->
 <script th:inline="javascript">
+    function linguistictypechange(){
+        var linguistictype=$("#languagetype option:selected").val();
+        window.location.href= "/login?lang="+linguistictype;
+    }
+
     var usernameisnull=[[#{user.register.usernameisnull}]];
     var userpassword=[[#{user.register.userpassword}]];
     var login_distance=[[#{user.login.long.distance}]];
     var system_prompt=[[#{system.prompt}]];
-
-
-
     var message=[[#{message}]];
     var Subm=[[#{Subm}]];
     var Makesureallexported=[[#{Make.sure.all.exported}]];
@@ -113,6 +116,15 @@
     var Pleaseselectthenodeandsubmit=[[#{Please.select.the.node.and.submit}]];
     var Therootnodecannotbeselected=[[#{The.root.node.cannot.be.selected}]];
     var Thelastlevelnodecannotbeselected=[[#{The.last.level.node.cannot.be.selected}]];
+
+    var objSelect = document.getElementById("languagetype"); //下拉框对象
+    for (var i = 0; i < objSelect.options.length; i++) {
+
+
+        if (objSelect.options[i].value == [[${language}]]){ //数据库中的值
+            objSelect.options[i].selected=true;
+        }
+    }
 </script>
 <!--end-->
 </body>

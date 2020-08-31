@@ -2,7 +2,7 @@ package com.project.system.user.controller;
 
 import java.util.List;
 
-import com.project.system.user.domain.ImpMenulinguistic;
+import com.project.system.user.domain.ImpMenulanguagetype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,7 +15,8 @@ import com.project.system.menu.domain.Menu;
 import com.project.system.menu.service.IMenuService;
 import com.project.system.user.domain.User;
 
-import static com.project.system.user.controller.LoginController.LoginMenulinguistictype;
+import static com.project.system.user.controller.LoginController.LoginMenulanguagetype;
+
 
 /**
  * 首页 业务处理
@@ -36,26 +37,81 @@ public class IndexController extends BaseController
 
     // 系统首页
     @GetMapping("/index")
-    public String index(ModelMap mmap, String linguistic)
+    public String index(ModelMap mmap, String lang)
     {
-        String IndexMenulinguistictype=LoginMenulinguistictype;
+        String IndexMenulanguagetype=LoginMenulanguagetype;
         // 取身份信息
         User user = getSysUser();
         // 根据用户id取出菜单
         List<Menu> menus = menuService.selectMenusByUser(user);
-        ImpMenulinguistic impMenulinguistic=new ImpMenulinguistic();
+
+        ImpMenulanguagetype impMenulanguagetype=new ImpMenulanguagetype();
         //判断index页面是否选择语言
-        if(linguistic=="" || linguistic==null){
+        if(lang=="" || lang==null){
             //判断login页面是否选择语言
-            if("".equals(IndexMenulinguistictype) || IndexMenulinguistictype==null) {
-                impMenulinguistic.setLinguistic("zh_CN");
+            if("".equals(IndexMenulanguagetype) || IndexMenulanguagetype==null) {
+                impMenulanguagetype.setLanguagetype("zh_CN");
             }else {
-                impMenulinguistic.setLinguistic(IndexMenulinguistictype);
+                impMenulanguagetype.setLanguagetype(IndexMenulanguagetype);
             }
         }else {
-            impMenulinguistic.setLinguistic(linguistic);
+            impMenulanguagetype.setLanguagetype(lang);
         }
-        mmap.put("linguistic",impMenulinguistic.getLinguistic());
+
+        for (int i = 0; i < menus.size(); i++) {
+            if (impMenulanguagetype.getLanguagetype() == "zh_CN" || impMenulanguagetype.getLanguagetype().equals("zh_CN")) {
+                menus.get(i).setMenuName(menus.get(i).getZh_CN());
+                if (menus.get(i).getChildren().size() > 0) {
+                    for (int j = 0; j < menus.get(i).getChildren().size(); j++) {
+                        menus.get(i).getChildren().get(j).setMenuName(menus.get(i).getChildren().get(j).getZh_CN());
+                        if (menus.get(i).getChildren().get(j).getChildren().size() > 0) {
+                            for (int k = 0; k < menus.get(i).getChildren().get(j).getChildren().size(); k++) {
+                                menus.get(i).getChildren().get(j).getChildren().get(k).setMenuName(menus.get(i).getChildren().get(j).getChildren().get(k).getZh_CN());
+                            }
+                        }
+                    }
+                }
+            } else if (impMenulanguagetype.getLanguagetype() == "en_US" || impMenulanguagetype.getLanguagetype().equals("en_US")) {
+                menus.get(i).setMenuName(menus.get(i).getEn_US());
+                if (menus.get(i).getChildren().size() > 0) {
+                    for (int j = 0; j < menus.get(i).getChildren().size(); j++) {
+                        menus.get(i).getChildren().get(j).setMenuName(menus.get(i).getChildren().get(j).getEn_US());
+                        if (menus.get(i).getChildren().get(j).getChildren().size() > 0) {
+                            for (int k = 0; k < menus.get(i).getChildren().get(j).getChildren().size(); k++) {
+                                menus.get(i).getChildren().get(j).getChildren().get(k).setMenuName(menus.get(i).getChildren().get(j).getChildren().get(k).getEn_US());
+                            }
+                        }
+                    }
+                }
+            } else if (impMenulanguagetype.getLanguagetype() == "ja_JP" || impMenulanguagetype.getLanguagetype().equals("ja_JP")) {
+
+                menus.get(i).setMenuName(menus.get(i).getJa_JP());
+                if (menus.get(i).getChildren().size() > 0) {
+                    for (int j = 0; j < menus.get(i).getChildren().size(); j++) {
+                        menus.get(i).getChildren().get(j).setMenuName(menus.get(i).getChildren().get(j).getJa_JP());
+                        if (menus.get(i).getChildren().get(j).getChildren().size() > 0) {
+                            for (int k = 0; k < menus.get(i).getChildren().get(j).getChildren().size(); k++) {
+                                menus.get(i).getChildren().get(j).getChildren().get(k).setMenuName(menus.get(i).getChildren().get(j).getChildren().get(k).getJa_JP());
+                            }
+                        }
+                    }
+                }
+            } else if (impMenulanguagetype.getLanguagetype() == "fr_FR" || impMenulanguagetype.getLanguagetype().equals("fr_FR")) {
+                menus.get(i).setMenuName(menus.get(i).getFr_FR());
+                if (menus.get(i).getChildren().size() > 0) {
+                    for (int j = 0; j < menus.get(i).getChildren().size(); j++) {
+                        menus.get(i).getChildren().get(j).setMenuName(menus.get(i).getChildren().get(j).getFr_FR());
+                        if (menus.get(i).getChildren().get(j).getChildren().size() > 0) {
+                            for (int k = 0; k < menus.get(i).getChildren().get(j).getChildren().size(); k++) {
+                                menus.get(i).getChildren().get(j).getChildren().get(k).setMenuName(menus.get(i).getChildren().get(j).getChildren().get(k).getFr_FR());
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        mmap.put("language", impMenulanguagetype.getLanguagetype());
         mmap.put("menus", menus);
         mmap.put("user", user);
         mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));

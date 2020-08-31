@@ -20,24 +20,44 @@ public class Menu extends BaseEntity
     /** 菜单ID */
     private Long menuId;
     /** 英文 */
-    private String English;
+    private String en_US;
     /** 中文 */
-    private String Chinese;
+    private String zh_CN;
+    /** 日文 */
+    private String ja_JP;
+    /** 法文 */
+    private String fr_FR;
 
-    public String getEnglish() {
-        return English;
+    public String getJa_JP() {
+        return ja_JP;
     }
 
-    public void setEnglish(String english) {
-        English = english;
+    public void setJa_JP(String ja_JP) {
+        this.ja_JP = ja_JP;
     }
 
-    public String getChinese() {
-        return Chinese;
+    public String getFr_FR() {
+        return fr_FR;
     }
 
-    public void setChinese(String chinese) {
-        Chinese = chinese;
+    public void setFr_FR(String fr_FR) {
+        this.fr_FR = fr_FR;
+    }
+
+    public String getEn_US() {
+        return en_US;
+    }
+
+    public void setEn_US(String en_US) {
+        this.en_US = en_US;
+    }
+
+    public String getZh_CN() {
+        return zh_CN;
+    }
+
+    public void setZh_CN(String zh_CN) {
+        this.zh_CN = zh_CN;
     }
 
     /** 菜单名称 */

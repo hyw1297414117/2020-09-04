@@ -27,7 +27,6 @@
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
                 <span class="logo-lg">Imperial System</span>
-
             </li>
         </a>
         <div class="sidebar-collapse">
@@ -39,43 +38,22 @@
                 <li th:each="menu : ${menus}">
                     <a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
                         <i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
-
-                        <span  th:switch="${linguistic}">
-                            <span th:case="'en_US'" th:name="aa">
-                                <span class="nav-label" th:text='  ${menu.English} '></span>
-                            </span>
-                            <span  th:case="'zh_CN'" th:name="aa">
-                                <span class="nav-label" th:text=' ${menu.Chinese} '></span>
-                            </span>
-                            <span th:case="*" th:name="aa">
-                                <span class="nav-label" th:text=' ${menu.English} '></span>
-                            </span>
-                        </span>
-
-
+                        <span class="nav-label" th:text='${menu.menuName}'></span>
                         <span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li th:each="cmenu : ${menu.children}" >
-                            <a  th:if="${#lists.isEmpty(cmenu.children)} and ${linguistic=='en_US'}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.English}" th:href="@{${cmenu.url}}">二级菜单</a>
-                            <a  th:if="${#lists.isEmpty(cmenu.children)} and ${linguistic=='zh_CN'}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.Chinese}" th:href="@{${cmenu.url}}">二级菜单</a>
-
-                            <a th:if="${linguistic=='en_US'} and ${not #lists.isEmpty(cmenu.children)} "   href="#">[[${cmenu.English}]]<span class="fa arrow"></span></a>
-                            <a th:if="${linguistic=='zh_CN'} and ${not #lists.isEmpty(cmenu.children)}"  href="#">[[${cmenu.Chinese}]]<span class="fa arrow"></span></a>
-
-
-
+                            <a  th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
+                            <a th:if="${not #lists.isEmpty(cmenu.children)} "   href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
                             <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
                                 <li th:each="emenu : ${cmenu.children}" >
-                                    <a  th:if="${#lists.isEmpty(emenu.children)} and ${linguistic=='en_US'}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.English}" th:href="@{${emenu.url}}">三级菜单</a>
-                                    <a  th:if="${#lists.isEmpty(emenu.children)} and ${linguistic=='zh_CN'}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.Chinese}" th:href="@{${emenu.url}}">三级菜单</a>
-
+                                    <a  th:if="${#lists.isEmpty(emenu.children)}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
 
                                     <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
                                     <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-four-level">
                                         <li th:each="fmenu : ${emenu.children}">
-                                            <a th:if="${#lists.isEmpty(fmenu.children)} and ${linguistic=='en_US'}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}" th:text="${emenu.English}" th:href="@{${fmenu.url}}">四级菜单</a>
-                                            <a th:if="${#lists.isEmpty(fmenu.children)} and ${linguistic=='zh_CN'}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}" th:text="${emenu.Chinese}" th:href="@{${fmenu.url}}">四级菜单</a>
+                                            <a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}" th:text="${emenu.menuName}" th:href="@{${fmenu.url}}">四级菜单</a>
+
                                         </li>
                                     </ul>
                                 </li>
@@ -99,10 +77,14 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li>
-                        <select id="linguistictype" name="linguistictype"  class="selectpicker show-tick form-control" onchange="linguistictypechange()">
+                        <input type="hidden" th:value="${language}">
+                        <select id="languagetype" name="languagetype" class="selectpicker show-tick form-control"
+                                onchange="linguistictypechange()">
                             <option >[[#{Please.select.language}]]</option>
-                            <option value="en_US" >English</option>
-                            <option value="zh_CN" >中文</option>
+                            <option th:value="en_US ">English</option>
+                            <option th:value="zh_CN ">中文</option>
+                            <option th:value="ja_JP ">わぶん</option>
+                            <option th:value="fr_FR ">français</option>
                         </select>
                     </li>
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen" ><i class="fa fa-arrows-alt"></i> [[#{menu.FullScreenToggle}]]</a></li>
@@ -158,14 +140,36 @@
         </div>
         <div class="footer">
 
-
-
             <div class="pull-right">© [[${copyrightYear}]] fanke Copyright </div>
 
         </div>
     </div>
     <!--右侧部分结束-->
 </div>
+<!--i18n国际化字符串 begin-->
+<script th:inline="javascript">
+    var CloseCurrent=[[#{menu.CloseCurrent}]];
+    var CloseOther=[[#{menu.CloseOther}]];
+    var CloseLeft=[[#{menu.CloseLeft}]];
+    var CloseRight=[[#{menu.CloseRight}]];
+    var CloseAll=[[#{menu.CloseAll}]];
+    var FullScreenToggle=[[#{menu.FullScreenToggle}]];
+    var Reflash=[[#{menu.Reflash}]];
+    var NewWindow=[[#{menu.NewWindow}]];
+    var Dataloading=[[#{Data.loading}]];
+    function linguistictypechange(){
+        var linguistictype="";
+        linguistictype =$("#languagetype option:selected").val();
+        window.location.href= "/index?lang="+linguistictype;
+    }
+
+    var objSelect = document.getElementById("languagetype"); //下拉框对象
+    for (var i = 0; i < objSelect.options.length; i++) {
+        if (objSelect.options[i].value == [[${language}]]){ //数据库中的值
+            objSelect.options[i].selected=true;
+        }
+    }
+</script>
 <!-- 全局js -->
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -237,25 +241,7 @@ $(function() {
 	}
 });
 </script>
-<!--i18n国际化字符串 begin-->
-<script th:inline="javascript">
-    var CloseCurrent=[[#{menu.CloseCurrent}]];
-    var CloseOther=[[#{menu.CloseOther}]];
-    var CloseLeft=[[#{menu.CloseLeft}]];
-    var CloseRight=[[#{menu.CloseRight}]];
-    var CloseAll=[[#{menu.CloseAll}]];
-    var FullScreenToggle=[[#{menu.FullScreenToggle}]];
-    var Reflash=[[#{menu.Reflash}]];
-    var NewWindow=[[#{menu.NewWindow}]];
-    var Dataloading=[[#{Data.loading}]];
 
-
-    function linguistictypechange(){
-        var linguistictype="";
-        linguistictype =$("#linguistictype option:selected").val();
-        window.location.href= "/index?lang="+linguistictype+"&linguistic="+linguistictype+"";
-    }
-</script>
 <!--end-->
 </body>
 </html>
