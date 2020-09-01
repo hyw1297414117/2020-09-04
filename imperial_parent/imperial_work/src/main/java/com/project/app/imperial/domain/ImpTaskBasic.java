@@ -63,6 +63,10 @@ public class ImpTaskBasic extends BaseEntity
     @Excel(name = "插入时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date inserttime;
 
+    /** 修改时间 */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updatetime;
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -172,6 +176,14 @@ public class ImpTaskBasic extends BaseEntity
         return inserttime;
     }
 
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -187,7 +199,7 @@ public class ImpTaskBasic extends BaseEntity
             .append("taskDestination", getTaskDestination())
             .append("tariff", getTariff())
             .append("inserttime", getInserttime())
-//            .append("updatetime", getUpdatetime())
+            .append("updatetime", getUpdatetime())
             .toString();
     }
 }

@@ -39,6 +39,10 @@ public class ImpTaskConsult extends BaseEntity
     @Excel(name = "插入时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date insertitme;
 
+    /** 修改时间 */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updatetime;
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -92,6 +96,14 @@ public class ImpTaskConsult extends BaseEntity
     public Date getInsertitme() 
     {
         return insertitme;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 
     @Override

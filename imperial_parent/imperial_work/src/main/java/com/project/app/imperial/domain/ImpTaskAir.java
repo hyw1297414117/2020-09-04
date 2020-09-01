@@ -71,6 +71,10 @@ public class ImpTaskAir extends BaseEntity
     @Excel(name = "插入时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date insertitme;
 
+    /** 修改时间 */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updatetime;
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -198,6 +202,14 @@ public class ImpTaskAir extends BaseEntity
         return insertitme;
     }
 
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -215,7 +227,7 @@ public class ImpTaskAir extends BaseEntity
             .append("payType", getPayType())
             .append("notes", getNotes())
             .append("insertitme", getInsertitme())
-//            .append("updatetime", getUpdatetime())
+            .append("updatetime", getUpdatetime())
             .toString();
     }
 }

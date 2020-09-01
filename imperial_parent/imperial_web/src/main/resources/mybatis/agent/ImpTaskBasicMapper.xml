@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpTaskBasicMapper">
+    
+    <resultMap type="ImpTaskBasic" id="ImpTaskBasicResult">
+        <result property="id"    column="id"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="taskType"    column="task_type"    />
+        <result property="businessType"    column="business_type"    />
+        <result property="priority"    column="priority"    />
+        <result property="taskRelate"    column="task_relate"    />
+        <result property="customer"    column="customer"    />
+        <result property="pendCheckDoc"    column="pend_check_doc"    />
+        <result property="taskOrigin"    column="task_origin"    />
+        <result property="taskDestination"    column="task_destination"    />
+        <result property="tariff"    column="tariff"    />
+        <result property="inserttime"    column="inserttime"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <sql id="selectImpTaskBasicVo">
+        select id, task_number, task_type, business_type, priority, task_relate, customer, pend_check_doc, task_origin, task_destination, tariff, inserttime, updatetime from imp_task_basic
+    </sql>
+
+    <select id="selectImpTaskBasicList" parameterType="ImpTaskBasic" resultMap="ImpTaskBasicResult">
+        <include refid="selectImpTaskBasicVo"/>
+        <where>  
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="taskType != null  and taskType != ''"> and task_type = #{taskType}</if>
+            <if test="businessType != null  and businessType != ''"> and business_type = #{businessType}</if>
+            <if test="priority != null  and priority != ''"> and priority = #{priority}</if>
+            <if test="taskRelate != null  and taskRelate != ''"> and task_relate = #{taskRelate}</if>
+            <if test="customer != null  and customer != ''"> and customer = #{customer}</if>
+            <if test="pendCheckDoc != null  and pendCheckDoc != ''"> and pend_check_doc = #{pendCheckDoc}</if>
+            <if test="taskOrigin != null  and taskOrigin != ''"> and task_origin = #{taskOrigin}</if>
+            <if test="taskDestination != null  and taskDestination != ''"> and task_destination = #{taskDestination}</if>
+            <if test="tariff != null  and tariff != ''"> and tariff = #{tariff}</if>
+            <if test="inserttime != null "> and inserttime = #{inserttime}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpTaskBasicById" parameterType="Long" resultMap="ImpTaskBasicResult">
+        <include refid="selectImpTaskBasicVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectTaskNumLatestToday" resultType="String">
+        select task_number from imp_task_basic
+        where inserttime like concat(CURDATE(),"%")
+        order by inserttime desc
+        limit 1
+    </select>
+
+    <insert id="insertImpTaskBasic" parameterType="ImpTaskBasic" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_task_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null">task_number,</if>
+            <if test="taskType != null">task_type,</if>
+            <if test="businessType != null">business_type,</if>
+            <if test="priority != null">priority,</if>
+            <if test="taskRelate != null">task_relate,</if>
+            <if test="customer != null">customer,</if>
+            <if test="pendCheckDoc != null">pend_check_doc,</if>
+            <if test="taskOrigin != null">task_origin,</if>
+            <if test="taskDestination != null">task_destination,</if>
+            <if test="tariff != null">tariff,</if>
+            <if test="inserttime != null">inserttime,</if>
+            <if test="updatetime != null">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null">#{taskNumber},</if>
+            <if test="taskType != null">#{taskType},</if>
+            <if test="businessType != null">#{businessType},</if>
+            <if test="priority != null">#{priority},</if>
+            <if test="taskRelate != null">#{taskRelate},</if>
+            <if test="customer != null">#{customer},</if>
+            <if test="pendCheckDoc != null">#{pendCheckDoc},</if>
+            <if test="taskOrigin != null">#{taskOrigin},</if>
+            <if test="taskDestination != null">#{taskDestination},</if>
+            <if test="tariff != null">#{tariff},</if>
+            <if test="inserttime != null">#{inserttime},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpTaskBasic" parameterType="ImpTaskBasic">
+        update imp_task_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNumber != null">task_number = #{taskNumber},</if>
+            <if test="taskType != null">task_type = #{taskType},</if>
+            <if test="businessType != null">business_type = #{businessType},</if>
+            <if test="priority != null">priority = #{priority},</if>
+            <if test="taskRelate != null">task_relate = #{taskRelate},</if>
+            <if test="customer != null">customer = #{customer},</if>
+            <if test="pendCheckDoc != null">pend_check_doc = #{pendCheckDoc},</if>
+            <if test="taskOrigin != null">task_origin = #{taskOrigin},</if>
+            <if test="taskDestination != null">task_destination = #{taskDestination},</if>
+            <if test="tariff != null">tariff = #{tariff},</if>
+            <if test="inserttime != null">inserttime = #{inserttime},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpTaskBasicById" parameterType="Long">
+        delete from imp_task_basic where id = #{id}
+    </delete>
+
+    <delete id="deleteImpTaskBasicByIds" parameterType="String">
+        delete from imp_task_basic where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

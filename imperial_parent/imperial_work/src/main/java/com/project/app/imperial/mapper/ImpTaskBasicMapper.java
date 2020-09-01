@@ -28,6 +28,14 @@ public interface ImpTaskBasicMapper
     public List<ImpTaskBasic> selectImpTaskBasicList(ImpTaskBasic impTaskBasic);
 
     /**
+     * 查询任务-当天最新一条数据
+     *
+     * @return 添加任务-基础数据
+     */
+    public String selectTaskNumLatestToday();
+
+
+    /**
      * 新增添加任务-基础数据
      * 
      * @param impTaskBasic 添加任务-基础数据
