@@ -80,7 +80,6 @@
                         <input type="hidden" th:value="${language}">
                         <select id="languagetype" name="languagetype" class="selectpicker show-tick form-control"
                                 onchange="linguistictypechange()">
-                            <option >[[#{Please.select.language}]]</option>
                             <option th:value="en_US ">English</option>
                             <option th:value="zh_CN ">中文</option>
                             <option th:value="ja_JP ">わぶん</option>
@@ -130,12 +129,9 @@
             </button>
             <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> [[#{menu.Reflash}]]</a>
         </div>
-
         <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
-
         <div class="row mainContent" id="content-main">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
-
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
         <div class="footer">

@@ -48,7 +48,9 @@
     <th:block th:include="include :: footer" />
     <script th:src="@{/js/app/agent/ddulist.js}"></script>        
  <script id="operatBtTpl" type="text/template">
-<div style="margin-top:5px">
+
+
+     <div style="margin-top:5px">
 				
             	<a class="btn btn-warning btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="shipperModule:data:export">
 			            <i class="fa fa-upload"></i> 导出
@@ -56,6 +58,9 @@
 			    <a class="btn btn-success btn-sm multiple disabled" onclick="showCheckPage()" shiro:hasPermission="shipperModule:data:submit">
 			            <i class="fa fa-random"></i> DDU审核
 			    </a>
+                <a class="btn btn-success btn-sm " onclick="DDUSendEmail()">
+                    <i class="fa fa-random"></i> 通知收货人
+                </a>
 </div>
 </script>
 <script id="searchTpl" type="text/template">

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EmailTemplate</title>
+    <style type="text/css">
+        div{
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+        .fontTitle{
+            font-weight: 600;
+            font-size: 25px;
+            margin-top: 50px;
+        }
+        .fontTitle-small{
+            font-weight: 600;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div >
+    <div class="fontTitle">
+        <span >公司logo</span>
+        <span style="float: right">进口费用通知</span>
+    </div>
+<div class="">
+        <div>收货人详情</div>
+        <div>收货人详情</div>
+        <div>收货人详情</div>
+        <div>收货人详情</div>
+</div>
+    <div class="fontTitle-small">时间:</div>
+
+    <div class=""> 尊敬:[[${shipperName}]]  </div>
+    <div class="">
+    <div>•	参考号: [[${reference1}]]</div>
+    <div>•	用户号: XXXXXXXXXXXXXXX</div>
+    <div>•	到达目的地: [[${line_address_1}]] (Private Purchase     / Non-Private Purchase) </div>
+    </div>
+    <div class="">注: 包裹运单号: [[${tacking_number_1}]]</div>
+
+    <div>此通知是让您知道在您的包裹送达之前需要支付一笔进口费用。货物由承运人XXXXXXXX从XXXXXXXX发出。为了让你方货物从海关放行，我们请你方支付由此产生的进口费用.</div>
+
+    <div>XXXXXXXXXX是英国HMRC特许报关代理公司，报关章代码XXX。我们已被XXXXXX的xxxxxxx指定为您的货物报关。从您那里收取的进口增值税和关税将代表您提交给英国海关。一旦费用支付完毕并经我方确认，您的订单将在接下来的XXX—XXX天内送达给您，具体时间取决于您选择的送货服务。</div>
+
+    <div class="fontTitle-small">进口费用</div>
+        <div>Customs Declaration	£XXXX</div>
+            <div>Import Duty	£XXXX</div>
+                <div>Import VAT	£XXXX</div>
+                    <div>Customs Payment Handling Charge	£XXXX</div>
+                        <div>Total	£XXXX</div>
+
+    <div class="fontTitle">下一步</div>
+<div style="margin-left: 30px">
+    <div>	请登录XXXXXXX使用Paypal、支付宝、微信或信用卡、借记卡进行支付。 </div>
+
+    <div>•	如欲了解更多有关进口收费的资料，请浏览我们的问答页面: XXXXXXXXXXXXXXXXX</div>
+
+    <div>•	如果您认为您需要通知我们更改报关说明，请通过在线门户网站XXXXXXX与我们联系，并按照说明提交所有相关信息。遗憾的是，我们不能接受电话或电子邮件中的修改指示。</div>
+
+    <div>请注意，在收到此通知后的21个日历天内，我们将保留未付的海关物品，然后将其返还给寄件人或销毁，这取决于您的承运人XXXXXXXXX的处理指</div>
+
+    <div >如有任何疑问，请致电+44 (0)XXXXXXXXXXX或发邮件XXXXXXXXXXXX与进口费用收取组联系。请在本通知书内注明你的参考编号。在英国工作日，办公时间为0900 - 1800。</div>
+</div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+
+    <div style="margin-left: 50px">谨启,</div>
+<div style="margin-top: 50px">
+    <div>进口费用收取小组</div>
+    <div>XXXXXXXXXXX</div>
+    <div>xxxxxxxxxxxxxxxxxxxxxxxx</div>
+    <div>Tel: +44 (0) XXXXXXXXXXX</div>
+</div>
+
+
+<div style="margin-top: 50px">
+    <div>*您已完成向帝国码头有限公司的付款，即表示您已完全接受我们的T&C。您可在以下网址访问我们的T&C </div>
+    <div>NG-Terminal Limited，经英国HMRC授权，报关徽章代码: XXXX</div>
+    <div>Registered at XXXXXXXXXXXXXXXXXXXXXX, Registration Number: XXXXXXXXX</div>
+    <div>VAT Number: XXXXXX</div>
+</div>
+</div>
+<br>
+<div>点击进入系统：</div><br>
+<span th:text="|http://${url}:8083/login|"></span>
+</body>
+</html>

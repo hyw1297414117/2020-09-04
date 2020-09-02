@@ -132,6 +132,9 @@ public class IndexController extends BaseController
     @GetMapping("/system/main")
     public String main(ModelMap mmap)
     {
+        // 取身份信息
+        User user = getSysUser();
+        mmap.put("user", user);
         mmap.put("version", ruoYiConfig.getVersion());
         return "main";
     }
