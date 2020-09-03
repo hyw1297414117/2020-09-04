@@ -103,16 +103,18 @@
         });
        //展示发货方账户详情
        function showCustomerInfo(rows){
-    	   var height = $(window).height()*0.9+"px";
+    	   //var height = $(window).height()+"px";
+    	   var screenHeight = window.screen.height;
+    	   var pageHeight = screenHeight*0.7+"px";
     	   var screenWidth = window.screen.width;  //获取屏幕宽度
-    	   var pageWidth = screenWidth*0.8+"px";
-	       	var index = layer.open({
+    	   var pageWidth = screenWidth*0.9+"px";
+	       	var index = top.layer.open({
 	       		type: 2,
 	       		fix: false,
 	       		maxmin: true,
 	       		shade: 0.3,
 	       		title: '发货账户详情',
-	       		area: [pageWidth, height], //宽高
+	       		area: [pageWidth, pageHeight], //宽高
 	       		content: "/customerInfo/showCustomerInfoDetail/"+rows.customer
 	       	});
 	       	//layer.full(index);
