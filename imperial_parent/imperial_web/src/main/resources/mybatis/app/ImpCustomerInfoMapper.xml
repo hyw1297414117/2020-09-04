@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpCustomerInfoMapper">
+    
+    <resultMap type="ImpCustomerInfo" id="ImpCustomerInfoResult">
+        <result property="id"    column="id"    />
+        <result property="customer"    column="customer"    />
+        <result property="customerState"    column="customer_state"    />
+        <result property="registerNo"    column="register_no"    />
+        <result property="registerLocation"    column="register_location"    />
+        <result property="registerEori"    column="register_eori"    />
+        <result property="mainConn1"    column="main_conn_1"    />
+        <result property="mainMail1"    column="main_mail_1"    />
+        <result property="mainConn2"    column="main_conn_2"    />
+        <result property="mainMail2"    column="main_mail_2"    />
+        <result property="operConn1"    column="oper_conn_1"    />
+        <result property="operMail1"    column="oper_mail_1"    />
+        <result property="operConn2"    column="oper_conn_2"    />
+        <result property="operMail2"    column="oper_mail_2"    />
+        <result property="financeConn1"    column="finance_conn_1"    />
+        <result property="financeMail1"    column="finance_mail_1"    />
+        <result property="financeConn2"    column="finance_conn_2"    />
+        <result property="financeMail2"    column="finance_mail_2"    />
+        <result property="fileSop"    column="file_sop"    />
+        <result property="vtSop"    column="vt_sop"    />
+        <result property="fileDutyDivision"    column="file_duty_division"    />
+        <result property="vtDutyDivision"    column="vt_duty_division"    />
+        <result property="filePowerAttorney"    column="file_power_attorney"    />
+        <result property="vtPowerAttorney"    column="vt_power_attorney"    />
+        <result property="fileNdaSecret"    column="file_nda_secret"    />
+        <result property="vtNdaSecret"    column="vt_nda_secret"    />
+        <result property="fileRegCopy"    column="file_reg_copy"    />
+        <result property="vtRegCopy"    column="vt_reg_copy"    />
+        <result property="fileAdd1"    column="file_add_1"    />
+        <result property="vtAdd1"    column="vt_add_1"    />
+        <result property="fileAdd2"    column="file_add_2"    />
+        <result property="vtAdd2"    column="vt_add_2"    />
+        <result property="fileAdd3"    column="file_add_3"    />
+        <result property="vtAdd3"    column="vt_add_3"    />
+        <result property="fileAdd4"    column="file_add_4"    />
+        <result property="vtAdd4"    column="vt_add_4"    />
+        <result property="fileAdd5"    column="file_add_5"    />
+        <result property="vtAdd5"    column="vt_add_5"    />
+        <result property="netCosn"    column="net_cosn"    />
+        <result property="fileFinanAuditCerti"    column="file_finan_audit_certi"    />
+        <result property="vtFinanAuditCerti"    column="vt_finan_audit_certi"    />
+        <result property="fileVertAddGuar"    column="file_vert_add_guar"    />
+        <result property="vtVertAddGuar"    column="vt_vert_add_guar"    />
+        <result property="inputer"    column="inputer"    />
+        <result property="inserttime"    column="inserttime"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <!-- <sql id="selectImpCustomerInfoVo">
+        select id, customer, customer_state, register_no, register_location, register_eori, main_conn_1, main_mail_1, main_conn_2, main_mail_2, oper_conn_1, oper_mail_1, oper_conn_2, oper_mail_2, finance_conn_1, finance_mail_1, finance_conn_2, finance_mail_2, file_sop, vt_sop, file_duty_division, vt_duty_division, file_power_attorney, vt_power_attorney, file_nda_secret, vt_nda_secret, file_reg_copy, vt_reg_copy, file_add_1, vt_add_1, file_add_2, vt_add_2, file_add_3, vt_add_3, file_add_4, vt_add_4, file_add_5, vt_add_5, net_cosn, file_finan_audit_certi, vt_finan_audit_certi, file_vert_add_guar, vt_vert_add_guar, inputer, inserttime, updatetime from imp_customer_info
+    </sql> -->
+    <sql id="selectImpCustomerInfoVo">
+        select id, customer, customer_state, register_no, register_location, register_eori, main_conn_1, main_mail_1, main_conn_2, main_mail_2, oper_conn_1, oper_mail_1, oper_conn_2, oper_mail_2, finance_conn_1, finance_mail_1, finance_conn_2, finance_mail_2 from imp_customer_info
+    </sql>
+    
+
+    <select id="selectImpCustomerInfoList" parameterType="ImpCustomerInfo" resultMap="ImpCustomerInfoResult">
+        <include refid="selectImpCustomerInfoVo"/>
+        <where>  
+            <if test="customer != null  and customer != ''"> and customer = #{customer}</if>
+            <if test="customerState != null  and customerState != ''"> and customer_state = #{customerState}</if>
+            <if test="registerNo != null  and registerNo != ''"> and register_no = #{registerNo}</if>
+            <if test="registerLocation != null  and registerLocation != ''"> and register_location = #{registerLocation}</if>
+            <if test="registerEori != null  and registerEori != ''"> and register_eori = #{registerEori}</if>
+            <if test="mainConn1 != null  and mainConn1 != ''"> and main_conn_1 = #{mainConn1}</if>
+            <if test="mainMail1 != null  and mainMail1 != ''"> and main_mail_1 = #{mainMail1}</if>
+            <if test="mainConn2 != null  and mainConn2 != ''"> and main_conn_2 = #{mainConn2}</if>
+            <if test="mainMail2 != null  and mainMail2 != ''"> and main_mail_2 = #{mainMail2}</if>
+            <if test="operConn1 != null  and operConn1 != ''"> and oper_conn_1 = #{operConn1}</if>
+            <if test="operMail1 != null  and operMail1 != ''"> and oper_mail_1 = #{operMail1}</if>
+            <if test="operConn2 != null  and operConn2 != ''"> and oper_conn_2 = #{operConn2}</if>
+            <if test="operMail2 != null  and operMail2 != ''"> and oper_mail_2 = #{operMail2}</if>
+            <if test="financeConn1 != null  and financeConn1 != ''"> and finance_conn_1 = #{financeConn1}</if>
+            <if test="financeMail1 != null  and financeMail1 != ''"> and finance_mail_1 = #{financeMail1}</if>
+            <if test="financeConn2 != null  and financeConn2 != ''"> and finance_conn_2 = #{financeConn2}</if>
+            <if test="financeMail2 != null  and financeMail2 != ''"> and finance_mail_2 = #{financeMail2}</if>
+            <if test="fileSop != null "> and file_sop = #{fileSop}</if>
+            <if test="vtSop != null  and vtSop != ''"> and vt_sop = #{vtSop}</if>
+            <if test="fileDutyDivision != null "> and file_duty_division = #{fileDutyDivision}</if>
+            <if test="vtDutyDivision != null  and vtDutyDivision != ''"> and vt_duty_division = #{vtDutyDivision}</if>
+            <if test="filePowerAttorney != null "> and file_power_attorney = #{filePowerAttorney}</if>
+            <if test="vtPowerAttorney != null  and vtPowerAttorney != ''"> and vt_power_attorney = #{vtPowerAttorney}</if>
+            <if test="fileNdaSecret != null "> and file_nda_secret = #{fileNdaSecret}</if>
+            <if test="vtNdaSecret != null  and vtNdaSecret != ''"> and vt_nda_secret = #{vtNdaSecret}</if>
+            <if test="fileRegCopy != null "> and file_reg_copy = #{fileRegCopy}</if>
+            <if test="vtRegCopy != null  and vtRegCopy != ''"> and vt_reg_copy = #{vtRegCopy}</if>
+            <if test="fileAdd1 != null "> and file_add_1 = #{fileAdd1}</if>
+            <if test="vtAdd1 != null  and vtAdd1 != ''"> and vt_add_1 = #{vtAdd1}</if>
+            <if test="fileAdd2 != null "> and file_add_2 = #{fileAdd2}</if>
+            <if test="vtAdd2 != null  and vtAdd2 != ''"> and vt_add_2 = #{vtAdd2}</if>
+            <if test="fileAdd3 != null "> and file_add_3 = #{fileAdd3}</if>
+            <if test="vtAdd3 != null  and vtAdd3 != ''"> and vt_add_3 = #{vtAdd3}</if>
+            <if test="fileAdd4 != null "> and file_add_4 = #{fileAdd4}</if>
+            <if test="vtAdd4 != null  and vtAdd4 != ''"> and vt_add_4 = #{vtAdd4}</if>
+            <if test="fileAdd5 != null "> and file_add_5 = #{fileAdd5}</if>
+            <if test="vtAdd5 != null  and vtAdd5 != ''"> and vt_add_5 = #{vtAdd5}</if>
+            <if test="netCosn != null  and netCosn != ''"> and net_cosn = #{netCosn}</if>
+            <if test="fileFinanAuditCerti != null "> and file_finan_audit_certi = #{fileFinanAuditCerti}</if>
+            <if test="vtFinanAuditCerti != null  and vtFinanAuditCerti != ''"> and vt_finan_audit_certi = #{vtFinanAuditCerti}</if>
+            <if test="fileVertAddGuar != null "> and file_vert_add_guar = #{fileVertAddGuar}</if>
+            <if test="vtVertAddGuar != null  and vtVertAddGuar != ''"> and vt_vert_add_guar = #{vtVertAddGuar}</if>
+            <if test="inputer != null  and inputer != ''"> and inputer = #{inputer}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpCustomerInfoByName" parameterType="java.lang.String" resultMap="ImpCustomerInfoResult">
+        <include refid="selectImpCustomerInfoVo"/>
+        where customer = #{customer}
+    </select>
+        
+    <insert id="insertImpCustomerInfo" parameterType="ImpCustomerInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_customer_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customer != null">customer,</if>
+            <if test="customerState != null">customer_state,</if>
+            <if test="registerNo != null">register_no,</if>
+            <if test="registerLocation != null">register_location,</if>
+            <if test="registerEori != null">register_eori,</if>
+            <if test="mainConn1 != null">main_conn_1,</if>
+            <if test="mainMail1 != null">main_mail_1,</if>
+            <if test="mainConn2 != null">main_conn_2,</if>
+            <if test="mainMail2 != null">main_mail_2,</if>
+            <if test="operConn1 != null">oper_conn_1,</if>
+            <if test="operMail1 != null">oper_mail_1,</if>
+            <if test="operConn2 != null">oper_conn_2,</if>
+            <if test="operMail2 != null">oper_mail_2,</if>
+            <if test="financeConn1 != null">finance_conn_1,</if>
+            <if test="financeMail1 != null">finance_mail_1,</if>
+            <if test="financeConn2 != null">finance_conn_2,</if>
+            <if test="financeMail2 != null">finance_mail_2,</if>
+            <if test="fileSop != null">file_sop,</if>
+            <if test="vtSop != null">vt_sop,</if>
+            <if test="fileDutyDivision != null">file_duty_division,</if>
+            <if test="vtDutyDivision != null">vt_duty_division,</if>
+            <if test="filePowerAttorney != null">file_power_attorney,</if>
+            <if test="vtPowerAttorney != null">vt_power_attorney,</if>
+            <if test="fileNdaSecret != null">file_nda_secret,</if>
+            <if test="vtNdaSecret != null">vt_nda_secret,</if>
+            <if test="fileRegCopy != null">file_reg_copy,</if>
+            <if test="vtRegCopy != null">vt_reg_copy,</if>
+            <if test="fileAdd1 != null">file_add_1,</if>
+            <if test="vtAdd1 != null">vt_add_1,</if>
+            <if test="fileAdd2 != null">file_add_2,</if>
+            <if test="vtAdd2 != null">vt_add_2,</if>
+            <if test="fileAdd3 != null">file_add_3,</if>
+            <if test="vtAdd3 != null">vt_add_3,</if>
+            <if test="fileAdd4 != null">file_add_4,</if>
+            <if test="vtAdd4 != null">vt_add_4,</if>
+            <if test="fileAdd5 != null">file_add_5,</if>
+            <if test="vtAdd5 != null">vt_add_5,</if>
+            <if test="netCosn != null">net_cosn,</if>
+            <if test="fileFinanAuditCerti != null">file_finan_audit_certi,</if>
+            <if test="vtFinanAuditCerti != null">vt_finan_audit_certi,</if>
+            <if test="fileVertAddGuar != null">file_vert_add_guar,</if>
+            <if test="vtVertAddGuar != null">vt_vert_add_guar,</if>
+            <if test="inputer != null">inputer,</if>
+            inserttime,
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customer != null">#{customer},</if>
+            <if test="customerState != null">#{customerState},</if>
+            <if test="registerNo != null">#{registerNo},</if>
+            <if test="registerLocation != null">#{registerLocation},</if>
+            <if test="registerEori != null">#{registerEori},</if>
+            <if test="mainConn1 != null">#{mainConn1},</if>
+            <if test="mainMail1 != null">#{mainMail1},</if>
+            <if test="mainConn2 != null">#{mainConn2},</if>
+            <if test="mainMail2 != null">#{mainMail2},</if>
+            <if test="operConn1 != null">#{operConn1},</if>
+            <if test="operMail1 != null">#{operMail1},</if>
+            <if test="operConn2 != null">#{operConn2},</if>
+            <if test="operMail2 != null">#{operMail2},</if>
+            <if test="financeConn1 != null">#{financeConn1},</if>
+            <if test="financeMail1 != null">#{financeMail1},</if>
+            <if test="financeConn2 != null">#{financeConn2},</if>
+            <if test="financeMail2 != null">#{financeMail2},</if>
+            <if test="fileSop != null">#{fileSop},</if>
+            <if test="vtSop != null">#{vtSop},</if>
+            <if test="fileDutyDivision != null">#{fileDutyDivision},</if>
+            <if test="vtDutyDivision != null">#{vtDutyDivision},</if>
+            <if test="filePowerAttorney != null">#{filePowerAttorney},</if>
+            <if test="vtPowerAttorney != null">#{vtPowerAttorney},</if>
+            <if test="fileNdaSecret != null">#{fileNdaSecret},</if>
+            <if test="vtNdaSecret != null">#{vtNdaSecret},</if>
+            <if test="fileRegCopy != null">#{fileRegCopy},</if>
+            <if test="vtRegCopy != null">#{vtRegCopy},</if>
+            <if test="fileAdd1 != null">#{fileAdd1},</if>
+            <if test="vtAdd1 != null">#{vtAdd1},</if>
+            <if test="fileAdd2 != null">#{fileAdd2},</if>
+            <if test="vtAdd2 != null">#{vtAdd2},</if>
+            <if test="fileAdd3 != null">#{fileAdd3},</if>
+            <if test="vtAdd3 != null">#{vtAdd3},</if>
+            <if test="fileAdd4 != null">#{fileAdd4},</if>
+            <if test="vtAdd4 != null">#{vtAdd4},</if>
+            <if test="fileAdd5 != null">#{fileAdd5},</if>
+            <if test="vtAdd5 != null">#{vtAdd5},</if>
+            <if test="netCosn != null">#{netCosn},</if>
+            <if test="fileFinanAuditCerti != null">#{fileFinanAuditCerti},</if>
+            <if test="vtFinanAuditCerti != null">#{vtFinanAuditCerti},</if>
+            <if test="fileVertAddGuar != null">#{fileVertAddGuar},</if>
+            <if test="vtVertAddGuar != null">#{vtVertAddGuar},</if>
+            <if test="inputer != null">#{inputer},</if>
+            now(),
+         </trim>
+    </insert>
+
+    <update id="updateImpCustomerInfo" parameterType="ImpCustomerInfo">
+        update imp_customer_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customer != null">customer = #{customer},</if>
+            <if test="customerState != null">customer_state = #{customerState},</if>
+            <if test="registerNo != null">register_no = #{registerNo},</if>
+            <if test="registerLocation != null">register_location = #{registerLocation},</if>
+            <if test="registerEori != null">register_eori = #{registerEori},</if>
+            <if test="mainConn1 != null">main_conn_1 = #{mainConn1},</if>
+            <if test="mainMail1 != null">main_mail_1 = #{mainMail1},</if>
+            <if test="mainConn2 != null">main_conn_2 = #{mainConn2},</if>
+            <if test="mainMail2 != null">main_mail_2 = #{mainMail2},</if>
+            <if test="operConn1 != null">oper_conn_1 = #{operConn1},</if>
+            <if test="operMail1 != null">oper_mail_1 = #{operMail1},</if>
+            <if test="operConn2 != null">oper_conn_2 = #{operConn2},</if>
+            <if test="operMail2 != null">oper_mail_2 = #{operMail2},</if>
+            <if test="financeConn1 != null">finance_conn_1 = #{financeConn1},</if>
+            <if test="financeMail1 != null">finance_mail_1 = #{financeMail1},</if>
+            <if test="financeConn2 != null">finance_conn_2 = #{financeConn2},</if>
+            <if test="financeMail2 != null">finance_mail_2 = #{financeMail2},</if>
+            <if test="fileSop != null">file_sop = #{fileSop},</if>
+            <if test="vtSop != null">vt_sop = #{vtSop},</if>
+            <if test="fileDutyDivision != null">file_duty_division = #{fileDutyDivision},</if>
+            <if test="vtDutyDivision != null">vt_duty_division = #{vtDutyDivision},</if>
+            <if test="filePowerAttorney != null">file_power_attorney = #{filePowerAttorney},</if>
+            <if test="vtPowerAttorney != null">vt_power_attorney = #{vtPowerAttorney},</if>
+            <if test="fileNdaSecret != null">file_nda_secret = #{fileNdaSecret},</if>
+            <if test="vtNdaSecret != null">vt_nda_secret = #{vtNdaSecret},</if>
+            <if test="fileRegCopy != null">file_reg_copy = #{fileRegCopy},</if>
+            <if test="vtRegCopy != null">vt_reg_copy = #{vtRegCopy},</if>
+            <if test="fileAdd1 != null">file_add_1 = #{fileAdd1},</if>
+            <if test="vtAdd1 != null">vt_add_1 = #{vtAdd1},</if>
+            <if test="fileAdd2 != null">file_add_2 = #{fileAdd2},</if>
+            <if test="vtAdd2 != null">vt_add_2 = #{vtAdd2},</if>
+            <if test="fileAdd3 != null">file_add_3 = #{fileAdd3},</if>
+            <if test="vtAdd3 != null">vt_add_3 = #{vtAdd3},</if>
+            <if test="fileAdd4 != null">file_add_4 = #{fileAdd4},</if>
+            <if test="vtAdd4 != null">vt_add_4 = #{vtAdd4},</if>
+            <if test="fileAdd5 != null">file_add_5 = #{fileAdd5},</if>
+            <if test="vtAdd5 != null">vt_add_5 = #{vtAdd5},</if>
+            <if test="netCosn != null">net_cosn = #{netCosn},</if>
+            <if test="fileFinanAuditCerti != null">file_finan_audit_certi = #{fileFinanAuditCerti},</if>
+            <if test="vtFinanAuditCerti != null">vt_finan_audit_certi = #{vtFinanAuditCerti},</if>
+            <if test="fileVertAddGuar != null">file_vert_add_guar = #{fileVertAddGuar},</if>
+            <if test="vtVertAddGuar != null">vt_vert_add_guar = #{vtVertAddGuar},</if>
+            <if test="inputer != null">inputer = #{inputer},</if>
+            <if test="inserttime != null">inserttime = #{inserttime},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpCustomerInfoById" parameterType="Long">
+        delete from imp_customer_info where id = #{id}
+    </delete>
+
+    <delete id="deleteImpCustomerInfoByIds" parameterType="String">
+        delete from imp_customer_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
