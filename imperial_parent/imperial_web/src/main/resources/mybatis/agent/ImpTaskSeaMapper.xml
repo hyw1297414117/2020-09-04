@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpTaskSeaMapper">
+    
+    <resultMap type="ImpTaskSea" id="ImpTaskSeaResult">
+        <result property="id"    column="id"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="seaMainOrderNo"    column="sea_main_order_no"    />
+        <result property="containerNumber"    column="container_number"    />
+        <result property="shippingName"    column="shipping_name"    />
+        <result property="shippingCode"    column="shipping_code"    />
+        <result property="shipFrequency"    column="ship_frequency"    />
+        <result property="arrivalTime"    column="arrival_time"    />
+        <result property="chargedWeight"    column="charged_weight"    />
+        <result property="actualWeight"    column="actual_weight"    />
+        <result property="volume"    column="volume"    />
+        <result property="loadAmount"    column="load_amount"    />
+        <result property="loadUnit"    column="load_unit"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="releaseWay"    column="release_way"    />
+        <result property="notes"    column="notes"    />
+        <result property="insertitme"    column="insertitme"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <sql id="selectImpTaskSeaVo">
+        select id, task_number, sea_main_order_no, container_number, shipping_name, shipping_code, ship_frequency, arrival_time, charged_weight, actual_weight, volume, load_amount, load_unit, pay_type, release_way, notes, insertitme, updatetime from imp_task_sea
+    </sql>
+
+    <select id="selectImpTaskSeaList" parameterType="ImpTaskSea" resultMap="ImpTaskSeaResult">
+        <include refid="selectImpTaskSeaVo"/>
+        <where>  
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="seaMainOrderNo != null  and seaMainOrderNo != ''"> and sea_main_order_no = #{seaMainOrderNo}</if>
+            <if test="containerNumber != null  and containerNumber != ''"> and container_number = #{containerNumber}</if>
+            <if test="shippingName != null  and shippingName != ''"> and shipping_name like concat('%', #{shippingName}, '%')</if>
+            <if test="shippingCode != null  and shippingCode != ''"> and shipping_code = #{shippingCode}</if>
+            <if test="shipFrequency != null  and shipFrequency != ''"> and ship_frequency = #{shipFrequency}</if>
+            <if test="arrivalTime != null  and arrivalTime != ''"> and arrival_time = #{arrivalTime}</if>
+            <if test="chargedWeight != null  and chargedWeight != ''"> and charged_weight = #{chargedWeight}</if>
+            <if test="actualWeight != null  and actualWeight != ''"> and actual_weight = #{actualWeight}</if>
+            <if test="volume != null  and volume != ''"> and volume = #{volume}</if>
+            <if test="loadAmount != null  and loadAmount != ''"> and load_amount = #{loadAmount}</if>
+            <if test="loadUnit != null  and loadUnit != ''"> and load_unit = #{loadUnit}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="releaseWay != null  and releaseWay != ''"> and release_way = #{releaseWay}</if>
+            <if test="notes != null  and notes != ''"> and notes = #{notes}</if>
+            <if test="insertitme != null "> and insertitme = #{insertitme}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpTaskSeaById" parameterType="Long" resultMap="ImpTaskSeaResult">
+        <include refid="selectImpTaskSeaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImpTaskSea" parameterType="ImpTaskSea" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_task_sea
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">task_number,</if>
+            <if test="seaMainOrderNo != null">sea_main_order_no,</if>
+            <if test="containerNumber != null">container_number,</if>
+            <if test="shippingName != null">shipping_name,</if>
+            <if test="shippingCode != null">shipping_code,</if>
+            <if test="shipFrequency != null">ship_frequency,</if>
+            <if test="arrivalTime != null">arrival_time,</if>
+            <if test="chargedWeight != null">charged_weight,</if>
+            <if test="actualWeight != null">actual_weight,</if>
+            <if test="volume != null">volume,</if>
+            <if test="loadAmount != null">load_amount,</if>
+            <if test="loadUnit != null">load_unit,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="releaseWay != null">release_way,</if>
+            <if test="notes != null">notes,</if>
+            <if test="insertitme != null">insertitme,</if>
+            <if test="updatetime != null">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">#{taskNumber},</if>
+            <if test="seaMainOrderNo != null">#{seaMainOrderNo},</if>
+            <if test="containerNumber != null">#{containerNumber},</if>
+            <if test="shippingName != null">#{shippingName},</if>
+            <if test="shippingCode != null">#{shippingCode},</if>
+            <if test="shipFrequency != null">#{shipFrequency},</if>
+            <if test="arrivalTime != null">#{arrivalTime},</if>
+            <if test="chargedWeight != null">#{chargedWeight},</if>
+            <if test="actualWeight != null">#{actualWeight},</if>
+            <if test="volume != null">#{volume},</if>
+            <if test="loadAmount != null">#{loadAmount},</if>
+            <if test="loadUnit != null">#{loadUnit},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="releaseWay != null">#{releaseWay},</if>
+            <if test="notes != null">#{notes},</if>
+            <if test="insertitme != null">#{insertitme},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpTaskSea" parameterType="ImpTaskSea">
+        update imp_task_sea
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">task_number = #{taskNumber},</if>
+            <if test="seaMainOrderNo != null">sea_main_order_no = #{seaMainOrderNo},</if>
+            <if test="containerNumber != null">container_number = #{containerNumber},</if>
+            <if test="shippingName != null">shipping_name = #{shippingName},</if>
+            <if test="shippingCode != null">shipping_code = #{shippingCode},</if>
+            <if test="shipFrequency != null">ship_frequency = #{shipFrequency},</if>
+            <if test="arrivalTime != null">arrival_time = #{arrivalTime},</if>
+            <if test="chargedWeight != null">charged_weight = #{chargedWeight},</if>
+            <if test="actualWeight != null">actual_weight = #{actualWeight},</if>
+            <if test="volume != null">volume = #{volume},</if>
+            <if test="loadAmount != null">load_amount = #{loadAmount},</if>
+            <if test="loadUnit != null">load_unit = #{loadUnit},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="releaseWay != null">release_way = #{releaseWay},</if>
+            <if test="notes != null">notes = #{notes},</if>
+            <if test="insertitme != null">insertitme = #{insertitme},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpTaskSeaById" parameterType="Long">
+        delete from imp_task_sea where id = #{id}
+    </delete>
+
+    <delete id="deleteImpTaskSeaByIds" parameterType="String">
+        delete from imp_task_sea where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpTaskRoadMapper">
+    
+    <resultMap type="ImpTaskRoad" id="ImpTaskRoadResult">
+        <result property="id"    column="id"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="roadMainOrderNo"    column="road_main_order_no"    />
+        <result property="carrier"    column="carrier"    />
+        <result property="chargedWeight"    column="charged_weight"    />
+        <result property="actualWeight"    column="actual_weight"    />
+        <result property="loadAmount"    column="load_amount"    />
+        <result property="loadUnit"    column="load_unit"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="notes"    column="notes"    />
+        <result property="inserttime"    column="inserttime"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <sql id="selectImpTaskRoadVo">
+        select id, task_number, road_main_order_no, carrier, charged_weight, actual_weight, load_amount, load_unit, pay_type, notes, inserttime, updatetime from imp_task_road
+    </sql>
+
+    <select id="selectImpTaskRoadList" parameterType="ImpTaskRoad" resultMap="ImpTaskRoadResult">
+        <include refid="selectImpTaskRoadVo"/>
+        <where>  
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="roadMainOrderNo != null  and roadMainOrderNo != ''"> and road_main_order_no = #{roadMainOrderNo}</if>
+            <if test="carrier != null  and carrier != ''"> and carrier = #{carrier}</if>
+            <if test="chargedWeight != null  and chargedWeight != ''"> and charged_weight = #{chargedWeight}</if>
+            <if test="actualWeight != null  and actualWeight != ''"> and actual_weight = #{actualWeight}</if>
+            <if test="loadAmount != null  and loadAmount != ''"> and load_amount = #{loadAmount}</if>
+            <if test="loadUnit != null  and loadUnit != ''"> and load_unit = #{loadUnit}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="notes != null  and notes != ''"> and notes = #{notes}</if>
+            <if test="inserttime != null "> and inserttime = #{inserttime}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpTaskRoadById" parameterType="Long" resultMap="ImpTaskRoadResult">
+        <include refid="selectImpTaskRoadVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImpTaskRoad" parameterType="ImpTaskRoad" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_task_road
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">task_number,</if>
+            <if test="roadMainOrderNo != null">road_main_order_no,</if>
+            <if test="carrier != null">carrier,</if>
+            <if test="chargedWeight != null">charged_weight,</if>
+            <if test="actualWeight != null">actual_weight,</if>
+            <if test="loadAmount != null">load_amount,</if>
+            <if test="loadUnit != null">load_unit,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="notes != null">notes,</if>
+            <if test="inserttime != null">inserttime,</if>
+            <if test="updatetime != null">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">#{taskNumber},</if>
+            <if test="roadMainOrderNo != null">#{roadMainOrderNo},</if>
+            <if test="carrier != null">#{carrier},</if>
+            <if test="chargedWeight != null">#{chargedWeight},</if>
+            <if test="actualWeight != null">#{actualWeight},</if>
+            <if test="loadAmount != null">#{loadAmount},</if>
+            <if test="loadUnit != null">#{loadUnit},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="notes != null">#{notes},</if>
+            <if test="inserttime != null">#{inserttime},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpTaskRoad" parameterType="ImpTaskRoad">
+        update imp_task_road
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">task_number = #{taskNumber},</if>
+            <if test="roadMainOrderNo != null">road_main_order_no = #{roadMainOrderNo},</if>
+            <if test="carrier != null">carrier = #{carrier},</if>
+            <if test="chargedWeight != null">charged_weight = #{chargedWeight},</if>
+            <if test="actualWeight != null">actual_weight = #{actualWeight},</if>
+            <if test="loadAmount != null">load_amount = #{loadAmount},</if>
+            <if test="loadUnit != null">load_unit = #{loadUnit},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="notes != null">notes = #{notes},</if>
+            <if test="inserttime != null">inserttime = #{inserttime},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpTaskRoadById" parameterType="Long">
+        delete from imp_task_road where id = #{id}
+    </delete>
+
+    <delete id="deleteImpTaskRoadByIds" parameterType="String">
+        delete from imp_task_road where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

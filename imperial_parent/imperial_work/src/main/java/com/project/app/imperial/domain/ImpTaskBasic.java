@@ -59,9 +59,19 @@ public class ImpTaskBasic extends BaseEntity
     @Excel(name = "收费标准")
     private String tariff;
 
+    /** 删除标志 */
+    private String delFlag;
+
+    /** 任务创建者（userId） */
+    private Long creator;
+
     /** 插入时间 */
     @Excel(name = "插入时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date inserttime;
+
+    /** 修改时间 */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updatetime;
 
     public void setId(Long id) 
     {
@@ -172,6 +182,30 @@ public class ImpTaskBasic extends BaseEntity
         return inserttime;
     }
 
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public Long getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Long creator) {
+        this.creator = creator;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -186,8 +220,10 @@ public class ImpTaskBasic extends BaseEntity
             .append("taskOrigin", getTaskOrigin())
             .append("taskDestination", getTaskDestination())
             .append("tariff", getTariff())
+            .append("delFlag", getDelFlag())
+            .append("creator", getCreator())
             .append("inserttime", getInserttime())
-//            .append("updatetime", getUpdatetime())
+            .append("updatetime", getUpdatetime())
             .toString();
     }
 }

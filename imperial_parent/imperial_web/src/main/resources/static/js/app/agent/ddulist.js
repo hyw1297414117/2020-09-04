@@ -65,7 +65,7 @@ function InitSubTable (mainNoIndex, row, $thisDetail) {
 	dataMap.bagNumber = row.bagNumber;
 	dataMap.submitFlag = 1;
 	dataMap.incoterms = 'DDU';
-	$thisDetail.append('<div id="smsenable'+tableidIndex+'" style="width:'+ddulistTableDivWid+'">'+$("#operatBtTpl").html()+'</div>');
+	$thisDetail.append('<div id="smsenable'+tableidIndex+'" style="width:'+ddulistTableDivWid+'">'+$("#operatBtTpl").html()+'<input id="mainOrderNoVal" value='+mainOrderNo+' type="hidden"/>'+'</div>');
 	var cur_table = $thisDetail.append('<div id="detailDiv'+tableidIndex+'" style="width:'+ddulistTableDivWid+'"><table id="ddulistSunTable'+tableidIndex+'"></table></div>').find('table');
 	var tableid = 'ddulistSunTable';
 	$(cur_table).bootstrapTable({
@@ -280,4 +280,48 @@ function showCheckPage(){
 					});
 				  }
 		);
+}
+
+/**
+ * 通知收件人发送邮件
+ * */
+function DDUSendEmail() {
+	$.modal.loading("正在发送邮件，请稍后...");
+
+
+	$.ajax({
+		type: "post",
+		url: ctx + "DDU/DDUSendEmail",
+		data: {
+			mainOrderNoVal: $("#mainOrderNoVal").val()
+		},
+		success: function (r) {
+			$.modal.closeLoading();
+			if (r.succeed > 0) {
+
+				layer.alert("<font>恭喜你，邮件发送成功！成功数量"+r.succeed+"<br/>失败数量："+r.fail+"</font>", {
+						icon: 1,
+						title: "邮件提示"
+					},
+					function (index) {
+						//关闭弹窗
+						layer.close(index);
+						// location.href = ctx + 'register';
+					});
+			} else {
+				$.modal.closeLoading();
+				$('.imgcode').click();
+				$(".code").val("");
+                layer.alert("<font color='red'>发送带附件的邮件失败！</font>", {
+                        icon: 1,
+                        title: "邮件提示"
+                    },
+                    function (index) {
+                        //关闭弹窗
+                        layer.close(index);
+                        // location.href = ctx + 'register';
+                    });
+        }
+		}
+	});
 }

@@ -75,7 +75,7 @@ spring:
     #发件邮箱
     username: 2273384387@qq.com
     #密码
-    password: lrntdstvgkfpbiii
+    password: hgvwnyfuiugvccda
     properties:
       mail:
         smtp:

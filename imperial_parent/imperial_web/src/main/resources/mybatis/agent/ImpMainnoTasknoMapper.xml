@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.app.imperial.mapper.ImpMainnoTasknoMapper">
+    
+    <resultMap type="ImpMainnoTaskno" id="ImpMainnoTasknoResult">
+        <result property="id"    column="id"    />
+        <result property="mainOrderNo"    column="main_order_no"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="insertTime"    column="insert_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectImpMainnoTasknoVo">
+        select id, main_order_no, task_number, insert_time, update_time from imp_mainno_taskno
+    </sql>
+
+    <select id="selectImpMainnoTasknoList" parameterType="ImpMainnoTaskno" resultMap="ImpMainnoTasknoResult">
+        <include refid="selectImpMainnoTasknoVo"/>
+        <where>  
+            <if test="mainOrderNo != null  and mainOrderNo != ''"> and main_order_no = #{mainOrderNo}</if>
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="insertTime != null "> and insert_time = #{insertTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectImpMainnoTasknoById" parameterType="Long" resultMap="ImpMainnoTasknoResult">
+        <include refid="selectImpMainnoTasknoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertImpMainnoTaskno" parameterType="ImpMainnoTaskno" useGeneratedKeys="true" keyProperty="id">
+        insert into imp_mainno_taskno
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mainOrderNo != null">main_order_no,</if>
+            <if test="taskNumber != null">task_number,</if>
+            <if test="insertTime != null">insert_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mainOrderNo != null">#{mainOrderNo},</if>
+            <if test="taskNumber != null">#{taskNumber},</if>
+            <if test="insertTime != null">#{insertTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateImpMainnoTaskno" parameterType="ImpMainnoTaskno">
+        update imp_mainno_taskno
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mainOrderNo != null">main_order_no = #{mainOrderNo},</if>
+            <if test="taskNumber != null">task_number = #{taskNumber},</if>
+            <if test="insertTime != null">insert_time = #{insertTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImpMainnoTasknoById" parameterType="Long">
+        delete from imp_mainno_taskno where id = #{id}
+    </delete>
+
+    <delete id="deleteImpMainnoTasknoByIds" parameterType="String">
+        delete from imp_mainno_taskno where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

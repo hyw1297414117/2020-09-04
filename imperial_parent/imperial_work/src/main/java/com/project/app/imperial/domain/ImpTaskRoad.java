@@ -59,7 +59,11 @@ public class ImpTaskRoad extends BaseEntity
     @Excel(name = "插入时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date inserttime;
 
-    public void setId(Long id) 
+    /** 修改时间 */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updatetime;
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -159,6 +163,14 @@ public class ImpTaskRoad extends BaseEntity
         return inserttime;
     }
 
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -173,7 +185,7 @@ public class ImpTaskRoad extends BaseEntity
             .append("payType", getPayType())
             .append("notes", getNotes())
             .append("inserttime", getInserttime())
-//            .append("updatetime", getUpdatetime())
+            .append("updatetime", getUpdatetime())
             .toString();
     }
 }

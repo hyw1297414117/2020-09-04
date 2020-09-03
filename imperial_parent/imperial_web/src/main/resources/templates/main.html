@@ -39,7 +39,7 @@
 <body class="gray-bg">
 	<div id= "staging">
 		<div class="stagingTitle" th:text="#{project.backlog}">待办事项<span class="refreshSpan"><img src="../img/app/refresh.png"></img></span></div>
-		<div>
+		<div th:if="${user.Roles[0].RoleId}=='1'">
 			<div class="checkpending" >
 				<span class="remindSpan" ><img src="../img/app/remind.png"></img></span>
 				<span th:text="#{project.TotalNumberOfOrdersToBeAudited}">待审核订单总数</span>
@@ -62,8 +62,14 @@
  				</span>
 			</div>
 		</div>
-		<div style="clear:both">
-
+		<div th:if="${user.Roles[0].RoleId}=='102'">
+			发货部门
+		</div>
+		<div th:if="${user.Roles[0].RoleId}=='103'">
+			代理部门
+		</div>
+		<div th:if="${user.Roles[0].RoleId}=='104'">
+			收货部门
 		</div>
 	</div>
 	<th:block th:include="include :: footer" />
