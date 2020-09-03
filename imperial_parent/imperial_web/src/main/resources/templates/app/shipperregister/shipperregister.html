@@ -2,153 +2,318 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 
-    <th:block th:include="include :: header('发货机构注册页面')" />
-    <style type="text/css">
-
-		
-	
-</style>
-<link th:href="@{/css/app/shipperregister/shipperregister.css}" rel="stylesheet"/>
+<th:block th:include="include :: header('发货方信息完善页面')" />
+<link th:href="@{/css/app/shipperregister/customerinfo.css}" rel="stylesheet"/>
 </head>
 <body class="white-bg" >
-<div style="position: relative;width:100%;height:100%">
-	<div class="leftFormDiv" style=" overflow:scroll;">
-		<div class="">
-	        <form class="form-horizontal m" id="form-data-add">
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label is-required">机构名：</label>
-	                <div class="col-sm-7">
-	                    <input name="tackingNumber1" id="tackingNumber1" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label is-required">机构代码：</label>
-	                <div class="col-sm-7">
-	                    <input name="tackingNumber2" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label is-required">机构法人：</label>
-	                <div class="col-sm-7">
-	                    <input name="bagNumber" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label is-required">手机号：</label>
-	                <div class="col-sm-7">
-	                    <input name="boxNumber" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label is-required">邮箱：</label>
-	                <div class="col-sm-7">
-	                    <input name="palletNumber" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label ">货物类型：</label>
-	                <div class="col-sm-7">
-	                    <input name="containerNumber" class="form-control" type="text">
-	                </div>
-	            </div>
-	            <div class="form-group">    
-	                <label class="col-sm-5 control-label">托运方式：</label>
-	                <div class="col-sm-7">
-	                    <input name="reference1" class="form-control" type="text">
-	                </div>
-	            </div>
-	            
-	            <div class="form-group">
-	            	<label class="col-sm-5 control-label">业务类型：</label>
-	            	<div class="col-sm-7">
-						<div id="mySelect" class="mySelect dropup" style=""></div>
-	            	</div>
-	            </div>
-	        </form>
-	    </div>
-	</div>
-	<div  class="rightTranRule" >
-	<div class="card-fouth">
-		<div class="chargeRules">收费规则</div>
-		<div class="desc desc-list" >
-			<div class="industry first active">
-				<span>海运</span>
-			</div>
-			<div class="industry">
-				<span>陆运</span>
-			</div>
-	
-			<div class="industry">
-				<span>空运</span>
-			</div>
-	
-			<div class="industry">
-				<span>咨询</span>
-			</div>
-			<div class="industry">
-				<span>其他</span>
+	<div class="container-div" >
+		<div class="row">
+			<form id="customerForm">
+				<table class="basicMsgTable">
+					<tr class="basicMsgTitle">
+						<td colspan="5">
+							<label style="width:100%;text-align:center;">发货方信息完善</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>用户名</label></td>
+						<td class="tdInput1"><input class="inputBottomLine" id="customer" name="customer" /></td>
+						<td class="tdLabel2"><label>用户所在国</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="customerState" name="customerState"/></td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>注册号</label></td>
+						<td class="tdInput1"><input class="inputBottomLine"  id="registerNo" name="registerNo"/></td>
+						<td class="tdLabel2"><label>注册地址</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="registerLocation" name="registerLocation"/></td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>注册EORI号</label></td>
+						<td colspan="1" class="tdInput1"><input class="inputBottomLine" id="registerEori" name="registerEori" /></td>
+					</tr>
+					<tr class="basicMsgSonTitle">
+						<td colspan="5">
+							<label style="width:100%">主联系号码与邮箱</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>主联系号码1</label></td>
+						<td class="tdInput1"><input class="inputBottomLine" id="mainConn1" name="mainConn1"/></td>
+						<td class="tdLabel2"><label>主联系邮箱1</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="mainMail1" name="mainMail1"/></td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>主联系号码2</label></td>
+						<td class="tdInput1"><input class="inputBottomLine"  id="mainConn2" name="mainConn2"/></td>
+						<td class="tdLabel2"><label>主联系邮箱2</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="mainMail2" name="mainMail2"/></td>
+						<td style="width:5%;">
+							<span style="margin-left:10px;cursor:pointer;"><img src="../../img/app/add.png"></img></span>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>操作人联系号码1</label></td>
+						<td class="tdInput1"><input class="inputBottomLine"  id="operConn1" name="operConn1"/></td>
+						<td class="tdLabel2"><label>操作人联系邮箱1</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="operMail1" name="operMail1"/></td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>操作人联系号码2</label></td>
+						<td class="tdInput1"><input class="inputBottomLine"  id="operConn2" name="operConn2"/></td>
+						<td class="tdLabel2"><label>操作人联系邮箱2</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="operMail2" name="operMail2"/></td>
+						<td style="width:5%;">
+							<span style="margin-left:10px;cursor:pointer;"><img src="../../img/app/add.png"></img></span>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>财务联系号码1</label></td>
+						<td class="tdInput1"><input class="inputBottomLine" id="financeConn1" name="financeConn1"/></td>
+						<td class="tdLabel2"><label>财务联系邮箱1</label></td>
+						<td class="tdInput2"><input class="inputBottomLine" id="financeMail1" name="financeMail1"/></td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>财务联系号码2</label></td>
+						<td class="tdInput1"><input class="inputBottomLine" id="financeConn2" name="financeConn2"/></td>
+						<td class="tdLabel2"><label>财务联系邮箱2</label></td>
+						<td  class="tdInput2"><input class="inputBottomLine" id="financeMail2" name="financeMail2"/></td>
+						<td style="width:5%;">
+							<span style="margin-left:10px;cursor:pointer;"><img src="../../img/app/add.png"></img></span>
+						</td>
+					</tr>
+					
+					<tr class="basicMsgSonTitle">
+						<td colspan="5">
+							<label style="width:100%">资料与证书</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>SOP文件</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2"><label>有效期</label></td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+						<td style="width:5%;">
+							<span style="margin-left:10px;cursor:pointer;"><img src="../../img/app/hisRecords.png"></img></span>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>职责划分文档</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2"><label>有效期</label></td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>授权委托书</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2"><label>有效期</label></td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>SLA合同</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2"><label>有效期</label></td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>NDA保密协议</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2"><label>有效期</label></td>
+						<td  class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>公司登记副本</label></td>
+						<td class="tdInput1"><input type="file" class="inputBottomLine" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+						<td style="style:5%"></td>
+					</tr>
+					<tr class="basicMsgSonTitle">
+						<td colspan="5">
+							<label style="width:100%">附加文档</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1">附加文档1</label></td>
+						<td class="tdInput1"><input type="file"  style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>附加文档2</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>附加文档3</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>附加文档4</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>附加文档5</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" style="width:100%" class="form-control">
+	                             <option value="0" selected >12个月</option>
+	                             <option value="1">3个月</option>
+	                             <option value="2">6个月</option>
+	                         </select>
+						</td>
+						<td style="width:5%;">
+							<span style="margin-left:10px;cursor:pointer;"><img src="../../img/app/add.png"></img></span>
+						</td>
+					</tr>
+					<tr class="basicMsgSonTitle">
+						<td colspan="5">
+							<label style="width:100%">网络联盟</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td colspan="5" style="width:100%">
+							<label style="width:15%;margin-left:10%">
+								<input type="checkbox">WCA General
+							</label>
+							<label style="width:15%">
+								<input type="checkbox">WCA eCommerce
+							</label>
+							<label style="width:15%">
+								<input type="checkbox" >WCA eCommerce
+							</label>
+							<label style="width:15%">
+								<input type="checkbox">NAP
+							</label>
+							<label style="width:15%">
+								<input type="checkbox">WFN
+							</label>
+						</td>
+					</tr>
+					<tr class="basicMsgSonTitle">
+						<td colspan="5">
+							<label style="width:100%">信用申请</label>
+							<div style="border:1px solid #44cef6;width:100%;"></div> 
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>公司财务审核凭证</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>信用批准限额</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >1周</option>
+	                             <option value="1">2周</option>
+	                             <option value="2">1月</option>
+	                         </select>
+						</td>
+					</tr>
+					<tr class="basicMsgTr">
+						<td class="tdLabel1"><label>附加保函核实</label></td>
+						<td class="tdInput1"><input type="file" style="width:100%;border:none;background-color:#f0f0f4" /></td>
+						<td class="tdLabel2">
+							<label>信用有效期</label>
+						</td>
+						<td class="tdInput2">
+							<select id="stateSelect" class="form-control">
+	                             <option value="0" selected >1年</option>
+	                             <option value="1">2年</option>
+	                             <option value="2">3年</option>
+	                         </select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<div>
+				<a id ="submit" onclick="submit()">保存</a>
 			</div>
 		</div>
-		<div class="case-container" >
-			<div class="case-panel tab-1 active">
-				<h2>海运内容</h2>
-				<div></div>
-			</div>
-			<div class="case-panel tab-2">
-				<h2>陆运内容</h2>
-			</div>
-			<div class="case-panel tab-3">
-				<h2>空运内容</h2>
-			</div>
-			<div class="case-panel tab-4">
-				<h2>咨询内容</h2>
-			</div>
-			<div class="case-panel tab-5">
-				<h2>其他内容</h2>
-			</div>
-			<button type="button" id="selChargeType" class="btn btn-primary" style="position:absolute;bottom: 24%;right: 5%;">选择此规则</button>
-			<!--<button type="button" id="selChargeType" class="btn btn-primary" style="position:absolute;bottom:25%;right:5%;">选择此规则</button>-->
-		</div>
 	</div>
-</div>
-</div>
-
-<div style="clear:both"></div>
-<div style="margin-top: 100px;">
-	<a id ="batchImport" onclick="" style="margin-top: 60%;">保存</a>
-</div>
 <th:block th:include="include :: footer" />
-<script type="text/javascript">
-	$(function () {
-		var bussiTypeArr = [];   //存储下拉框内容 数组形式
-		var mySelect= $("#mySelect").mySelect({
-			  mult:true,//true为多选,false为单选
-			  option:[//选项数据
-				  {label:"海运",value:0},
-				  {label:"陆运",value:1},
-				  {label:"空运",value:2},
-				  {label:"咨询",value:3},
-				  {label:"其他",value:4}
-			  ]
-			  /* onChange:function(res){//选择框值变化返回结果
-				console.log(res)
-			  } */
-		  });
-		//点击 选择此规则之后 将tap页签和左边业务类型下拉框内容保持一致
-		$("#selChargeType").on('click',function(){
-			var activeObjectIndex = $('.desc-list').find(".active").index();
-			if($.inArray(activeObjectIndex,bussiTypeArr)<0){    //只添加不重复的数据
-				bussiTypeArr.push(activeObjectIndex);
-				}
-			mySelect.setResult(bussiTypeArr);   //给左边业务类型下拉框 重新赋值
-		})
-		//tap状态
-		$('.industry').hover(function() {
-			var i = $(this).index(); //当前索引
-			$(this).addClass('active').siblings().removeClass('active');
-			$('.case-panel').eq(i).addClass('active').siblings().removeClass('active');
-		})
-})
-</script>
+<script th:src="@{/js/app/register/customerinfo/customerinfo.js}"></script>
 </body>
 </html>
