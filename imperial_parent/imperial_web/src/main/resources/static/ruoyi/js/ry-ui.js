@@ -141,8 +141,6 @@ var table = {
                     	$("#" + options.id+"> tbody td").each(function(index){
                     		$(this).attr("title",$(this).text());
                     	});
-                   	},
-                   	onDblClickRow: function(){
                    	}
                 });
             },
