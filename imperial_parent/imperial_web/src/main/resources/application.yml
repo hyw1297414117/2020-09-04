@@ -73,7 +73,7 @@ spring:
     #邮箱服务器
     host: smtp.qq.com
     #发件邮箱
-    username: 2034089353@qq.com
+    username: 2273384387@qq.com
     #密码
     password: lrntdstvgkfpbiii
     properties:
