@@ -171,18 +171,23 @@ $(function () {
             }
         ],
         queryParams: function (params) {
-            var temp = {
-                limit: params.limit,   //页面大小
-                offset: params.offset,  //页码
-                mainOrderNo: $("#search_mainOrderNo").val(),
-                tackingNumber1: $("#search_tackingNumber1").val(),
-                bagNumber: $("#search_bagNumber").val(),
-                customer: $("#search_customer").val(),
-                shipperName: $("#search_shipperName").val(),
-                consigneeName: $("#search_consigneeName").val(),
-                incoterms: $("#search_typeSelect").val(),
+            var dataMap = {};
+            dataMap.mainOrderNo=$("#search_mainOrderNo").val();
+            dataMap.tackingNumber1=$("#search_tackingNumber1").val();
+            dataMap.bagNumber=$("#search_bagNumber").val();
+            dataMap.shipperName=$("#search_shipperName").val();
+            // dataMap.customer=$("#search_customer").val();
+            dataMap.consigneeName=$("#search_consigneeName").val();
+            dataMap.incoterms=$("#search_typeSelect").val();
+            var pageParams = initPageParams(params);//分页参数的初始化
+            var reqParams = {
+                pageSize : params.limit,//分页的话，pageSize和pageNum两个参数必不可少！
+                pageNum: params.offset / params.limit + 1,
+                offset: params.offset,
+                isAsc:true,
+                impParams:queryParams(dataMap)
             };
-            return temp;
+            return reqParams;
         }
     })
 });
@@ -205,6 +210,7 @@ function bindMainOrder(){
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#taskForm").validate({
+        debug:true,
         rules: {
             taskOrigin: {
                 required: true
@@ -236,6 +242,7 @@ function validateRule() {
     })
 
     $("#transportFormA").validate({
+        debug:true,
         rules: {
             airMainOrderNo: {
                 required: true
@@ -253,9 +260,6 @@ function validateRule() {
                 required: true
             }
             ,loadAmount: {
-                required: true
-            }
-            ,payType: {
                 required: true
             }
         },
@@ -278,13 +282,11 @@ function validateRule() {
             ,loadAmount: {
                 required: icon + "目的地为空"
             }
-            ,payType: {
-                required: icon + "目的地为空"
-            }
         }
-    })
+    });
 
     $("#transportFormB").validate({
+        debug:true,
         rules: {
             seaMainOrderNo: {
                 required: true
@@ -298,16 +300,13 @@ function validateRule() {
             ,actualWeight: {
                 required: true
             }
-            ,volume: {
-                required: true
-            }
             ,loadUnit: {
                 required: true
             }
             ,loadAmount: {
                 required: true
             }
-            ,payType: {
+            ,volume: {
                 required: true
             }
         },
@@ -324,22 +323,20 @@ function validateRule() {
             ,actualWeight: {
                 required: icon + "目的地为空"
             }
-            ,volume: {
-                required: icon + "目的地为空"
-            }
             ,loadUnit: {
                 required: icon + "目的地为空"
             }
             ,loadAmount: {
                 required: icon + "目的地为空"
             }
-            ,payType: {
+            ,volume: {
                 required: icon + "目的地为空"
             }
         }
-    })
+    });
 
     $("#transportFormC").validate({
+        debug:true,
         rules: {
             roadMainOrderNo: {
                 required: true
@@ -386,5 +383,5 @@ function validateRule() {
                 required: icon + "目的地为空"
             }
         }
-    })
+    });
 }

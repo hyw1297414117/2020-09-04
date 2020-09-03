@@ -10,8 +10,10 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.common.utils.DateUtils;
 import com.common.utils.TaskNumGenerater;
+import com.framework.web.page.PageDomain;
 import com.project.app.imperial.domain.*;
 import com.project.app.imperial.service.*;
+import com.project.app.imperial.vo.ImpTaskBasicVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ import com.framework.web.controller.BaseController;
 import com.framework.web.domain.AjaxResult;
 import com.framework.web.page.TableDataInfo;
 import com.project.system.user.domain.User;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 清关系统代理人审核处理Controller
@@ -95,13 +99,54 @@ public class ImpAgentController extends BaseController
     @PostMapping("/createTask")
     @RequiresPermissions("createTask:data:view")
     @ResponseBody
-    public AjaxResult createTask(@RequestBody Map<String,Object> taskData)
-    {
+    @Transactional
+    public AjaxResult createTask(@RequestBody Map<String,Object> taskData) {
         //任务流水号
         String taskNum = impTaskService.createTask(taskData);
 
         return AjaxResult.success(taskNum);
     }
+
+    /**
+     * @ author     :LianZheng
+     * @ Description:任务综合查询页
+     * @ Date       :2020-09-01
+    */
+    @GetMapping("/showQueryTaskPage")
+    @RequiresPermissions("createTask:data:view")
+    public String showQueryTaskPage() {
+        return prefix + "/taskData";
+    }
+
+    /**
+     * @ author     :LianZheng
+     * @ Description:查询任务
+     * @ Date       :2020-09-01
+    */
+    @PostMapping("/queryTask")
+    @RequiresPermissions("createTask:data:view")
+    @ResponseBody
+    public TableDataInfo queryTask(@RequestBody Map<String,Object> params) {
+        PageDomain pageDomain = JSON.parseObject(JSON.toJSONString(params), PageDomain.class);
+        startPage(pageDomain);
+        List<ImpTaskBasicVo> taskBasicList = impTaskService.selectImpTaskBasicsByConditions((Map) params.get("impParams"));
+        return getDataTable(taskBasicList);
+    }
+
+    /**
+     * @ author     :LianZheng
+     * @ Description:撤销任务
+     * @ Date       :2020-09-01
+    */
+    @PostMapping("/revokeTask")
+    @RequiresPermissions("createTask:data:view")
+    @ResponseBody
+    public AjaxResult revokeTask(@RequestParam(value = "revokeTaskIds[]") String revokeTaskIds) {
+        return toAjax(impTaskService.deleteImpTaskBasicByIds(revokeTaskIds));
+    }
+
+
+
 
     /**
      * 

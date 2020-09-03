@@ -36,11 +36,14 @@ $(function() {
  * @returns
  */
 function queryParamsPaging(params) {
-	var dataMap = {};
-	var pageParams = initPageParams(params);////分页参数的初始化
+	// var dataMap = {};
+	// var pageParams = initPageParams(params);////分页参数的初始化
 	return {
-		pageParams,
-        impParams:queryParams(dataMap)
+		pageSize : params.limit,//分页的话，pageSize和pageNum两个参数必不可少！
+		pageNum: params.offset / params.limit + 1,
+		offset: params.offset,
+		isAsc:true
+        // impParams:queryParams(dataMap)
 	};
 }
 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('任务综合查询')" />
+    <th:block th:include="include :: bootstrap-select-css" />
+    <style type="text/css">
+        .select-list li input {
+            width: 200px;
+        }
+        .select-list li label {
+            width: 80px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <p class="select-title">复杂条件查询</p>
+            <form id="complex-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label >任务号：</label>
+                            <input type="text" id="search_taskNumber"/>
+                        </li>
+                        <li class="select-selectpicker">
+                            <label >业务类型：</label>
+                            <select class="selectpicker" id="search_businessType" data-none-selected-text="请选择" multiple>
+                                <option value="0">进口</option>
+                                <option value="1">出口</option>
+                                <option value="2">国内</option>
+                                <option value="3">其他</option>
+                            </select>
+                        </li>
+                        <li class="select-selectpicker ">
+                            <label >任务分类：</label>
+                            <select class="selectpicker" id="search_taskType" data-none-selected-text="请选择" multiple>
+                                <option value="A">空运</option>
+                                <option value="B">海运</option>
+                                <option value="C">陆运</option>
+                                <option value="D">咨询</option>
+                                <option value="E">其他</option>
+                            </select>
+                        </li>
+                        <li class="select-selectpicker ">
+                            <label >优先级：</label>
+                            <select class="selectpicker" id="search_priority" data-none-selected-text="请选择" multiple>
+                                <option value="0">紧急</option>
+                                <option value="1">优质</option>
+                                <option value="2">标准</option>
+                                <option value="3">经济</option>
+                            </select>
+                        </li>
+                        <li class="">
+                            <label >主单号：</label>
+                            <input type="text" id="search_mainOrderNo"/>
+                        </li>
+                        <li class="">
+                            <label >起始地：</label>
+                            <input type="text" id="search_taskOrigin"/>
+                        </li>
+                        <li class="">
+                            <label >目的地：</label>
+                            <input type="text" id="search_taskDestination"/>
+                        </li>
+
+                        <li class="select-time ">
+                            <label >创建时间：</label>
+                            <input type="text" id="search_inserttime_start" class="time-input" placeholder="开始时间"/>
+                            <span>-</span>
+                            <input type="text" id="search_inserttime_end" class="time-input" placeholder="结束时间"/>
+                        </li>
+
+                        <li class="">
+                            <a class="btn btn-primary btn-rounded btn-sm m50" onclick="searchTask()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('complex-form')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-danger" onclick="revokeTask()">
+                <i class="fa fa-remove"></i> 撤销
+            </a>
+            <a class="btn btn-warning" onclick="">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="table_task"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: bootstrap-select-js" />
+<script th:src="@{/js/app/agent/taskdata.js}"></script>
+</body>
+</html>

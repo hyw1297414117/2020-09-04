@@ -39,10 +39,10 @@
                             <input type="checkbox" value="A" id="optionsRadiosA" name="transportRadios" checked>空运
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" value="B" id="optionsRadiosB" name="transportRadios">陆运
+                            <input type="checkbox" value="B" id="optionsRadiosB" name="transportRadios">海运
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" value="C" id="optionsRadiosC" name="transportRadios">海运
+                            <input type="checkbox" value="C" id="optionsRadiosC" name="transportRadios">陆运
                         </label>
                         <label class="checkbox-inline">
                             <input type="checkbox" value="D" name="taskCheckbox" id="taskCheckbox4">咨询
@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label is-required">New Taiff：</label>
                     <div class="col-sm-8">
-                        <select class="selectpicker show-tick form-control">
+                        <select class="selectpicker show-tick form-control" name="tariffFlag">
                             <option value="1">是</option>
                             <option value="0" selected="selected">否</option>
                         </select>
@@ -128,11 +128,11 @@
                     <span>空运</span>
                 </div>
                 <div class="trantabhead industry" id="tabheadB" style="display: none">
-                    <span>陆运</span>
+                    <span>海运</span>
                 </div>
 
                 <div class="trantabhead industry" id="tabheadC" style="display: none">
-                    <span>海运</span>
+                    <span>陆运</span>
                 </div>
 
                 <div class="industry" id="tabheadD" style="display: none">
@@ -229,7 +229,7 @@
                     </form>
                 </div>
                 <div class="trantab case-panel tab-B" style="display: none">
-                    <from class="form-horizontal m" id="transportFormB">
+                    <form class="form-horizontal m" id="transportFormB">
                         <div style="width: 49%;height: 99%;float: left;">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label is-required">主单号：</label>
@@ -330,7 +330,7 @@
                                 </div>
                             </div>
                         </div>
-                    </from>
+                    </form>
                 </div>
                 <div class="trantab case-panel tab-C" style="display: none">
                     <div style="width: 70%;height: 99%">
@@ -535,10 +535,6 @@
 </div>
 
 <th:block th:include="include :: footer"/>
-<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
-
-<!--<th:block th:include="include :: select2-css"/>-->
-<!--<th:block th:include="include :: select2-js"/>-->
 <script th:inline="javascript">
     var MainOrderNo = [[#{MASTER_BILL_OF_LADING}]];
 

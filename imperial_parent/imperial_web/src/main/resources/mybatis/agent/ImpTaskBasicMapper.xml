@@ -16,8 +16,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="taskOrigin"    column="task_origin"    />
         <result property="taskDestination"    column="task_destination"    />
         <result property="tariff"    column="tariff"    />
+        <result property="creator"    column="creator"    />
         <result property="inserttime"    column="inserttime"    />
         <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <resultMap type="com.project.app.imperial.vo.ImpTaskBasicVo" id="ImpTaskBasicVoResult">
+        <association property="impTaskBasic" javaType="ImpTaskBasic">
+            <result property="id"    column="id"    />
+            <result property="taskNumber"    column="task_number"    />
+            <result property="taskType"    column="task_type"    />
+            <result property="businessType"    column="business_type"    />
+            <result property="priority"    column="priority"    />
+            <result property="taskRelate"    column="task_relate"    />
+            <result property="customer"    column="customer"    />
+            <result property="pendCheckDoc"    column="pend_check_doc"    />
+            <result property="taskOrigin"    column="task_origin"    />
+            <result property="taskDestination"    column="task_destination"    />
+            <result property="tariff"    column="tariff"    />
+            <result property="inserttime"    column="inserttime"    />
+            <result property="updatetime"    column="updatetime"    />
+        </association>
+        <association property="impMainnoTaskno" javaType="ImpMainnoTaskno">
+            <result property="mainOrderNo"    column="main_order_no"    />
+            <result property="taskNumber"    column="task_number"    />
+        </association>
     </resultMap>
 
     <sql id="selectImpTaskBasicVo">
@@ -41,7 +64,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updatetime != null "> and updatetime = #{updatetime}</if>
         </where>
     </select>
-    
+
+    <select id="selectImpTaskBasicsByConditions" parameterType="java.util.Map" resultMap="ImpTaskBasicVoResult">
+        select itb.id, itb.task_number, itb.task_type, itb.business_type, itb.priority, itb.task_relate, itb.customer, itb.pend_check_doc, itb.task_origin, itb.task_destination, itb.tariff, itb.inserttime, itb.updatetime,imt.main_order_no,imt.task_number from imp_task_basic itb
+        join imp_mainno_taskno imt on imt.task_number = itb.task_number
+        <where>
+         del_flag = 0
+            <if test="mainOrderNo != null  and mainOrderNo != ''"> and imt.main_order_no = #{mainOrderNo}</if>
+            <if test="taskNumber != null  and taskNumber != ''"> and itb.task_number = #{taskNumber}</if>
+            <if test="taskType != null  and taskType != ''"> and itb.task_type = #{taskType}</if>
+            <if test="businessType != null  and businessType != ''"> and itb.business_type in (#{businessType})</if>
+            <if test="priority != null  and priority.size > 0">
+             and itb.priority in
+                <foreach collection="priority" item="priorityVal" index="index" open="(" close=")" separator=",">
+                    #{priorityVal}
+                </foreach>
+            </if>
+            <if test="taskRelate != null  and taskRelate != ''"> and itb.task_relate = #{taskRelate}</if>
+            <if test="customer != null  and customer != ''"> and itb.customer = #{customer}</if>
+            <if test="pendCheckDoc != null  and pendCheckDoc != ''"> and itb.pend_check_doc = #{pendCheckDoc}</if>
+            <if test="taskOrigin != null  and taskOrigin != ''"> and itb.task_origin = #{taskOrigin}</if>
+            <if test="taskDestination != null  and taskDestination != ''"> and task_destination = #{taskDestination}</if>
+            <if test="tariff != null  and tariff != ''"> and itb.tariff = #{tariff}</if>
+            <if test="inserttime != null  and inserttime != ''"> and itb.inserttime &gt; #{inserttimeStart} and itb.inserttime &lt; #{inserttimeEnd}</if>
+        </where>
+    </select>
+
     <select id="selectImpTaskBasicById" parameterType="Long" resultMap="ImpTaskBasicResult">
         <include refid="selectImpTaskBasicVo"/>
         where id = #{id}
@@ -67,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskOrigin != null">task_origin,</if>
             <if test="taskDestination != null">task_destination,</if>
             <if test="tariff != null">tariff,</if>
+            <if test="creator != null">creator,</if>
             <if test="inserttime != null">inserttime,</if>
             <if test="updatetime != null">updatetime,</if>
          </trim>
@@ -81,6 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="taskOrigin != null">#{taskOrigin},</if>
             <if test="taskDestination != null">#{taskDestination},</if>
             <if test="tariff != null">#{tariff},</if>
+            <if test="creator != null">#{creator},</if>
             <if test="inserttime != null">#{inserttime},</if>
             <if test="updatetime != null">#{updatetime},</if>
          </trim>
@@ -110,7 +160,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteImpTaskBasicByIds" parameterType="String">
-        delete from imp_task_basic where id in 
+        update imp_task_basic set del_flag = 2 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

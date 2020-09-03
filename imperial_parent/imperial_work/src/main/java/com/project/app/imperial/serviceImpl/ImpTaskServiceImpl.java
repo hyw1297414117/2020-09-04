@@ -7,6 +7,9 @@ import com.common.utils.text.Convert;
 import com.project.app.imperial.domain.*;
 import com.project.app.imperial.mapper.*;
 import com.project.app.imperial.service.IImpTaskService;
+import com.project.app.imperial.vo.ImpTaskBasicVo;
+import com.project.system.user.domain.User;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +60,11 @@ public class ImpTaskServiceImpl implements IImpTaskService {
     public List<ImpTaskBasic> selectImpTaskBasicList(ImpTaskBasic impTaskBasic)
     {
         return impTaskBasicMapper.selectImpTaskBasicList(impTaskBasic);
+    }
+
+    @Override
+    public List<ImpTaskBasicVo> selectImpTaskBasicsByConditions(Map<String, Object> conditions) {
+        return impTaskBasicMapper.selectImpTaskBasicsByConditions(conditions);
     }
 
     /**
@@ -117,10 +125,12 @@ public class ImpTaskServiceImpl implements IImpTaskService {
     public String createTask(Map<String, Object> taskData) {
         String taskNum = TaskNumGenerater.getInstance().generaterNextNumber(impTaskBasicMapper.selectTaskNumLatestToday());
         Date nowDate = DateUtils.getNowDate();
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
         //基本任务数据
         ImpTaskBasic basicData = JSON.parseObject(JSON.toJSONString(taskData.get("basicData")), ImpTaskBasic.class);
         basicData.setTaskNumber(taskNum);
         basicData.setInserttime(nowDate);
+        basicData.setCreator(user.getUserId());
         impTaskBasicMapper.insertImpTaskBasic(basicData);
         //关联主单
         ImpMainnoTaskno impMainnoTaskno = new ImpMainnoTaskno();

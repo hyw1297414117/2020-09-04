@@ -1,6 +1,7 @@
 package com.project.app.imperial.service;
 
 import com.project.app.imperial.domain.ImpTaskBasic;
+import com.project.app.imperial.vo.ImpTaskBasicVo;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,14 @@ public interface IImpTaskService {
      * @return 添加任务-基础数据集合
      */
     public List<ImpTaskBasic> selectImpTaskBasicList(ImpTaskBasic impTaskBasic);
+
+    /**
+     * 多条件查询任务
+     *
+     * @param conditions 条件
+     * @return 添加任务-基础数据集合
+     */
+    public List<ImpTaskBasicVo> selectImpTaskBasicsByConditions(Map<String,Object> conditions);
 
     /**
      * 查询任务-当天最新一条数据
