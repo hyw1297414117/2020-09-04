@@ -48,6 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dataScope"    column="data_scope"     />
 		<result property="status"       column="role_status"    />
 	</resultMap>
+
+	<resultMap id="UserRole" type="UserRole">
+		<id     property="userId"       column="userId" />
+		<result property="roleId"     column="roleId" />
+	</resultMap>
 	
 	<sql id="selectUserVo">
         select  u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.sex, u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_time, u.remark,u.active_code,u.active_state,
@@ -232,4 +237,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where active_code = #{activeCode}
 	</update>
+	<insert id="addUserrole" parameterType="UserRole">
+
+			INSERT INTO sys_user_role
+			(
+		<if test="userId != null and userId != 0">user_id,</if>
+		<if test="roleId != null and roleId != 0">role_id</if>
+		    )
+			VALUES
+			(
+		<if test="userId != null and userId != 0">#{userId},</if>
+		<if test="roleId != null and roleId != 0">#{roleId}</if>
+			)
+	</insert>
 </mapper> 

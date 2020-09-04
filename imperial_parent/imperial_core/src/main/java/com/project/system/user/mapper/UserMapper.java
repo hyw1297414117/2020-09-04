@@ -3,6 +3,7 @@ package com.project.system.user.mapper;
 import java.util.List;
 
 import com.project.system.user.domain.User;
+import com.project.system.user.domain.UserRole;
 
 /**
  * 用户表 数据层
@@ -130,6 +131,6 @@ public interface UserMapper
      * @return 结果
      */
     public int activeUser(String activeCode);
-
-
+    //注册用户时直接绑定收货人temp
+    public int addUserrole(UserRole userRole);
 }

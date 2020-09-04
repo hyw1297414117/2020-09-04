@@ -212,4 +212,7 @@ public interface IUserService
      * @return 结果
      */
     public int activeUser(String activeCode);
+
+    //注册用户时直接绑定收货人temp
+    public int addUserrole(UserRole  userRole);
 }

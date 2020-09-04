@@ -542,4 +542,9 @@ public class UserServiceImpl implements IUserService
     {
         return userMapper.activeUser(activeCode);
     }
+    //注册用户时直接绑定收货人temp
+    @Override
+    public int addUserrole(UserRole userRole) {
+        return userMapper.addUserrole(userRole);
+    }
 }

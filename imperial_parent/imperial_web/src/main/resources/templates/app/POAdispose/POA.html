@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btnd{
+            background-color: #6c757d;
+            font-size: 40px;
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+        #refuse{
+            width: 30%;
+            float: left;
+            height: 100%;
+            margin-left: 20px;
+
+        }
+        #approve{
+
+            width: 30%;
+            float: left;
+            height:100%;
+            margin-left: 40px;
+
+        }
+        #approveupdate{
+
+            width: 30%;
+            float: left;
+            height: 100%;
+            margin-left: 20px;
+
+        }
+
+    </style>
+</head>
+<body style="height: 95%;">
+<div style="overflow: auto;height: 100%;">
+    <div id="approve" onclick="aa()" class="panel panel-default ">
+        <button th:class="btnd">认同POA并遵守清关指令</button>
+    </div>
+    <div id="approveupdate" onclick="aa()" class="panel panel-default ">
+        <button th:class="btnd">认同POA修改清关指令</button>
+    </div>
+    <div id="refuse" onclick="aa()" class="panel panel-default ">
+        <button th:class="btnd">拒绝POA</button>
+    </div>
+</div>
+<script th:inline="javascript">
+
+    function aa() {
+
+        window.location.href='/test'
+    }
+</script>
+</body>
+</html>

@@ -5,9 +5,9 @@ import com.common.utils.MailUtils;
 import com.common.utils.MessageUtils;
 import com.framework.manager.AsyncManager;
 import com.framework.manager.factory.AsyncFactory;
+import com.project.system.user.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -19,7 +19,7 @@ import com.project.system.user.service.IUserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.io.IOException;
+
 import java.util.UUID;
 
 /**
@@ -91,7 +91,14 @@ public class RegisterService
             String activeCode = UUID.randomUUID().toString();
             user.setActiveCode(activeCode);
             boolean regFlag = userService.registerUser(user);
-            if (!regFlag)
+
+            //注册用户时直接绑定收货人temp
+            UserRole userRole=new UserRole();
+            userRole.setUserId(user.getUserId());
+            userRole.setRoleId(Long.valueOf("106"));
+            int success=userService.addUserrole(userRole);
+
+            if (!regFlag || success<0)
             {
                 msg = "注册失败,请联系系统管理人员";
             }
@@ -106,6 +113,7 @@ public class RegisterService
 
                 mailUtils.sendHtmlMail(email, "账户激活", emailContent);//发邮件
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
+
             }
         }
         return msg;
