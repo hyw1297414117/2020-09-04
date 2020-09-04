@@ -1,42 +1,37 @@
 package com.project.app.imperial.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.common.utils.DateUtils;
-import com.common.utils.TaskNumGenerater;
+import com.common.utils.PDFItextUtils;
 import com.framework.web.page.PageDomain;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.project.app.imperial.domain.*;
 import com.project.app.imperial.service.*;
 import com.project.app.imperial.vo.ImpTaskBasicVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSONObject;
-import com.common.utils.poi.ExcelUtil;
 import com.common.utils.text.Convert;
-import com.framework.aspectj.lang.annotation.Log;
-import com.framework.aspectj.lang.enums.BusinessType;
 import com.framework.web.controller.BaseController;
 import com.framework.web.domain.AjaxResult;
 import com.framework.web.page.TableDataInfo;
 import com.project.system.user.domain.User;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 清关系统代理人审核处理Controller
@@ -89,6 +84,17 @@ public class ImpAgentController extends BaseController
     public String showCreateTaskPage()
     {
         return prefix + "/createtask";
+    }
+    /**
+     * @ Description:任务详情页面
+    */
+    @GetMapping("/showTaskInfoPage")
+    @RequiresPermissions("createTask:data:view")
+    public String showTaskInfoPage(Model model,Long taskId)
+    {
+        ImpTaskBasic impTaskBasic = impTaskService.selectImpTaskBasicById(taskId);
+        model.addAttribute("impTaskBasic",impTaskBasic);
+        return prefix + "/taskinfo";
     }
 
     /**
@@ -145,6 +151,49 @@ public class ImpAgentController extends BaseController
         return toAjax(impTaskService.deleteImpTaskBasicByIds(revokeTaskIds));
     }
 
+    /**
+     * @ author     :LianZheng
+     * @ Description:生成任务pdf
+     * @ Date       :2020-09-03
+    */
+    @PostMapping("/generateTaskPDF")
+    @RequiresPermissions("createTask:data:view")
+    @ResponseBody
+    public AjaxResult generateTaskPDF(@RequestParam(value = "revokeTaskIds[]") String revokeTaskIds)throws IOException {
+        String pdfZipName = impTaskService.createPdf(revokeTaskIds);
+        if(pdfZipName==null){
+            return AjaxResult.error();
+        }
+        return AjaxResult.success(pdfZipName);
+    }
+
+    /**
+     * @ author     :LianZheng
+     * @ Description:下载任务pdf
+     * @ Date       :2020-09-04
+     */
+    @GetMapping("/downloadTaskPDF")
+    @RequiresPermissions("createTask:data:view")
+    public String downloadTaskPDF(HttpServletResponse response,String fileName)throws IOException {
+        File file = new File(fileName);
+
+        response.reset();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition",
+                "attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
+        InputStream input=new FileInputStream(file);
+        OutputStream out = response.getOutputStream();
+        byte[] buff =new byte[1024];
+        int index=0;
+        while((index= input.read(buff))!= -1){
+            out.write(buff, 0, index);
+            out.flush();
+        }
+        out.close();
+        input.close();
+        return null;
+    }
 
 
 

@@ -69,4 +69,12 @@ public interface IImpTaskService {
      * @return 任务流水号，失败为空
      */
     String createTask(Map<String, Object> taskData);
+
+    /**
+     * 生成任务PDF
+     *
+     * @param ids 任务-基础数据IDs
+     * @return 文件名
+     */
+    String createPdf(String ids);
 }

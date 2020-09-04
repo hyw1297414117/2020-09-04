@@ -1,6 +1,10 @@
 package com.project.app.imperial.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -150,4 +154,24 @@ public class ImpCustomerInfoController extends BaseController
         return toAjax(impCustomerInfoService.deleteImpCustomerInfoByIds(ids));
     }
     */
+
+    /**
+     * 查询发货人信息完善列表
+     */
+
+    @RequiresPermissions("customerInfo:imperial:list")
+    @PostMapping("/selectList")
+    @ResponseBody
+    public List selectList()
+    {
+        List<ImpCustomerInfo> infoList = impCustomerInfoService.selectImpCustomerInfoList(new ImpCustomerInfo());
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        for (ImpCustomerInfo info:infoList) {
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("id",info.getId());
+            map.put("text",info.getCustomer());
+            list.add(map);
+        }
+        return list;
+    }
 }

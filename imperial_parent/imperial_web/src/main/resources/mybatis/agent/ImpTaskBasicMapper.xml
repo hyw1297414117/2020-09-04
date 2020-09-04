@@ -70,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         join imp_mainno_taskno imt on imt.task_number = itb.task_number
         <where>
          del_flag = 0
+            <if test="taskId != null  and taskId != ''"> and itb.id = #{taskId}</if>
             <if test="mainOrderNo != null  and mainOrderNo != ''"> and imt.main_order_no = #{mainOrderNo}</if>
             <if test="taskNumber != null  and taskNumber != ''"> and itb.task_number = #{taskNumber}</if>
             <if test="taskType != null  and taskType != ''"> and itb.task_type = #{taskType}</if>

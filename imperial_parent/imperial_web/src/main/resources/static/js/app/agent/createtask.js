@@ -1,6 +1,23 @@
 
 $(function () {
     validateRule()
+
+    $.ajax({
+        type: "POST",
+        url: "/customerInfo/selectList",
+        datatype: "json",
+        success: function (data) {
+            var obj = eval(data);
+            $.each(obj, function (key, value) {
+                var customerOption = $('<option value="'+value.text+'">'+value.text+'</option>');
+                $("#customer").append(customerOption);
+            });
+
+            $('#customer').select2();
+        },
+        error: function (request) {
+        }
+    });
     // var bussiTypeArr = [];   //存储下拉框内容 数组形式
     // var mySelect= $("#mySelect").mySelect({
     //     mult:true,//true为多选,false为单选
@@ -190,6 +207,9 @@ $(function () {
             return reqParams;
         }
     })
+
+
+
 });
 
 /**

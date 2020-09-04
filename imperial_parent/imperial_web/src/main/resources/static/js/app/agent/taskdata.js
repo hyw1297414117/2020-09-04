@@ -131,7 +131,8 @@ var option = {
             align: 'center',
             formatter: function (value, row, index) {
                 var actions = [];
-                actions.push('<a class="btn btn-success btn-xs '  + '" href="javascript:void(0)" onclick="export(\'' + row.id + '\')"><i class="fa fa-edit"></i>导出</a> ');
+                actions.push('<a class="btn btn-success btn-xs '  + '" href="javascript:void(0)" onclick="taskInfoPage(\'' + row.impTaskBasic.id + '\')"><i class="fa fa-edit"></i>详细信息</a> ');
+                actions.push('<a class="btn btn-success btn-xs '  + '" href="javascript:void(0)" onclick="exportTask(\'' + row.impTaskBasic.id + '\')"><i class="fa fa-edit"></i>导出</a> ');
                 actions.push('<a class="btn btn-danger btn-xs '  + '" href="javascript:void(0)" onclick="revokeTask(\'' + row.impTaskBasic.id + '\')"><i class="fa fa-remove"></i>撤销</a> ');
                 return actions.join('');
             }
@@ -202,5 +203,59 @@ function revokeTask(taskId) {
         error: function (request) {
             layer.msg('撤销任务失败1！', {icon: 1, time: 1000});
         }
+    });
+}
+
+/**
+ * 任务PDF下载
+ * */
+function exportTask(taskId) {
+    var loadingIndex = layer.load(1, {
+        shade: [0.8,'#fff'] //0.1透明度的白色背景
+    });
+    var revokeTaskIds = new Array();
+    if(taskId===null||taskId===undefined){
+        var rows= $("#table_task").bootstrapTable('getSelections');
+        $.each(rows,function(index,value){
+            revokeTaskIds.push(value.impTaskBasic.id);
+        });
+    }else {
+        revokeTaskIds.push(taskId);
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/agentModule/agentData/generateTaskPDF",
+        data: {
+            "revokeTaskIds":revokeTaskIds
+        },
+        datatype: "json",
+        success: function (data) {
+            layer.close(loadingIndex);
+            if(data.code==0){
+                const link = document.createElement('a')
+                link.href = "/agentModule/agentData/downloadTaskPDF?fileName="+data.msg;
+                link.click()
+            }else {
+                layer.msg('pdf生成失败！', {icon: 1, time: 1000});
+            }
+
+        },
+        error: function (request) {
+            layer.msg('生成任务失败！', {icon: 1, time: 1000});
+        }
+    });
+}
+/**
+ * 任务PDF下载
+ * */
+function taskInfoPage(taskId) {
+    layer.open({
+        type: 2,
+        title: '任务详情页',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['700px', '90%'],
+        content: '/agentModule/agentData/showTaskInfoPage?taskId='+taskId//iframe的url
     });
 }

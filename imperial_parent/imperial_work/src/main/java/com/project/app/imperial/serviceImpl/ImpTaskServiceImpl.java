@@ -2,8 +2,15 @@ package com.project.app.imperial.serviceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.common.utils.DateUtils;
+import com.common.utils.PDFItextUtils;
 import com.common.utils.TaskNumGenerater;
+import com.common.utils.ZipFilesUtils;
 import com.common.utils.text.Convert;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.project.app.imperial.domain.*;
 import com.project.app.imperial.mapper.*;
 import com.project.app.imperial.service.IImpTaskService;
@@ -13,9 +20,11 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class ImpTaskServiceImpl implements IImpTaskService {
@@ -49,6 +58,8 @@ public class ImpTaskServiceImpl implements IImpTaskService {
     {
         return impTaskBasicMapper.selectImpTaskBasicById(id);
     }
+
+
 
     /**
      * 查询添加任务-基础数据列表
@@ -166,5 +177,104 @@ public class ImpTaskServiceImpl implements IImpTaskService {
             impTaskConsultMapper.insertImpTaskConsult(consultData);
         }
         return taskNum;
+    }
+
+    /**
+     * 生成任务PDF
+     *
+     * @param ids 任务-基础数据IDs
+     * @return 文件名
+     */
+    @Override
+    public String createPdf(String ids)
+    {
+        List<File> pdfFileList = new ArrayList<>();
+        Map<String,Object> conditions = new HashMap<>();
+        String[] idArr = Convert.toStrArray(ids);
+        String zipName=null;
+        for(String taskId:idArr){
+            conditions.put("taskId",Integer.valueOf(taskId));
+            List<ImpTaskBasicVo> impTaskBasicVos = impTaskBasicMapper.selectImpTaskBasicsByConditions(conditions);
+            File pdfFile=null;
+            try {
+                pdfFile = createTaskPDF(impTaskBasicVos.get(0));
+                pdfFileList.add(pdfFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            zipName = "/taskPDFs"+new Date().getTime()+".zip";
+            ZipFilesUtils.zip(pdfFileList,zipName);
+            return zipName;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+    public File createTaskPDF(ImpTaskBasicVo taskVo) throws IOException {
+        Document document = new Document(PageSize.A4);
+        File file = new File("/task-" + taskVo.getImpTaskBasic().getTaskNumber()+".pdf");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, fileOutputStream);
+            document.addTitle("TaskInfo");
+            document.open();
+            PdfPTable title = new PdfPTable(1);
+            title.addCell(PDFItextUtils.createCenterPdfPCell("任务基本信息"));
+            PdfPTable table = new PdfPTable(2);//生成一个两列的表格
+            table.addCell(PDFItextUtils.createCenterPdfPCell("任务编号"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getTaskNumber()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("业务类型"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getBusinessType()));
+//            table.addCell(PDFItextUtils.createCenterPdfPCell("任务类型"));
+//            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getTaskType()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("优先级"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getPriority()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("客户"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("张三"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("关联主单"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpMainnoTaskno().getMainOrderNo()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("起始地"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getTaskOrigin()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("目的地"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getTaskDestination()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("收费类型"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(taskVo.getImpTaskBasic().getTariff()));
+            table.addCell(PDFItextUtils.createCenterPdfPCell("创建时间"));
+            table.addCell(PDFItextUtils.createCenterPdfPCell(DateUtils.dateTime(taskVo.getImpTaskBasic().getInserttime())));
+            document.add(table);
+            if(taskVo.getImpTaskBasic().getTaskType().contains("A")){
+                PdfPTable tableA = new PdfPTable(1);
+                tableA.addCell(PDFItextUtils.createCenterPdfPCell("空运信息"));
+                tableA.addCell(PDFItextUtils.createCenterPdfPCell("……"));
+                document.add(tableA);
+            }
+            if(taskVo.getImpTaskBasic().getTaskType().contains("B")){
+                PdfPTable tableB = new PdfPTable(1);
+                tableB.addCell(PDFItextUtils.createCenterPdfPCell("海运信息"));
+                tableB.addCell(PDFItextUtils.createCenterPdfPCell("……"));
+                document.add(tableB);
+            }
+            if(taskVo.getImpTaskBasic().getTaskType().contains("C")){
+                PdfPTable tableC = new PdfPTable(1);
+                tableC.addCell(PDFItextUtils.createCenterPdfPCell("陆运信息"));
+                tableC.addCell(PDFItextUtils.createCenterPdfPCell("……"));
+                document.add(tableC);
+            }
+            if(taskVo.getImpTaskBasic().getTaskType().contains("D")){
+                PdfPTable tableD = new PdfPTable(1);
+                tableD.addCell(PDFItextUtils.createCenterPdfPCell("咨询信息"));
+                tableD.addCell(PDFItextUtils.createCenterPdfPCell("……"));
+                document.add(tableD);
+            }
+        }  catch (DocumentException e) {
+            e.printStackTrace();
+        } finally {
+            document.close();
+        }
+        return file;
     }
 }
