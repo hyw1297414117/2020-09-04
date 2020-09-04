@@ -13,7 +13,7 @@ public class ImpPOAController {
     }
     @RequestMapping("/showPOA")
     public String poa(){
-        return POAprefix+"POA";
+        return POAprefix+"/POA";
     }
 
     @RequestMapping("/showconsignerperfectinformation")
