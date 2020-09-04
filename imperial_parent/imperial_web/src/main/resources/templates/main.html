@@ -11,6 +11,39 @@
     <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
     <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
 	<th:block th:include="include :: header('首页')" />
+	<style>
+		.btnd{
+			background-color: #6c757d;
+			font-size: 40px;
+			width: 100%;
+			height: 100%;
+			color: white;
+		}
+		#refuse{
+			width: 30%;
+			float: left;
+			height: 95%;
+			margin-left: 20px;
+
+		}
+		#approve{
+
+			width: 30%;
+			float: left;
+			height:95%;
+			margin-left: 40px;
+		}
+		#approveupdate{
+
+			width: 30%;
+			float: left;
+			height: 95%;
+			margin-left: 20px;
+
+
+		}
+
+	</style>
 </head>
 <style>
 	.stagingTitle{
@@ -68,12 +101,54 @@
 		<div th:if="${user.Roles[0].RoleId}=='103'">
 			代理部门
 		</div>
-		<div th:if="${user.Roles[0].RoleId}=='104'">
-			收货部门
+		<div th:if="${user.Roles[0].RoleId}=='104'"  style="width: 100%;">
+			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: #5acde2">
+				处理POA
+			</button>
+			<!-- 模态框（Modal） -->
+			<div  class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 95%;margin-left: 3%;height: 100%;">
+				<div class="modal-dialog" style="width: 100%;margin: 0px;height: 100%;">
+					<div class="modal-content" style="height: 95%;">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+
+								POA处理
+							</h4>
+						</div>
+						<div class="modal-body"  style="height: 80%;">
+							<div style="overflow: auto;height: 100%;">
+								<div id="approve" onclick="aa()" class="panel panel-default ">
+									<button th:class="btnd">认同POA并遵守清关指令</button>
+									</div>
+								<div id="approveupdate" onclick="aa()" class="panel panel-default ">
+									<button th:class="btnd">认同POA修改清关指令</button>
+									</div>
+								<div id="refuse" onclick="aa()" class="panel panel-default ">
+									<button th:class="btnd">拒绝POA</button>
+									</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+
 		</div>
 	</div>
 	<th:block th:include="include :: footer" />
 </body>
 <script th:src="@{/js/app/main/main.js}"></script>
-
+<script th:inline="javascript">
+	$('#myModal').modal('show')
+	function aa() {
+		window.location.href='/test'
+	}
+</script>
 </html>

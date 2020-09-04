@@ -287,8 +287,6 @@ function showCheckPage(){
  * */
 function DDUSendEmail() {
 	$.modal.loading("正在发送邮件，请稍后...");
-
-
 	$.ajax({
 		type: "post",
 		url: ctx + "DDU/DDUSendEmail",

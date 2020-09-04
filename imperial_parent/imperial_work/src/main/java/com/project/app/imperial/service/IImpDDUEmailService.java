@@ -17,7 +17,7 @@ public interface IImpDDUEmailService {
      * 发送DDU邮件
      * */
     public Map<String, Integer> DDUSendEmail(String mainOrderNoVal, String serverUrl);
-    public  String getWebIp();
+
 
 
 }

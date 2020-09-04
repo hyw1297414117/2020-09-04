@@ -10,14 +10,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * @ author     :LianZheng
@@ -119,7 +115,6 @@ public class MailUtils {
         logger.info("发送带附件邮件开始：{},{},{},{}", to, subject, content, filePath);
         MimeMessage message = mailSender.createMimeMessage();
         boolean succeed;
-
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(message, true);
@@ -128,26 +123,19 @@ public class MailUtils {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content, true);
-
-            FileSystemResource file = new FileSystemResource(new File(filePath+"\\imperial_parent\\imperial_web\\src\\main\\resources\\receiver_mail\\CustomsFile.pdf"));
+            FileSystemResource file = new FileSystemResource(new File(filePath+"/receiver_mail/CustomsFile.pdf"));
             String fileName = file.getFilename();
             helper.addAttachment(fileName, file);
-
-
-            FileSystemResource file1 = new FileSystemResource(new File(filePath+"\\imperial_parent\\imperial_web\\src\\main\\resources\\receiver_mail\\POA.pdf"));
+            FileSystemResource file1 = new FileSystemResource(new File(filePath+"/receiver_mail/POA.pdf"));
             String fileName1 = file1.getFilename();
             helper.addAttachment(fileName1, file1);
-
             mailSender.send(message);
-
             logger.info("发送带附件邮件成功");
             succeed=true;
         } catch (MessagingException e) {
             succeed=false;
             logger.error("发送带附件邮件失败", e);
-
         }
-
         return succeed;
 
     }
